@@ -1,6 +1,7 @@
 package pl.sdk;
 
 import java.util.HashMap;
+import java.util.Map;
 
 class Board {
     private final Map<Point, Creature> map;
@@ -15,6 +16,5 @@ class Board {
 
     Creature get(int aX, int aY) {
         return map.get(new Point(aX, aY));
-
     }
 }
