@@ -1,0 +1,5 @@
+shape zamienic na inne kolekcje : set, kolejke, stack
+zmienic implementacje klasy shape zeby nie przyjmowala punktow tylko segmenty
+narysowa na kartce kwadrat wziac ktorys z segementow geterem zmienic jego punkt startowy
+(4 segment ustawic na 5 czy cos) raz uzyj segmentow zwyklych a pozniej tych co kopiujemy w tescie w srodku i przesun punkt
+get segment 0 start point
