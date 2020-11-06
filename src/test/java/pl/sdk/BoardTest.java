@@ -6,42 +6,48 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BoardTest {
-private Board board;
-private Creature creature;
+    private Board board;
+    private Creature creature;
+    private Creature creature2;
 
     @BeforeEach
-    void init(){
+    void init() {
 
-        Board board = new Board();
-        Creature creature = new Creature();
+         board = new Board();
+         creature = new Creature();
+         creature2 = new Creature();
     }
+
     @Test
     void shouldAddCreature() {
         Board board = new Board();
-        Creature creature = new Creature();
+
         board.add(new Point(0, 0), creature);
 
-        Creature creatureFromBoard = board.get(0,0);
+        Creature creatureFromBoard = board.get(0, 0);
 
         assertEquals(creature, creatureFromBoard);
 
     }
-@Test
-    void shouldRedturnNullWhenFiledIsEmpty(){
+
+    @Test
+    void shouldRedturnNullWhenFiledIsEmpty() {
         Creature creatureFromBoard = board.get(0, 0);
 
         assertNull(creatureFromBoard);
 
-}
-@Test
-    void shouldXWhenYouTryAddCreatureToNotEmptyField(){
-        board.add(new Point(0, 0),creature);
-        Creature creature2 = new Creature();
-        board.add(new Point(0, 0),creature);
+    }
+
+    @Test
+    void shouldThrowIllegalArgumentExceptionXWhenYouTryAddCreatureToNotEmptyField() {
+        board.add(new Point(0, 0), creature);
+
+        assertThrows(IllegalArgumentException.class, () -> board.add(new Point(0, 0), creature2));
 
         Creature creatureFromBoard = board.get(0, 0);
 
         assertEquals(creature, creatureFromBoard);
-}
+    }
+
 
 }
