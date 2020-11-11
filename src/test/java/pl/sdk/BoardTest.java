@@ -56,10 +56,11 @@ class BoardTest {
 
         Creature creatureFromBoard = board.get(0, 0);
 
-        board.add(new Point(0, 0), creature2);
+        board.add(new Point(0, 1), creature2);
 
         assertEquals(creature, creatureFromBoard);
     }
+
 
 
 }

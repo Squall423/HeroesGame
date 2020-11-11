@@ -12,6 +12,14 @@ class Point {
         y = aY;
     }
 
+    int getX() {
+        return x;
+    }
+
+    int getY() {
+        return y;
+    }
+
     @Override
     public boolean equals(Object aO) {
         if (this == aO) return true;

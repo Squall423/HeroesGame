@@ -1,0 +1,52 @@
+warning: LF will be replaced by CRLF in src/main/java/pl/sdk/Board.java.
+The file will have its original line endings in your working directory
+[1mdiff --git a/src/main/java/pl/sdk/Board.java b/src/main/java/pl/sdk/Board.java[m
+[1mindex e11f04c..9d4a122 100644[m
+[1m--- a/src/main/java/pl/sdk/Board.java[m
+[1m+++ b/src/main/java/pl/sdk/Board.java[m
+[36m@@ -11,10 +11,14 @@[m [mclass Board {[m
+     }[m
+ [m
+     void add(Point aPoint, Creature aCreature) {[m
+[32m+[m[32m        throwExceptionWhenFieldIsTaken(aPoint);[m
+[32m+[m[32m        map.put(aPoint, aCreature);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    private void throwExceptionWhenFieldIsTaken(Point aPoint) {[m
+         if (map.containsKey(aPoint)) {[m
+             throw new IllegalArgumentException();[m
+         }[m
+[31m-        map.put(aPoint, aCreature);[m
+     }[m
+ [m
+     Creature get(int aX, int aY) {[m
+[36m@@ -22,6 +26,7 @@[m [mclass Board {[m
+     }[m
+ [m
+     void move(Point aSourcePoint, Point aTargetPoint1) {[m
+[32m+[m[32m        throwExceptionWhenFieldIsTaken(aTargetPoint1);[m
+         Creature creatureFromSourcePoint = map.get(aSourcePoint);[m
+         map.remove(aSourcePoint);[m
+         map.put(aTargetPoint1, creatureFromSourcePoint);[m
+[1mdiff --git a/src/test/java/pl/sdk/BoardMovingTest.java b/src/test/java/pl/sdk/BoardMovingTest.java[m
+[1mindex 96d7af7..f600614 100644[m
+[1m--- a/src/test/java/pl/sdk/BoardMovingTest.java[m
+[1m+++ b/src/test/java/pl/sdk/BoardMovingTest.java[m
+[36m@@ -29,4 +29,16 @@[m [mclass BoardMovingTest {[m
+         assertNull(board.get(0, 0));[m
+     }[m
+ [m
+[32m+[m[32m    @Test[m[41m[m
+[32m+[m[32m    void shouldThrowEsceptionWhenCreatureTryingToMoveToNotEmptyField() {[m[41m[m
+[32m+[m[32m        board.add(new Point(0, 1), new Creature());[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        assertThrows(IllegalArgumentException.class, () -> board.move(new Point(0, 0), new Point(0, 0)));[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        Creature creatureFromBoard = board.get(0, 0);[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m        assertEquals(creature, creatureFromBoard);[m[41m[m
+[32m+[m[41m[m
+[32m+[m[32m    }[m[41m[m
+[32m+[m[41m[m
+ }[m
+\ No newline at end of file[m
