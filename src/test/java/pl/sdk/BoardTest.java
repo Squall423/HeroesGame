@@ -48,6 +48,18 @@ class BoardTest {
 
         assertEquals(creature, creatureFromBoard);
     }
+    @Test
+    void shouldThrowIllegalArgumentExceptionXWhenYouTryAddCreatureToNotEmptyField2() {
+        board.add(new Point(0, 0), creature);
+
+        assertThrows(IllegalArgumentException.class, () -> board.add(new Point(0, 0), creature2));
+
+        Creature creatureFromBoard = board.get(0, 0);
+
+        board.add(new Point(0, 0), creature2);
+
+        assertEquals(creature, creatureFromBoard);
+    }
 
 
 }
