@@ -2,51 +2,22 @@ package pl.sdk;
 
 import java.util.Objects;
 
-public class Point {
-    private double distanceToCenter;
-    private int x;
-    private int y;
+class Point {
 
-    public Point(int aX, int aY) {
-        this.x = aX;
-        this.y = aY;
-       distanceToCenter =  Math.sqrt(x*x+y*y);
-    }
-    public Point(Point aPoint1){
-        this(aPoint1.x,aPoint1.y);
+    final private int x;
+    final private int y;
+
+     Point(int aX, int aY) {
+        x = aX;
+        y = aY;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
+    int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    @Override
-    public String toString() {
-        return "Point{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
-    }
-
-    @Override
-    public Object clone() throws CloneNotSupportedException {
-        return new Point(x, y);
-    }
-
-    public double getDistanceToCenter() {
-        return getDistanceToCenter();
     }
 
     @Override
