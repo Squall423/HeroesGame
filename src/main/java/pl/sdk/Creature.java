@@ -1,4 +1,6 @@
 package pl.sdk;
 
-public class Creature {
+class Creature {
+
+
 }
