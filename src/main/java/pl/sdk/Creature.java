@@ -11,7 +11,16 @@ class Creature {
 
     Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
         stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange);
+        currentHp = stats.getMaxHp();
     }
 
+    void attack(Creature aDefender) {
+        aDefender.currentHp = aDefender.currentHp - stats.getAttack() + aDefender.stats.getArmor();
 
+    }
+
+    int getCurrentHp() {
+        return currentHp;
+    }
 }
+

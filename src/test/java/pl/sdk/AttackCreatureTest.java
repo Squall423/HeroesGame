@@ -10,11 +10,11 @@ class AttackCreatureTest {
 
     @Test
     void creatureShouldLost10HpWhenAttackerHas20AttackAndDefenderHas10Armor(){
-        attacker = new Creature("Attacker",20,NOT_IMPORTANT,100,NOT_IMPORTANT);
-        attacker = new Creature("Defender",NOT_IMPORTANT,10,100,NOT_IMPORTANT);
+        Creature attacker = new Creature("Attacker",20,NOT_IMPORTANT,100,NOT_IMPORTANT);
+        Creature defender = new Creature("Defender",NOT_IMPORTANT,10,100,NOT_IMPORTANT);
 
         attacker.attack(defender);
 
-        assertEquals(10, defender.getCurrenthp(10));
+        assertEquals(90, defender.getCurrentHp());
     }
 }
