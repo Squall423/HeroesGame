@@ -1,7 +1,9 @@
 package pl.sdk;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 class Board {
     private final Map<Point, Creature> map;
@@ -25,6 +27,20 @@ class Board {
 
     Creature get(int aX, int aY) {
         return map.get(new Point(aX, aY));
+    }
+
+    Point get(Creature aCreature) {
+        return map.keySet().stream().filter(p -> map.get(p).equals(aCreature)).findAny().get();
+//        ArrayList<Point> keyList = new ArrayList(map.keySet());
+//        for (int i = 0; i < keyList.size(); i++) {
+//            if (map.get(keyList.get(i)).equals(aCreature)) {
+//                return keyList.get(i);
+//            }
+//        }
+    }
+
+    void move(Creature aCreature, Point aTargetPoint1) {
+        move(get(aCreature), aTargetPoint1);
     }
 
     void move(Point aSourcePoint, Point aTargetPoint1) {
