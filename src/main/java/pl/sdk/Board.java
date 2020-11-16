@@ -1,14 +1,16 @@
 package pl.sdk;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
-class Board {
+ class Board {
     private final Map<Point, Creature> map;
     public final static int WIDTH = 20;
     public final static int HEIGHT = 15;
 
-    Board() {
+     Board() {
         map = new HashMap<>();
     }
 
@@ -25,6 +27,18 @@ class Board {
 
     Creature get(int aX, int aY) {
         return map.get(new Point(aX, aY));
+    }
+
+    Point get(Creature aCreature) {
+        if (map.containsValue(aCreature)) {
+            return map.keySet().stream().filter(p -> map.get(p).equals(aCreature)).findAny().get();
+        } else {
+            return null;
+        }
+    }
+
+    void move(Creature aCreature, Point aTargetPoint1) {
+        move(get(aCreature), aTargetPoint1);
     }
 
     void move(Point aSourcePoint, Point aTargetPoint1) {

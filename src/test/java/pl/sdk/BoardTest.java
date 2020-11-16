@@ -13,9 +13,9 @@ class BoardTest {
     @BeforeEach
     void init() {
 
-         board = new Board();
-         creature = new Creature();
-         creature2 = new Creature();
+        board = new Board();
+        creature = new Creature();
+        creature2 = new Creature();
     }
 
     @Test
@@ -31,7 +31,7 @@ class BoardTest {
     }
 
     @Test
-    void shouldRedturnNullWhenFiledIsEmpty() {
+    void shouldReturnNullWhenFiledIsEmpty() {
         Creature creatureFromBoard = board.get(0, 0);
 
         assertNull(creatureFromBoard);
@@ -48,6 +48,7 @@ class BoardTest {
 
         assertEquals(creature, creatureFromBoard);
     }
+
     @Test
     void shouldThrowIllegalArgumentExceptionXWhenYouTryAddCreatureToNotEmptyField2() {
         board.add(new Point(0, 0), creature);
@@ -61,6 +62,17 @@ class BoardTest {
         assertEquals(creature, creatureFromBoard);
     }
 
+    @Test
+    void shouldReturnCorrectLocationForByCreature() {
+        board.add(new Point(5, 5), creature);
+        Point result = board.get(creature);
+        assertEquals(new Point(5, 5), result);
 
+    }
+    @Test
+    void shouldReturnNullIfTheresNoCreatureOnMap() {
+        Point result = board.get(creature);
+        assertEquals(null, result);
+    }
 
 }
