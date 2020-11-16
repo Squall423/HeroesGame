@@ -5,12 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-class Board {
+ class Board {
     private final Map<Point, Creature> map;
     public final static int WIDTH = 20;
     public final static int HEIGHT = 15;
 
-    Board() {
+     Board() {
         map = new HashMap<>();
     }
 
