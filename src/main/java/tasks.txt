@@ -1,2 +1,2 @@
 dodac do metody :  Point get(Creature aCreature)
-sytuacje gdyby pobieralo creature ktorej nie ma
+sytuacje gdy ktos poda creature ktorej nie ma na mapie

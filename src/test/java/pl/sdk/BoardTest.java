@@ -31,7 +31,7 @@ class BoardTest {
     }
 
     @Test
-    void shouldRedturnNullWhenFiledIsEmpty() {
+    void shouldReturnNullWhenFiledIsEmpty() {
         Creature creatureFromBoard = board.get(0, 0);
 
         assertNull(creatureFromBoard);
@@ -68,6 +68,11 @@ class BoardTest {
         Point result = board.get(creature);
         assertEquals(new Point(5, 5), result);
 
+    }
+    @Test
+    void shouldReturnNullIfTheresNoCreatureOnMap() {
+        Point result = board.get(creature);
+        assertEquals(null, result);
     }
 
 }

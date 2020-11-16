@@ -18,7 +18,7 @@ public class GameEngine {
     }
 
     void move(Point aTargetPoint){
-        
+        board.move(queue.getActiveCreature(), aTargetPoint);
     }
     private void putCreaturesToBoard(List<Creature> aCreatures1, List<Creature> aCreatures2) {
         putCreaturesFromOneSideToBoard(aCreatures1, 0);
