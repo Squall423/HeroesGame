@@ -1,6 +1,6 @@
 package pl.sdk.gui;
 
-import pl.sdk.Board;
+
 import pl.sdk.GameEngine;
 import pl.sdk.Point;
 
