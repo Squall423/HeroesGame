@@ -4,7 +4,7 @@ class Creature {
 
     private CreatureStatistic stats;
     private int currentHp;
-    private boolean counterAttackedInThisTurn;
+    boolean counterAttackedInThisTurn;
 
     Creature() {
         stats = new CreatureStatistic("DefName", 1, 100, 1, 1);
@@ -19,14 +19,19 @@ class Creature {
         if (isAlive()) {
             int damageToDeal = calculateDamage(aDefender);
             aDefender.currentHp = aDefender.currentHp - damageToDeal;
-
-            if (!aDefender.counterAttackedInThisTurn) {
-                int damageToDealInCounterAttack = aDefender.calculateDamage(this);
-                currentHp = currentHp - damageToDealInCounterAttack;
-               aDefender.counterAttackedInThisTurn = true;
-            }
+            counterAttack(aDefender);
         }
     }
+
+    private void counterAttack(Creature aDefender) {
+        if (!aDefender.counterAttackedInThisTurn) {
+            int damageToDealInCounterAttack = aDefender.calculateDamage(this);
+            currentHp = currentHp - damageToDealInCounterAttack;
+            aDefender.counterAttackedInThisTurn = true;
+
+        }
+    }
+
 
     private int calculateDamage(Creature aDefender) {
         int damageToDeal = this.stats.getAttack() - aDefender.stats.getArmor();
@@ -42,6 +47,12 @@ class Creature {
 
     int getCurrentHp() {
         return currentHp;
+    }
+
+
+    void reset() {
+        counterAttackedInThisTurn = false;
+
     }
 }
 

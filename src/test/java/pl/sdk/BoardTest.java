@@ -69,6 +69,7 @@ class BoardTest {
         assertEquals(new Point(5, 5), result);
 
     }
+
     @Test
     void shouldReturnNullIfTheresNoCreatureOnMap() {
         Point result = board.get(creature);

@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
     Point get(Creature aCreature) {
         if (map.containsValue(aCreature)) {
             return map.keySet().stream().filter(p -> map.get(p).equals(aCreature)).findAny().get();
+
         } else {
             return null;
         }

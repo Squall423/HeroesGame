@@ -2,7 +2,6 @@ package pl.sdk;
 
 import java.util.Collection;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Queue;
 
 class CreatureTurnQueue {
@@ -20,7 +19,7 @@ class CreatureTurnQueue {
 
     private void initQueue() {
         creaturesQueue.addAll(creatures);
-      
+
     }
 
     Creature getActiveCreature() {
@@ -30,8 +29,11 @@ class CreatureTurnQueue {
     void next() {
         if (creaturesQueue.isEmpty()) {
             initQueue();
+            creatures.forEach(c -> c.reset());
         }
+
         activeCreature = creaturesQueue.poll();
+
 
     }
 }

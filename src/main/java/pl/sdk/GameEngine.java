@@ -14,7 +14,9 @@ import java.util.List;
         List<Creature> twoSidesCreatures = new ArrayList<>();
         twoSidesCreatures.addAll(aCreatures1);
         twoSidesCreatures.addAll(aCreatures2);
-        queue = new CreatureTurnQueue(aCreatures1);
+        queue = new CreatureTurnQueue(twoSidesCreatures);
+
+
     }
 
     public void move(Point aTargetPoint) {
