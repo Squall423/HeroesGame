@@ -1,37 +1,34 @@
 package pl.sdk;
 
-class Creature {
+public class Creature {
 
     private CreatureStatistic stats;
     private int currentHp;
-    boolean counterAttackedInThisTurn;
+    private boolean counterAttackedInThisTurn;
 
-    Creature() {
-        stats = new CreatureStatistic("DefName", 1, 100, 1, 1);
+
+    public Creature(){
+        this("Name",2,1,10,10);
     }
 
     Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
-        stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange);
+        stats = new CreatureStatistic(aName,aAttack,aArmor,aMaxHp,aMoveRange);
         currentHp = stats.getMaxHp();
     }
+
 
     void attack(Creature aDefender) {
         if (isAlive()) {
             int damageToDeal = calculateDamage(aDefender);
             aDefender.currentHp = aDefender.currentHp - damageToDeal;
-            counterAttack(aDefender);
+
+            if (!aDefender.counterAttackedInThisTurn) {
+                int damageToDealInCounterAttack = aDefender.calculateDamage(this);
+                currentHp = currentHp - damageToDealInCounterAttack;
+                aDefender.counterAttackedInThisTurn = true;
+            }
         }
     }
-
-    private void counterAttack(Creature aDefender) {
-        if (!aDefender.counterAttackedInThisTurn) {
-            int damageToDealInCounterAttack = aDefender.calculateDamage(this);
-            currentHp = currentHp - damageToDealInCounterAttack;
-            aDefender.counterAttackedInThisTurn = true;
-
-        }
-    }
-
 
     private int calculateDamage(Creature aDefender) {
         int damageToDeal = this.stats.getAttack() - aDefender.stats.getArmor();
@@ -49,10 +46,16 @@ class Creature {
         return currentHp;
     }
 
+    public String getName() {
+        return stats.getName();
+    }
 
-    void reset() {
+    boolean canCounterAttack() {
+        return !counterAttackedInThisTurn;
+    }
+
+   public void update() {
         counterAttackedInThisTurn = false;
-
     }
 }
 

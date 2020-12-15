@@ -23,6 +23,11 @@
             <artifactId>javafx-fxml</artifactId>
             <version>11-ea+25</version>
         </dependency>
+        <dependency>
+            <groupId>pl.sdk</groupId>
+            <artifactId>battle-model</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
