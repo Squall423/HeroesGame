@@ -6,13 +6,12 @@ class CreatureTurnQueue {
     private final Collection<Creature> creatures;
     private final Queue<Creature> creaturesQueue;
     private Creature activeCreature;
-    private List<Creature> observers;
+    private Set<Creature> observers;
 
     public CreatureTurnQueue(Collection<Creature> aCreatureList) {
         creatures = aCreatureList;
         creaturesQueue = new LinkedList<>();
-        observers = new ArrayList<>();
-        creatures.forEach(c -> addObserver(c));
+        observers = new HashSet<>();
         initQueue();
         next();
     }
