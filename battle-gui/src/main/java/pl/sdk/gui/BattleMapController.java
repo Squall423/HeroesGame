@@ -60,6 +60,9 @@ public class BattleMapController implements PropertyChangeListener {
                         rec.setBackground(Color.GREEN);
                     }
                 }
+                else if (gameEngine.canMove(x,y)){
+                    rec.setBackground(Color.GREY);
+                }
             }
 
         }

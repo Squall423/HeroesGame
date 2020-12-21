@@ -48,4 +48,8 @@ import java.util.stream.Collectors;
         map.remove(aSourcePoint);
         map.put(aTargetPoint1, creatureFromSourcePoint);
     }
-}
+
+     boolean canMove(Creature aActiveCreature, int aX, int aY) {
+         return true;
+     }
+ }

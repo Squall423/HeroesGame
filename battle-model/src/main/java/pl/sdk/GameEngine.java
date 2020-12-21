@@ -73,4 +73,8 @@ public class GameEngine {
     public Creature getActiveCreature() {
         return queue.getActiveCreature();
     }
+
+    boolean canMove(int aX, int aY) {
+        return board.canMove(getActiveCreature(),aX,aY);
+    }
 }

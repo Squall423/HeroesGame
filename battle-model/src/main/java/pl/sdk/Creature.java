@@ -11,7 +11,7 @@ public class Creature {
         this("Name",2,1,10,10);
     }
 
-    Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
+    public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
         stats = new CreatureStatistic(aName,aAttack,aArmor,aMaxHp,aMoveRange);
         currentHp = stats.getMaxHp();
     }

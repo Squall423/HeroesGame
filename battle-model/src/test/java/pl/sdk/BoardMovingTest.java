@@ -41,6 +41,24 @@ class BoardMovingTest {
 
     }
 
+    @Test
+    void canMoveWhenCreaturesHasEnoughtMovePoint() {
+
+        board.add(new Point(5, 5), new Creature("Defname", 1, 1, 10, 5));
+        
+        assertTrue(board.canMove(creature, 6, 5));
+        assertTrue(board.canMove(creature, 4, 5));
+        assertTrue(board.canMove(creature, 5, 4));
+        assertTrue(board.canMove(creature, 5, 6));
+    }
+
+    @Test
+    void cannotMoveWhenCreaturesHasNotEnoughtMovePoint() {
+
+        board.add(new Point(5, 5), new Creature("Defname", 1, 1, 10, 5));
+
+        assertFalse(board.canMove(creature, 6, 6));
+    }
 
 
 }
