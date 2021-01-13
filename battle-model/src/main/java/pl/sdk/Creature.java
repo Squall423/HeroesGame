@@ -7,12 +7,12 @@ public class Creature {
     private boolean counterAttackedInThisTurn;
 
 
-    public Creature(){
-        this("Name",2,1,10,10);
+    public Creature() {
+        this("Name", 2, 1, 10, 10);
     }
 
     public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
-        stats = new CreatureStatistic(aName,aAttack,aArmor,aMaxHp,aMoveRange);
+        stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange);
         currentHp = stats.getMaxHp();
     }
 
@@ -54,8 +54,12 @@ public class Creature {
         return !counterAttackedInThisTurn;
     }
 
-   public void update() {
+    public void update() {
         counterAttackedInThisTurn = false;
+    }
+
+    int getMoveRange() {
+        return stats.getMoveRange();
     }
 }
 

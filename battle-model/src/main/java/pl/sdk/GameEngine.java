@@ -9,6 +9,7 @@ import java.util.List;
 
 public class GameEngine {
     public static final String CURRENT_CREATURE_CHANGED = "CURRENT_CREATURE_CHANGED";
+    public static final String CREATURE_MOVED = "CREATURE_MOVED";
     private final Board board;
     private final CreatureTurnQueue queue;
     private final PropertyChangeSupport observerSupport;
@@ -38,7 +39,9 @@ public class GameEngine {
     }
 
     public void move(Point aTargetPoint) {
+        Point oldPosition = board.get(queue.getActiveCreature());
         board.move(queue.getActiveCreature(), aTargetPoint);
+        notifyObservers(new PropertyChangeEvent(this,CREATURE_MOVED,oldPosition, aTargetPoint));
     }
 
     public void pass() {
@@ -74,7 +77,7 @@ public class GameEngine {
         return queue.getActiveCreature();
     }
 
-    boolean canMove(int aX, int aY) {
-        return board.canMove(getActiveCreature(),aX,aY);
+    public boolean canMove(int aX, int aY) {
+        return board.canMove(getActiveCreature(), aX, aY);
     }
 }

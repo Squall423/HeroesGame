@@ -8,14 +8,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class BoardMovingTest {
     private Board board;
     private Creature creature;
-    private Creature creature2;
 
     @BeforeEach
     void init() {
 
         board = new Board();
         creature = new Creature();
-        creature2 = new Creature();
         board.add(new Point(0, 0), creature);
     }
 
@@ -42,10 +40,10 @@ class BoardMovingTest {
     }
 
     @Test
-    void canMoveWhenCreaturesHasEnoughtMovePoint() {
+    void canMoveWhenCreaturesHasEnoughMovePoint() {
+//        Creature creature = new Creature("Defname", 1, 1, 10, 1);
+        board.add(new Point(5,5), new Creature("DefName", 1, 1, 10, 1));
 
-        board.add(new Point(5, 5), new Creature("Defname", 1, 1, 10, 5));
-        
         assertTrue(board.canMove(creature, 6, 5));
         assertTrue(board.canMove(creature, 4, 5));
         assertTrue(board.canMove(creature, 5, 4));
@@ -53,11 +51,21 @@ class BoardMovingTest {
     }
 
     @Test
-    void cannotMoveWhenCreaturesHasNotEnoughtMovePoint() {
+    void cannotMoveWhenCreaturesHasNotEnoughMovePoint() {
 
-        board.add(new Point(5, 5), new Creature("Defname", 1, 1, 10, 5));
+        Creature creature = new Creature("Defname", 1, 1, 10, 1);
+        board.add(new Point(5, 5), creature);
+
 
         assertFalse(board.canMove(creature, 6, 6));
+    }
+
+    @Test
+    void cannotMoveWhenTileIsTaken(){
+        Creature creature = new Creature("DefName", 1, 1, 10, 10);
+        board.add(new Point(5,5), creature);
+
+        assertFalse(board.canMove(creature, 0,0 ));
     }
 
 
