@@ -1,6 +1,9 @@
 package pl.sdk;
 
-public class Creature {
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+
+public class Creature implements PropertyChangeListener {
 
     private CreatureStatistic stats;
     private int currentHp;
@@ -60,6 +63,11 @@ public class Creature {
 
     int getMoveRange() {
         return stats.getMoveRange();
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
+        counterAttackedInThisTurn = false;
     }
 }
 
