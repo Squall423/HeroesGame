@@ -10,9 +10,14 @@ import java.util.List;
 public class GameEngine {
     public static final String CURRENT_CREATURE_CHANGED = "CURRENT_CREATURE_CHANGED";
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
+    public static final String CREATURE_ATTACKED = "CREATURE_ATTACKED";
+    public static final String END_OF_TURN = "END_OF_TURN";
     private final Board board;
     private final CreatureTurnQueue queue;
     private final PropertyChangeSupport observerSupport;
+    private boolean blockMoving;
+    private boolean blockAttacking;
+
 
     public GameEngine(List<Creature> aCreatures1, List<Creature> aCreatures2) {
         board = new Board();
@@ -22,12 +27,16 @@ public class GameEngine {
         twoSidesCreatures.addAll(aCreatures2);
         queue = new CreatureTurnQueue(twoSidesCreatures);
 
-        twoSidesCreatures.forEach(c -> queue.addObserver(c));
+        twoSidesCreatures.forEach(queue::addObserver);
         observerSupport = new PropertyChangeSupport(this);
     }
 
     public void addObserver(String aEventType, PropertyChangeListener aObs) {
-        observerSupport.addPropertyChangeListener(aEventType, aObs);
+        if (END_OF_TURN.equals(aEventType)) {
+            queue.addObserver(aObs);
+        } else {
+            observerSupport.addPropertyChangeListener(aEventType, aObs);
+        }
     }
 
     public void removeObserver(PropertyChangeListener aObs) {
@@ -39,23 +48,28 @@ public class GameEngine {
     }
 
     public void move(Point aTargetPoint) {
+        if (blockMoving){
+            return;
+        }
         Point oldPosition = board.get(queue.getActiveCreature());
         board.move(queue.getActiveCreature(), aTargetPoint);
-        notifyObservers(new PropertyChangeEvent(this,CREATURE_MOVED,oldPosition, aTargetPoint));
+        blockMoving = true;
+        notifyObservers(new PropertyChangeEvent(this, CREATURE_MOVED, oldPosition, aTargetPoint));
     }
 
     public void pass() {
         Creature oldActiveCreature = queue.getActiveCreature();
         queue.next();
-
+        blockAttacking = false;
+        blockMoving = false;
         Creature newActiveCreature = queue.getActiveCreature();
-
-
         notifyObservers(new PropertyChangeEvent(this, CURRENT_CREATURE_CHANGED, oldActiveCreature, newActiveCreature));
     }
 
     public void attack(int x, int y) {
         queue.getActiveCreature().attack(board.get(x, y));
+        blockAttacking = true;
+        blockMoving = true;
     }
 
     private void putCreaturesToBoard(List<Creature> aCreatures1, List<Creature> aCreatures2) {
@@ -79,5 +93,9 @@ public class GameEngine {
 
     public boolean canMove(int aX, int aY) {
         return board.canMove(getActiveCreature(), aX, aY);
+    }
+
+    public boolean canAttack(int aX, int aY) {
+        return board.get(getActiveCreature()).distance(new Point(aX, aY)) <= 1;
     }
 }
