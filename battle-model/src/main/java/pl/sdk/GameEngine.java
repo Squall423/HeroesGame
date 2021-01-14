@@ -98,4 +98,6 @@ public class GameEngine {
     public boolean canAttack(int aX, int aY) {
         return board.get(getActiveCreature()).distance(new Point(aX, aY)) <= 1;
     }
+
+
 }

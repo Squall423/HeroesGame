@@ -1,8 +1,8 @@
 package pl.sdk;
 
 import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
+import java.beans.PropertyChangeListener;
 public class Creature implements PropertyChangeListener {
 
     private CreatureStatistic stats;
@@ -55,10 +55,6 @@ public class Creature implements PropertyChangeListener {
 
     boolean canCounterAttack() {
         return !counterAttackedInThisTurn;
-    }
-
-    public void update() {
-        counterAttackedInThisTurn = false;
     }
 
     int getMoveRange() {
