@@ -11,11 +11,16 @@ public class Creature implements PropertyChangeListener {
 
 
     public Creature() {
-        this("Name", 2, 1, 10, 10);
+        this("Name", 2, 1, 10, 10,2);
     }
 
     public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
-        stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange);
+        stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange, aAttack);
+        currentHp = stats.getMaxHp();
+    }
+
+    public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, int aDamage) {
+        stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange, aDamage);
         currentHp = stats.getMaxHp();
     }
 
