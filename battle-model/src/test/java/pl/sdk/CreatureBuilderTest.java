@@ -13,12 +13,19 @@ class CreatureBuilderTest {
 
     @Test
     void shouldCreateCorrectCreatureFromBuilder() {
-        Creature creature = new Creature("Attacker", 10, NOT_IMPORTANT, 100, NOT_IMPORTANT, Range.closed(10,20),
-                new DefaultDamageCalculator());
-        Creature creatureFromBuilder = new Creature.Builder()
+        Creature creature = new Creature.Builder()
                 .name("Attacker")
-//                .armor(5)
-//                .attack(10)
+                .armor(5)
+                .attack(10)
+                .damage(Range.closed(10, 20))
+                .maxHp(100)
+                .moveRange(5)
+                .damageCalculator(new DamageCalculator())
+                .build();
+        Creature creatureFromBuilder = new Creature.Builder()
+                .name("Defender")
+                .armor(5)
+                .attack(10)
                 .damage(Range.closed(10, 20))
                 .maxHp(100)
                 .moveRange(5)

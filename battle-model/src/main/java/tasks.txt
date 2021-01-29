@@ -1,6 +1,2 @@
-1.dorobic metode can attack i sprawdzic czy moga atakowac dla wykrywania kiedy mozemy zaatakowac a nie ruszyc
-jednoskti maja stac obok siebie zeby mogly sie zaatakowac do strzelajacych dojdziemy
-2.jednostka moze sie ruszyc nieograniczona ilosc razy, rozwiazac to mozna w warstwie gui nie pozwalac, w wasrtwie gamenegine zabrac funkcjonalnosci,
-po ruchu mozemy zmienic iczbe punktow ruchu do 0
-3.przejscie do klasy kolejki ie chcemy seta chcemy zamienic na property change listenera i property support
-dodawanie observera tylko zx poziomu gameenegine
+zrobic testy nowe i zaorac creatury cos z atakiem nie tak NullPointerException
+dodac stacka builder amount potrzebny, apply damage w creaturze i testy do ap-ply damage

@@ -26,7 +26,6 @@ public class GameEngine {
         twoSidesCreatures.addAll(aCreatures1);
         twoSidesCreatures.addAll(aCreatures2);
         queue = new CreatureTurnQueue(twoSidesCreatures);
-
         twoSidesCreatures.forEach(queue::addObserver);
         observerSupport = new PropertyChangeSupport(this);
     }
@@ -70,6 +69,7 @@ public class GameEngine {
         queue.getActiveCreature().attack(board.get(x, y));
         blockAttacking = true;
         blockMoving = true;
+        notifyObservers(new PropertyChangeEvent(this, CREATURE_ATTACKED, null, null));
     }
 
     private void putCreaturesToBoard(List<Creature> aCreatures1, List<Creature> aCreatures2) {

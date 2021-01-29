@@ -9,11 +9,9 @@ public class DefaultDamageCalculator extends DamageCalculator {
     DefaultDamageCalculator() {
         this(new Random());
     }
-
     DefaultDamageCalculator(Random aRand) {
         rand = aRand;
     }
-
 
     int calculateDamage(Creature aAttacker, Creature aDefender) {
 
