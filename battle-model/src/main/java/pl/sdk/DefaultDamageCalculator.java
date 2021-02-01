@@ -34,6 +34,6 @@ public class DefaultDamageCalculator extends DamageCalculator {
         if (ret < 0) {
             ret = 0;
         }
-        return (int) ret;
+        return aAttacker.getAmount() * (int)ret;
     }
 }

@@ -94,7 +94,7 @@ public class ApplyDamageTest {
                 .armor(NON_IMPORTANT)
                 .maxHp(IMMORTAL)
                 .moveRange(1)
-                .damage(Range.closed(99, 9))
+                .damage(Range.closed(99, 99))
                 .build();
         attacker.attack(defender);
         attacker.attack(defender);

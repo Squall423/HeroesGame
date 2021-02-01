@@ -40,7 +40,7 @@ class BoardMovingTest {
 
     @Test
     void canMoveWhenCreaturesHasEnoughMovePoint() {
-//        Creature creature = new Creature("Defname", 1, 1, 10, 1);
+
         board.add(new Point(5,5), new Creature("DefName", 1, 1, 10, 1));
 
         assertTrue(board.canMove(creature, 6, 5));
