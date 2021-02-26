@@ -1,18 +1,14 @@
 package pl.sdk;
 
-public class ShootingCreature extends Creature {
+public class BlockCounterAttackCreature extends Creature {
 
-    ShootingCreature() {
+    BlockCounterAttackCreature() {
         super();
     }
 
-    ShootingCreature(CreatureStatistic aStats) {
+    public BlockCounterAttackCreature(CreatureStatistic aStats) {
         super(aStats);
-    }
 
-    @Override
-    double getAttackRange() {
-        return Double.MAX_VALUE;
     }
 
     @Override
@@ -21,13 +17,10 @@ public class ShootingCreature extends Creature {
     }
 
     public static final class Builder extends Creature.Builder {
-
-
         @Override
         Creature createInstance(CreatureStatistic aStats) {
-            return new ShootingCreature(aStats);
+            return new BlockCounterAttackCreature(aStats);
         }
     }
-
 
 }
