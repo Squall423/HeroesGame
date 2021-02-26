@@ -20,7 +20,7 @@ class CreatureBuilderTest {
                 .damage(Range.closed(10, 20))
                 .maxHp(100)
                 .moveRange(5)
-                .damageCalculator(new DamageCalculator())
+
                 .build();
         Creature creatureFromBuilder = new Creature.Builder()
                 .name("Defender")
@@ -29,7 +29,7 @@ class CreatureBuilderTest {
                 .damage(Range.closed(10, 20))
                 .maxHp(100)
                 .moveRange(5)
-                .damageCalculator(new DamageCalculator())
+              
                 .build();
 
 

@@ -15,15 +15,15 @@ public class Creature implements PropertyChangeListener {
     private CreatureStatistic stats;
     private int currentHp;
     private boolean counterAttackedInThisTurn;
-    private DamageCalculator calc;
+    private CalculateDamageStrategy calculateDamageStrategy;
     private int amount;
 
-
+    //Mockito constructor
     public Creature() {
-        new CreatureStatistic("Name", 2, 1, 10, 10, Range.closed(2, 2));
+        new CreatureStatistic("Name", 1, 1, 1, 1, Range.closed(2, 2));
     }
 
-    private Creature(CreatureStatistic aStats) {
+    protected Creature(CreatureStatistic aStats) {
         stats = aStats;
         currentHp = stats.getMaxHp();
     }
@@ -34,29 +34,35 @@ public class Creature implements PropertyChangeListener {
     }
 
     public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, int aDamage) {
-        this(aName, aAttack, aArmor, aMaxHp, aMoveRange, Range.closed(aDamage, aDamage), new DefaultDamageCalculator());
+        this(aName, aAttack, aArmor, aMaxHp, aMoveRange, Range.closed(aDamage, aDamage), new DefaultCalculateStrategy());
     }
 
     public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, Range<Integer> aDamage,
-                    DamageCalculator aCalc) {
+                    CalculateDamageStrategy aCalculateDamageStrategy) {
         stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange, aDamage);
         currentHp = stats.getMaxHp();
-        calc = aCalc;
+        calculateDamageStrategy = aCalculateDamageStrategy;
     }
 ////////////////////////////////////////////////
 
     void attack(Creature aDefender) {
         if (isAlive()) {
-            int damageToDeal = calc.calculateDamage(this, aDefender);
+            int damageToDeal = calculateDamageStrategy.calculateDamage(this, aDefender);
             aDefender.applyDamage(damageToDeal);
+
+            performAfterAttack(damageToDeal);
+
 
             counterAttack(aDefender);
         }
     }
 
-    private void counterAttack(Creature aDefender) {
+     void performAfterAttack(int aDamageToDeal) {
+    }
+
+     void counterAttack(Creature aDefender) {
         if (!aDefender.counterAttackedInThisTurn) {
-            int damageToDealInCounterAttack = calc.calculateDamage(aDefender, this);
+            int damageToDealInCounterAttack = calculateDamageStrategy.calculateDamage(aDefender, this);
             applyDamage(damageToDealInCounterAttack);
             aDefender.counterAttackedInThisTurn = true;
         }
@@ -147,14 +153,18 @@ public class Creature implements PropertyChangeListener {
         return sb.toString();
     }
 
-    public static final class Builder{
+    double getAttackRange() {
+        return 1.0;
+    }
+
+    public static class Builder{
         private String name;
         private Integer attack;
         private Integer armor;
         private Integer maxHp;
         private Integer moveRange;
         private Range<Integer> damage;
-        private DamageCalculator damageCalculator;
+        private CalculateDamageStrategy damageCalculator;
         private Integer amount;
 
         public Builder name(String aName) {
@@ -192,8 +202,8 @@ public class Creature implements PropertyChangeListener {
             return this;
         }
 
-        public Builder damageCalculator(DamageCalculator damageCalculator) {
-            this.damageCalculator = damageCalculator;
+        public Builder damageCalculator(CalculateDamageStrategy aCalculateDamageStrategy) {
+            this.damageCalculator = aCalculateDamageStrategy;
             return this;
         }
 
@@ -224,18 +234,22 @@ public class Creature implements PropertyChangeListener {
             }
 
             CreatureStatistic stats = new CreatureStatistic(name, attack, armor, maxHp, moveRange, damage);
-            Creature ret = new Creature(stats);
+            Creature ret = createInstance(stats);
             if(amount == null){
                 ret.amount = 1;
             }else{
                 ret.amount = amount;
             }
             if (damageCalculator != null) {
-                ret.calc = damageCalculator;
+                ret.calculateDamageStrategy = damageCalculator;
             } else {
-                ret.calc = new DefaultDamageCalculator();
+                ret.calculateDamageStrategy = new DefaultCalculateStrategy();
             }
             return ret;
+        }
+
+          Creature createInstance(CreatureStatistic aStats) {
+            return new Creature(aStats);
         }
     }
 }

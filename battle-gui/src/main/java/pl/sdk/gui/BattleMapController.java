@@ -64,7 +64,7 @@ public class BattleMapController implements PropertyChangeListener {
                 .moveRange(5)
                 .build();
         notUpgradedCreatures.add(c);
-        c = new Creature.Builder()
+        c = new ShootingCreature.Builder()
                 .name("Lich")
                 .armor(10)
                 .attack(13)
@@ -130,7 +130,7 @@ public class BattleMapController implements PropertyChangeListener {
                 .moveRange(9)
                 .build();
         upgradedCreatures.add(c);
-        c = new Creature.Builder()
+        c = new ShootingCreature.Builder()
                 .name("Power Lich")
                 .armor(10)
                 .attack(13)
