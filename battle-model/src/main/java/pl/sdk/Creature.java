@@ -34,7 +34,8 @@ public class Creature implements PropertyChangeListener {
     }
 
     public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, int aDamage) {
-        this(aName, aAttack, aArmor, aMaxHp, aMoveRange, Range.closed(aDamage, aDamage), new DefaultCalculateStrategy());
+        this(aName, aAttack, aArmor, aMaxHp, aMoveRange, Range.closed(aDamage, aDamage),
+                new DefaultCalculateStrategy());
     }
 
     public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, Range<Integer> aDamage,
@@ -47,7 +48,7 @@ public class Creature implements PropertyChangeListener {
 
     void attack(Creature aDefender) {
         if (isAlive()) {
-            int damageToDeal = calculateDamageStrategy.calculateDamage(this, aDefender);
+            int damageToDeal = calculateDamage(aDefender, this);
             aDefender.applyDamage(damageToDeal);
 
             performAfterAttack(damageToDeal);
@@ -57,43 +58,42 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
-     void performAfterAttack(int aDamageToDeal) {
+    protected int calculateDamage(Creature aAttacker, Creature aDefender) {
+        return calculateDamageStrategy.calculateDamage(aAttacker, aDefender);
     }
 
-     void counterAttack(Creature aDefender) {
+    void performAfterAttack(int aDamageToDeal) {
+    }
+
+    void counterAttack(Creature aDefender) {
         if (!aDefender.counterAttackedInThisTurn) {
-            int damageToDealInCounterAttack = calculateDamageStrategy.calculateDamage(aDefender, this);
+            int damageToDealInCounterAttack = calculateDamage(this, aDefender);
             applyDamage(damageToDealInCounterAttack);
             aDefender.counterAttackedInThisTurn = true;
         }
     }
 
-    void applyDamage(int aDamageToApply){
+    void applyDamage(int aDamageToApply) {
         int fullCurrentHp = (stats.getMaxHp() * (amount - 1)) + currentHp - aDamageToApply;
         if (fullCurrentHp <= 0) {
             amount = 0;
             currentHp = 0;
-        }
-        else
-        {
-            if(fullCurrentHp % stats.getMaxHp()==0)
-            {
-                currentHp=stats.getMaxHp();
-                amount=fullCurrentHp/stats.getMaxHp();
-            }
-            else
-            {
+        } else {
+            if (fullCurrentHp % stats.getMaxHp() == 0) {
+                currentHp = stats.getMaxHp();
+                amount = fullCurrentHp / stats.getMaxHp();
+            } else {
                 currentHp = fullCurrentHp % stats.getMaxHp();
-                if (aDamageToApply >= 0){
-                    amount = (fullCurrentHp/stats.getMaxHp()) + 1;
-                }else{
-                    amount = (fullCurrentHp/stats.getMaxHp());
+                if (aDamageToApply >= 0) {
+                    amount = (fullCurrentHp / stats.getMaxHp()) + 1;
+                } else {
+                    amount = (fullCurrentHp / stats.getMaxHp());
                 }
             }
         }
     }
 
-    private boolean isAlive() {
+    boolean isAlive() {
         return currentHp > 0;
     }
 
@@ -130,7 +130,7 @@ public class Creature implements PropertyChangeListener {
         return stats.getDamage();
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
@@ -157,7 +157,11 @@ public class Creature implements PropertyChangeListener {
         return 1.0;
     }
 
-    public static class Builder{
+    protected void setCurrentHpToMaximum() {
+        currentHp = stats.getMaxHp();
+    }
+
+    public static class Builder {
         private String name;
         private Integer attack;
         private Integer armor;
@@ -235,9 +239,9 @@ public class Creature implements PropertyChangeListener {
 
             CreatureStatistic stats = new CreatureStatistic(name, attack, armor, maxHp, moveRange, damage);
             Creature ret = createInstance(stats);
-            if(amount == null){
+            if (amount == null) {
                 ret.amount = 1;
-            }else{
+            } else {
                 ret.amount = amount;
             }
             if (damageCalculator != null) {
@@ -248,7 +252,7 @@ public class Creature implements PropertyChangeListener {
             return ret;
         }
 
-          Creature createInstance(CreatureStatistic aStats) {
+        Creature createInstance(CreatureStatistic aStats) {
             return new Creature(aStats);
         }
     }

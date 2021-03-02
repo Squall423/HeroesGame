@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 public class ShootingAndBlockCounterAttackCreatureTest {
@@ -17,7 +16,7 @@ public class ShootingAndBlockCounterAttackCreatureTest {
 
     @Test
     void creatureCanAttackEvenDistanceToOpponentIsMoreThanOne() {
-        Creature shootingCreature = new ShootingCreature.Builder()
+        Creature shootingCreature = new ShootingCreatureDecorator.Builder()
                 .name("shooter")
                 .maxHp(NOT_IMPORTANT)
                 .attack(NOT_IMPORTANT)
@@ -45,7 +44,7 @@ public class ShootingAndBlockCounterAttackCreatureTest {
 
     @Test
     void defenderShouldNotCounterAttackForShootingCreature() {
-        Creature shootingCreature = spy(ShootingCreature.class);
+        Creature shootingCreature = spy(ShootingCreatureDecorator.class);
         Creature normalCreature = spy(Creature.class);
 
         shootingCreature.attack(normalCreature);
@@ -60,16 +59,30 @@ public class ShootingAndBlockCounterAttackCreatureTest {
 
     @Test
     void defenderShouldNotCounterAttackForBlockCounterAttackCreature() {
-        Creature blockCreature = spy(BlockCounterAttackCreature.class);
-        Creature normalCreature = spy(Creature.class);
+        Creature blockCounterAttackCreature = new Creature.Builder()
+                .name("shooter")
+                .maxHp(100)
+                .attack(10)
+                .armor(10)
+                .damage(Range.closed(10, 10))
+                .moveRange(NOT_IMPORTANT)
+                .amount(1)
+                .build();
+        Creature normalCreature = new Creature.Builder()
+                .name("Normal unit")
+                .maxHp(100)
+                .attack(10)
+                .armor(10)
+                .damage(Range.closed(10, 10))
+                .moveRange(10)
+                .amount(1)
+                .build();
 
-        blockCreature.attack(normalCreature);
-        verify(blockCreature, never()).applyDamage((anyInt()));
-        verify(normalCreature, atMost(1)).applyDamage(anyInt());
+        blockCounterAttackCreature = new ShootingCreatureDecorator(new BlockCounterAttackCreatureDecorator(blockCounterAttackCreature));
+        blockCounterAttackCreature.attack(normalCreature);
+        blockCounterAttackCreature.getAttackRange();
 
-        normalCreature.attack(normalCreature);
-        verify(blockCreature, atMost(1)).applyDamage(anyInt());
-        verify(normalCreature, atMost(2)).applyDamage(anyInt());
-
+        assertEquals(100,blockCounterAttackCreature.getCurrentHp());
+        assertEquals(1,blockCounterAttackCreature.getAmount());
     }
 }
