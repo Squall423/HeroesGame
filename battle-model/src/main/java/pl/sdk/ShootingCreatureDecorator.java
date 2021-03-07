@@ -9,7 +9,7 @@ public class ShootingCreatureDecorator extends Creature {
     private final Creature decorated;
 
 
-     ShootingCreatureDecorator(Creature aDecorated) {
+     public ShootingCreatureDecorator(Creature aDecorated) {
         decorated = aDecorated;
     }
 

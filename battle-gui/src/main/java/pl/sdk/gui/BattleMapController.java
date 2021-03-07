@@ -25,139 +25,14 @@ public class BattleMapController implements PropertyChangeListener {
 
     public BattleMapController() {
         List<Creature> notUpgradedCreatures = new ArrayList<>();
-
-        Creature c;
-        c = new Creature.Builder()
-                .name("Skeleton")
-                .armor(6)
-                .attack(5)
-                .damage(Range.closed(1, 3))
-                .maxHp(6)
-                .moveRange(4)
-                
-                .build();
-        notUpgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Walking Dead")
-                .armor(5)
-                .attack(5)
-                .damage(Range.closed(2, 3))
-                .maxHp(15)
-                .moveRange(3)
-                .build();
-        notUpgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Wight")
-                .armor(7)
-                .attack(7)
-                .damage(Range.closed(3, 5))
-                .maxHp(18)
-                .moveRange(5)
-                .build();
-        notUpgradedCreatures.add(c);
-        c = new BlockCounterAttackCreatureDecorator.Builder()
-                .name("Vampire")
-                .armor(7)
-                .attack(10)
-                .damage(Range.closed(3, 5))
-                .maxHp(18)
-                .moveRange(5)
-                .build();
-        notUpgradedCreatures.add(c);
-        c = new ShootingCreatureDecorator.Builder()
-                .name("Lich")
-                .armor(10)
-                .attack(13)
-                .damage(Range.closed(5, 8))
-                .maxHp(30)
-                .moveRange(6)
-                .build();
-        notUpgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Black Knight")
-                .armor(16)
-                .attack(16)
-                .damage(Range.closed(15, 30))
-                .maxHp(120)
-                .moveRange(7)
-                .build();
-        notUpgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Bone Dragon")
-                .armor(16)
-                .attack(16)
-                .damage(Range.closed(25, 50))
-                .maxHp(150)
-                .moveRange(9)
-                .build();
-        notUpgradedCreatures.add(c);
-
         List<Creature> upgradedCreatures = new ArrayList<>();
-
-        c = new Creature.Builder()
-                .name("Skeleton Warrior")
-                .armor(6)
-                .attack(6)
-                .damage(Range.closed(1, 3))
-                .maxHp(6)
-                .moveRange(5)
-                .build();
-        upgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Zombie")
-                .armor(5)
-                .attack(5)
-                .damage(Range.closed(2, 3))
-                .maxHp(20)
-                .moveRange(4)
-                .build();
-        upgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Wraith")
-                .armor(5)
-                .attack(5)
-                .damage(Range.closed(2, 3))
-                .maxHp(20)
-                .moveRange(4)
-                .build();
-        upgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Vampire Lord")
-                .armor(10)
-                .attack(10)
-                .damage(Range.closed(5, 8))
-                .maxHp(40)
-                .moveRange(9)
-                .build();
-        upgradedCreatures.add(c);
-        c = new ShootingCreatureDecorator.Builder()
-                .name("Power Lich")
-                .armor(10)
-                .attack(13)
-                .damage(Range.closed(11, 15))
-                .maxHp(40)
-                .moveRange(7)
-                .build();
-        upgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Dread Knight")
-                .armor(18)
-                .attack(18)
-                .damage(Range.closed(15,30))
-                .maxHp(120)
-                .moveRange(9)
-                .build();
-        upgradedCreatures.add(c);
-        c = new Creature.Builder()
-                .name("Ghost Dragon")
-                .armor(17)
-                .attack(19)
-                .damage(Range.closed(25,50))
-                .maxHp(200)
-                .moveRange(14)
-                .build();
-        upgradedCreatures.add(c);
-
+        NecropolisFactory factory = new NecropolisFactory();
+        for (int i = 1; i < 7; i++) {
+            notUpgradedCreatures.add(factory.create(false, i));
+        }
+        for (int i = 1; i < 7; i++) {
+            upgradedCreatures.add(factory.create(true, i));
+        }
 
         gameEngine = new GameEngine(notUpgradedCreatures, upgradedCreatures);
 

@@ -161,6 +161,12 @@ public class Creature implements PropertyChangeListener {
         currentHp = stats.getMaxHp();
     }
 
+    public boolean[][] getSplashRange() {
+        boolean[][] ret = new boolean[3][3];
+        ret[1][1] = true;
+        return ret;
+    }
+
     public static class Builder {
         private String name;
         private Integer attack;

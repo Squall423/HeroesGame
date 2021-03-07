@@ -8,7 +8,7 @@ public class BlockCounterAttackCreatureDecorator extends Creature {
 
     private final Creature decorated;
 
-    BlockCounterAttackCreatureDecorator(Creature aDecorated) {
+    public BlockCounterAttackCreatureDecorator(Creature aDecorated) {
         decorated = aDecorated;
     }
 
