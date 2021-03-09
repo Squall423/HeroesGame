@@ -1,13 +1,18 @@
 package pl.sdk;
 
+import pl.sdk.creatures.Creature;
+
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class GameEngine {
+
+    public final static int BOARD_WIDTH = 20;
+    public final static int BOARD_HEIGHT = 15;
+
     public static final String CURRENT_CREATURE_CHANGED = "CURRENT_CREATURE_CHANGED";
     public static final String CREATURE_MOVED = "CREATURE_MOVED";
     public static final String CREATURE_ATTACKED = "CREATURE_ATTACKED";
@@ -25,7 +30,22 @@ public class GameEngine {
         List<Creature> twoSidesCreatures = new ArrayList<>();
         twoSidesCreatures.addAll(aCreatures1);
         twoSidesCreatures.addAll(aCreatures2);
+        twoSidesCreatures.sort((c1, c2) -> c2.getMoveRange() - c1.getMoveRange());
         queue = new CreatureTurnQueue(twoSidesCreatures);
+
+        twoSidesCreatures.forEach(queue::addObserver);
+        observerSupport = new PropertyChangeSupport(this);
+    }
+
+    GameEngine(List<Creature> aCreatures1, List<Creature> aCreatures2, Board aBoard) {
+        board = aBoard;
+        putCreaturesToBoard(aCreatures1, aCreatures2);
+        List<Creature> twoSidesCreatures = new ArrayList<>();
+        twoSidesCreatures.addAll(aCreatures1);
+        twoSidesCreatures.addAll(aCreatures2);
+        twoSidesCreatures.sort((c1, c2) -> c2.getMoveRange() - c1.getMoveRange());
+        queue = new CreatureTurnQueue(twoSidesCreatures);
+
         twoSidesCreatures.forEach(queue::addObserver);
         observerSupport = new PropertyChangeSupport(this);
     }
@@ -47,7 +67,7 @@ public class GameEngine {
     }
 
     public void move(Point aTargetPoint) {
-        if (blockMoving){
+        if (blockMoving) {
             return;
         }
         Point oldPosition = board.get(queue.getActiveCreature());
@@ -66,7 +86,14 @@ public class GameEngine {
     }
 
     public void attack(int x, int y) {
-        queue.getActiveCreature().attack(board.get(x, y));
+        if (blockAttacking) {
+            return;
+        }
+        Creature activeCreature = queue.getActiveCreature();
+//        activeCreature.getSplashRange();
+
+            activeCreature.attack(board.get(x, y));
+
         blockAttacking = true;
         blockMoving = true;
         notifyObservers(new PropertyChangeEvent(this, CREATURE_ATTACKED, null, null));
@@ -74,7 +101,7 @@ public class GameEngine {
 
     private void putCreaturesToBoard(List<Creature> aCreatures1, List<Creature> aCreatures2) {
         putCreaturesFromOneSideToBoard(aCreatures1, 0);
-        putCreaturesFromOneSideToBoard(aCreatures2, Board.WIDTH - 1);
+        putCreaturesFromOneSideToBoard(aCreatures2, GameEngine.BOARD_WIDTH - 1);
     }
 
     private void putCreaturesFromOneSideToBoard(List<Creature> aCreatures, int aX) {

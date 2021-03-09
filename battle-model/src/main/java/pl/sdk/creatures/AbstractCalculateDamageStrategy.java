@@ -1,8 +1,8 @@
-package pl.sdk;
+package pl.sdk.creatures;
 
 import java.util.Random;
 
-public abstract class AbstractCalculateDamageStrategy implements CalculateDamageStrategy {
+abstract class AbstractCalculateDamageStrategy implements CalculateDamageStrategy {
 
     private final Random rand;
 

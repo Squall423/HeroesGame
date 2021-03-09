@@ -1,7 +1,8 @@
 package pl.sdk;
 
-
 import org.junit.jupiter.api.Test;
+import pl.sdk.creatures.Creature;
+import pl.sdk.creatures.NecropolisFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.util.List;
@@ -15,8 +16,8 @@ class EndOfTurnTests {
 
     @Test
     void shouldResetCounterAttackFlagAfterEndOfTurn() {
-        Creature attacker = new Creature();
-        Creature defender = new Creature();
+        Creature attacker = NecropolisFactory.createDefaultForTests();;
+        Creature defender = NecropolisFactory.createDefaultForTests();;
         GameEngine engine = new GameEngine(List.of(attacker), List.of(defender));
 
         assertEquals(true, defender.canCounterAttack());
@@ -32,7 +33,7 @@ class EndOfTurnTests {
     @Test
     void shouldCallPropertyChangeAfterEndOfTurn() {
         Creature attacker = spy(Creature.class);
-        Creature defender = new Creature();
+        Creature defender = NecropolisFactory.createDefaultForTests();;
         GameEngine engine = new GameEngine(List.of(attacker), List.of(defender));
 
         engine.pass();

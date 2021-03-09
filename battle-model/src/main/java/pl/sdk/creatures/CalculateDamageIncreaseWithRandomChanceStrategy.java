@@ -1,8 +1,8 @@
-package pl.sdk;
+package pl.sdk.creatures;
 
 import java.util.Random;
 
-public class CalculateDamageIncreaseWithRandomChanceStrategy extends AbstractCalculateDamageStrategy {
+ class CalculateDamageIncreaseWithRandomChanceStrategy extends AbstractCalculateDamageStrategy {
 
 
     private final double chanceToIncrease;
@@ -12,7 +12,7 @@ public class CalculateDamageIncreaseWithRandomChanceStrategy extends AbstractCal
         this(aChance, aIncreaseFactor, new Random());
     }
 
-    public CalculateDamageIncreaseWithRandomChanceStrategy(double aChance, double aIncreaseFactor, Random aRand) {
+     CalculateDamageIncreaseWithRandomChanceStrategy(double aChance, double aIncreaseFactor, Random aRand) {
         super(aRand);
         chanceToIncrease = aChance;
         increaseFactor = aIncreaseFactor;

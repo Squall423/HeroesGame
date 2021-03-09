@@ -1,8 +1,8 @@
 package pl.sdk;
 
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.sdk.creatures.Creature;
 
 import java.util.List;
 

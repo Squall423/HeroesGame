@@ -1,10 +1,10 @@
-package pl.sdk;
+package pl.sdk.creatures;
 
 import com.google.common.collect.Range;
 
 import java.beans.PropertyChangeEvent;
 
-public class ShootingCreatureDecorator extends Creature {
+ class ShootingCreatureDecorator extends Creature {
 
     private final Creature decorated;
 
@@ -14,7 +14,7 @@ public class ShootingCreatureDecorator extends Creature {
     }
 
     @Override
-    void attack(Creature aDefender) {
+    public void attack(Creature aDefender) {
         decorated.attack(aDefender);
     }
 
@@ -39,7 +39,7 @@ public class ShootingCreatureDecorator extends Creature {
     }
 
     @Override
-    int getCurrentHp() {
+    public int getCurrentHp() {
         return decorated.getCurrentHp();
     }
 
@@ -49,12 +49,12 @@ public class ShootingCreatureDecorator extends Creature {
     }
 
     @Override
-    boolean canCounterAttack() {
+    public boolean canCounterAttack() {
         return decorated.canCounterAttack();
     }
 
     @Override
-    int getMoveRange() {
+    public int getMoveRange() {
         return decorated.getMoveRange();
     }
 
@@ -64,12 +64,12 @@ public class ShootingCreatureDecorator extends Creature {
     }
 
     @Override
-    int getAttack() {
+    public int getAttack() {
         return decorated.getAttack();
     }
 
     @Override
-    int getArmor() {
+    public int getArmor() {
         return decorated.getArmor();
     }
 
@@ -94,7 +94,7 @@ public class ShootingCreatureDecorator extends Creature {
     }
 
     @Override
-    double getAttackRange() {
+    public double getAttackRange() {
         return Double.MAX_VALUE;
     }
 

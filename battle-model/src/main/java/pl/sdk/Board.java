@@ -1,14 +1,15 @@
 package pl.sdk;
 
-import java.util.ArrayList;
+import pl.sdk.creatures.Creature;
+
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
+import static pl.sdk.GameEngine.BOARD_HEIGHT;
+import static pl.sdk.GameEngine.BOARD_WIDTH;
 
 class Board {
+
     private final Map<Point, Creature> map;
-    public final static int WIDTH = 20;
-    public final static int HEIGHT = 15;
 
     Board() {
         map = new HashMap<>();
@@ -32,7 +33,7 @@ class Board {
     }
 
     private void throwExceptionWhenIsOutsideMap(Point aPoint) {
-        if (aPoint.getX() < 0 || aPoint.getX() > WIDTH || aPoint.getY() < 0 || aPoint.getY() > HEIGHT) {
+        if (aPoint.getX() < 0 || aPoint.getX() > BOARD_WIDTH || aPoint.getY() < 0 || aPoint.getY() > BOARD_HEIGHT) {
             throw new IllegalArgumentException("You are trying to works outside the map");
         }
     }
