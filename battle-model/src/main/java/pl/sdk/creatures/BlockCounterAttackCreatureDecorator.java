@@ -40,7 +40,7 @@ class BlockCounterAttackCreatureDecorator extends Creature {
     }
 
     @Override
-    void applyDamage(int aDamageToApply) {
+    public void applyDamage(int aDamageToApply) {
         decorated.applyDamage(aDamageToApply);
     }
 

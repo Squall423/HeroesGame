@@ -34,7 +34,7 @@ import java.beans.PropertyChangeEvent;
     }
 
     @Override
-    void applyDamage(int aDamageToApply) {
+    public void applyDamage(int aDamageToApply) {
         decorated.applyDamage(aDamageToApply);
     }
 

@@ -1,2 +1,0 @@
-zrobic testy nowe i zaorac creatury cos z atakiem nie tak NullPointerException
-dodac stacka builder amount potrzebny, apply damage w creaturze i testy do ap-ply damage

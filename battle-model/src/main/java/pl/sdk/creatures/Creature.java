@@ -73,7 +73,7 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
-    void applyDamage(int aDamageToApply) {
+    public void applyDamage(int aDamageToApply) {
         int fullCurrentHp = (stats.getMaxHp() * (amount - 1)) + currentHp - aDamageToApply;
         if (fullCurrentHp <= 0) {
             amount = 0;
@@ -163,7 +163,11 @@ public class Creature implements PropertyChangeListener {
 
     public boolean[][] getSplashRange() {
         boolean[][] ret = new boolean[3][3];
+        ret[0][1] = true;
+        ret[2][1] = true;
         ret[1][1] = true;
+        ret[1][2] = true;
+        ret[1][0] = true;
         return ret;
     }
 
