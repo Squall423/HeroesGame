@@ -22,6 +22,8 @@ public class GameEngine {
     private final PropertyChangeSupport observerSupport;
     private boolean blockMoving;
     private boolean blockAttacking;
+    private List<Creature> creatures1;
+    private List<Creature> creatures2;
 
 
     public GameEngine(List<Creature> aCreatures1, List<Creature> aCreatures2) {
@@ -30,7 +32,9 @@ public class GameEngine {
 
     GameEngine(List<Creature> aCreatures1, List<Creature> aCreatures2, Board aBoard) {
         board = aBoard;
-        putCreaturesToBoard(aCreatures1, aCreatures2);
+        creatures1 = aCreatures1;
+        creatures2 = aCreatures2;
+        putCreaturesToBoard(creatures1, creatures2);
         List<Creature> twoSidesCreatures = new ArrayList<>();
         twoSidesCreatures.addAll(aCreatures1);
         twoSidesCreatures.addAll(aCreatures2);
@@ -53,7 +57,7 @@ public class GameEngine {
         observerSupport.removePropertyChangeListener(aObs);
     }
 
-    public void notifyObservers(PropertyChangeEvent aEvent) {
+    void notifyObservers(PropertyChangeEvent aEvent) {
         observerSupport.firePropertyChange(aEvent);
     }
 
@@ -85,7 +89,7 @@ public class GameEngine {
         for (int x = 0; x < splashRange.length; x++) {
             for (int y = 0; y < splashRange.length; y++) {
                 if (splashRange[x][y]) {
-                    activeCreature.attack(board.get(aX+x-1, aY+y-1));
+                    activeCreature.attack(board.get(aX + x - 1, aY + y - 1));
                 }
             }
         }
@@ -103,7 +107,7 @@ public class GameEngine {
 
     private void putCreaturesFromOneSideToBoard(List<Creature> aCreatures, int aX) {
         for (int i = 0; i < aCreatures.size(); i++) {
-            board.add(new Point(aX, i * 2), aCreatures.get(i));
+            board.add(new Point(aX, i * 2 + 1), aCreatures.get(i));
         }
     }
 
@@ -120,8 +124,14 @@ public class GameEngine {
     }
 
     public boolean canAttack(int aX, int aY) {
-        return board.get(getActiveCreature()).distance(new Point(aX, aY)) <= getActiveCreature().getAttackRange();
+        boolean isP1Creature = creatures1.contains(getActiveCreature());
+        boolean theSamePlayerUnit;
+        if (isP1Creature) {
+            theSamePlayerUnit = creatures1.contains(board.get(aX, aY));
+        } else {
+            theSamePlayerUnit = creatures2.contains(board.get(aX, aY));
+        }
+
+        return !theSamePlayerUnit && board.get(getActiveCreature()).distance(new Point(aX, aY)) <= getActiveCreature().getAttackRange();
     }
-
-
 }

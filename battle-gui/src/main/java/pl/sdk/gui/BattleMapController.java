@@ -28,10 +28,10 @@ public class BattleMapController implements PropertyChangeListener {
         List<Creature> notUpgradedCreatures = new ArrayList<>();
         List<Creature> upgradedCreatures = new ArrayList<>();
         NecropolisFactory factory = new NecropolisFactory();
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i <= 7; i++) {
             notUpgradedCreatures.add(factory.create(false, i));
         }
-        for (int i = 1; i < 7; i++) {
+        for (int i = 1; i <= 7; i++) {
             upgradedCreatures.add(factory.create(true, i));
         }
 
@@ -60,7 +60,7 @@ public class BattleMapController implements PropertyChangeListener {
 
                 Creature c = gameEngine.get(x, y);
                 if (c != null) {
-                    rec.addCreature(c.getName(), c.currentHealth());
+                    rec.addCreature(c.getName(), c.getAmount());
 
                     if (c == gameEngine.getActiveCreature()) {
                         rec.setBackground(Color.GREEN);

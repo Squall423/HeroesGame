@@ -13,6 +13,11 @@ class BlockCounterAttackCreatureDecorator extends Creature {
     }
 
     @Override
+    int calculateDamage(Creature aAttacker, Creature aDefender) {
+        return decorated.calculateDamage(aAttacker, aDefender);
+    }
+
+    @Override
     public void attack(Creature aDefender) {
         if (decorated.isAlive()) {
             int damageToDeal = decorated.calculateDamage(this, aDefender);
@@ -31,6 +36,7 @@ class BlockCounterAttackCreatureDecorator extends Creature {
 
     @Override
     protected void setCurrentHpToMaximum() {
+        decorated.setCurrentHpToMaximum();
 
     }
 
@@ -40,8 +46,18 @@ class BlockCounterAttackCreatureDecorator extends Creature {
     }
 
     @Override
+    public boolean[][] getSplashRange() {
+        return decorated.getSplashRange();
+    }
+
+    @Override
     public void applyDamage(int aDamageToApply) {
         decorated.applyDamage(aDamageToApply);
+    }
+
+    @Override
+    public boolean isAlive() {
+        return decorated.isAlive();
     }
 
     @Override
@@ -103,6 +119,7 @@ class BlockCounterAttackCreatureDecorator extends Creature {
     public double getAttackRange() {
         return decorated.getAttackRange();
     }
+
 
 
 }

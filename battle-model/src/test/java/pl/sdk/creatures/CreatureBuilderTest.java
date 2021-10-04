@@ -34,11 +34,11 @@ class CreatureBuilderTest {
 
 
         assertEquals(creature.getCurrentHp(),creatureFromBuilder.getCurrentHp());
-        assertEquals(creature.getCurrentHp(),creatureFromBuilder.getName());
-        assertEquals(creature.getCurrentHp(),creatureFromBuilder.getArmor());
-        assertEquals(creature.getCurrentHp(),creatureFromBuilder.getAttack());
-        assertEquals(creature.getCurrentHp(),creatureFromBuilder.getDamage());
-        assertEquals(creature.getCurrentHp(),creatureFromBuilder.getMoveRange());
+        assertEquals(creatureFromBuilder.getName(),creatureFromBuilder.getName());
+        assertEquals(creature.getArmor(),creatureFromBuilder.getArmor());
+        assertEquals(creature.getAttack(),creatureFromBuilder.getAttack());
+        assertEquals(creature.getDamage(),creatureFromBuilder.getDamage());
+        assertEquals(creature.getMoveRange(),creatureFromBuilder.getMoveRange());
 
     }
 

@@ -7,20 +7,20 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ApplyDamageTest {
-    public static final int NON_IMPORTANT = 5;
-    private static final int IMMORTAL = 9999;
+    public static final int NOT_IMPORTANT = 5;
+    private static final int IMMORTAL = 99999;
     private Creature defender;
 
     @BeforeEach
     void init() {
         defender = new Creature.Builder()
                 .name("Name")
-                .attack(NON_IMPORTANT)
-                .armor(NON_IMPORTANT)
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
                 .maxHp(100)
                 .amount(10)
-                .moveRange(NON_IMPORTANT)
-                .damage(Range.closed(NON_IMPORTANT, NON_IMPORTANT))
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(NOT_IMPORTANT, NOT_IMPORTANT))
                 .build();
     }
 
@@ -28,9 +28,9 @@ public class ApplyDamageTest {
     void shouldLostOneCreatureFromStackAndHasFullHp() {
         Creature attacker = new Creature.Builder()
                 .name("Name")
-                .attack(NON_IMPORTANT)
-                .armor(NON_IMPORTANT)
-                .maxHp(NON_IMPORTANT)
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
+                .maxHp(NOT_IMPORTANT)
                 .moveRange(1)
                 .damage(Range.closed(100, 100))
                 .build();
@@ -45,9 +45,9 @@ public class ApplyDamageTest {
     void shouldLostTwoCreatureFromStackAndHasFullHp() {
         Creature attacker = new Creature.Builder()
                 .name("Name")
-                .attack(NON_IMPORTANT)
-                .armor(NON_IMPORTANT)
-                .maxHp(NON_IMPORTANT)
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
+                .maxHp(NOT_IMPORTANT)
                 .moveRange(1)
                 .damage(Range.closed(200, 200))
                 .build();
@@ -60,9 +60,9 @@ public class ApplyDamageTest {
     void shouldLostOneCreatureFromnStackAndHas1Hp() {
         Creature attacker = new Creature.Builder()
                 .name("Name")
-                .attack(NON_IMPORTANT)
-                .armor(NON_IMPORTANT)
-                .maxHp(NON_IMPORTANT)
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
+                .maxHp(NOT_IMPORTANT)
                 .moveRange(1)
                 .damage(Range.closed(199, 199))
                 .build();
@@ -75,9 +75,9 @@ public class ApplyDamageTest {
     void shouldLost99HpButWithoutCreatureFromStack() {
         Creature attacker = new Creature.Builder()
                 .name("Name")
-                .attack(NON_IMPORTANT)
-                .armor(NON_IMPORTANT)
-                .maxHp(NON_IMPORTANT)
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
+                .maxHp(NOT_IMPORTANT)
                 .moveRange(1)
                 .damage(Range.closed(99, 99))
                 .build();
@@ -90,8 +90,8 @@ public class ApplyDamageTest {
     void shouldLost198HpBecauseAttackTwiceShouldBe9StackAnd2Hp() {
         Creature attacker = new Creature.Builder()
                 .name("Name")
-                .attack(NON_IMPORTANT)
-                .armor(NON_IMPORTANT)
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
                 .maxHp(IMMORTAL)
                 .moveRange(1)
                 .damage(Range.closed(99, 99))

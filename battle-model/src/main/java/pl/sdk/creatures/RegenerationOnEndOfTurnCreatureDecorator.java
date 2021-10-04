@@ -4,7 +4,7 @@ import com.google.common.collect.Range;
 
 import java.beans.PropertyChangeEvent;
 
- class RegenerationOnEndOfTurnCreatureDecorator extends Creature {
+ class RegenerationOnEndOfTurnCreatureDecorator extends Creature{
 
     private Creature decorated;
 
@@ -22,7 +22,12 @@ import java.beans.PropertyChangeEvent;
         return decorated.calculateDamage(aAttacker, aDefender);
     }
 
-    @Override
+     @Override
+     void performAfterAttack(int aDamageToDeal) {
+         decorated.performAfterAttack(aDamageToDeal);
+     }
+
+     @Override
     protected void counterAttack(Creature aDefender) {
         decorated.counterAttack(aDefender);
     }
@@ -32,7 +37,12 @@ import java.beans.PropertyChangeEvent;
         decorated.applyDamage(aDamageToApply);
     }
 
-    @Override
+     @Override
+     public boolean isAlive() {
+         return decorated.isAlive();
+     }
+
+     @Override
     public int getCurrentHp() {
         return decorated.getCurrentHp();
     }
@@ -69,7 +79,7 @@ import java.beans.PropertyChangeEvent;
     }
 
     @Override
-    Range<Integer> getDamage() {
+    public Range<Integer> getDamage() {
         return decorated.getDamage();
     }
 
@@ -93,5 +103,15 @@ import java.beans.PropertyChangeEvent;
         return decorated.getAttackRange();
     }
 
+     @Override
+     void setCurrentHpToMaximum() {
+         decorated.setCurrentHpToMaximum();
+     }
 
-}
+     @Override
+     public boolean[][] getSplashRange() {
+         return decorated.getSplashRange();
+     }
+
+
+ }

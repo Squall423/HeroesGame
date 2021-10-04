@@ -6,6 +6,7 @@ import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +15,7 @@ class CreatureTurnQueueTest {
     private Creature a;
     private Creature b;
     private Creature c;
-    private List<Creature> creatureList;
+    private Collection<Creature> creatureList;
 
     @BeforeEach
     void init() {

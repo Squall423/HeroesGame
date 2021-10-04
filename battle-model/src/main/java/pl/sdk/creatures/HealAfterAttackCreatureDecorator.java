@@ -24,6 +24,11 @@ class HealAfterAttackCreatureDecorator extends Creature {
         }
     }
 
+    @Override
+    void performAfterAttack(int aDamageToDeal) {
+        decorated.performAfterAttack(aDamageToDeal);
+    }
+
     private void healAfterAttack(int aDamageToDeal) {
         applyDamage((int) (-aDamageToDeal * selfHealingPercentage));
     }
@@ -35,7 +40,17 @@ class HealAfterAttackCreatureDecorator extends Creature {
 
     @Override
     protected void setCurrentHpToMaximum() {
+        decorated.setCurrentHpToMaximum();
+    }
 
+    @Override
+    public boolean isAlive() {
+        return decorated.isAlive();
+    }
+
+    @Override
+    public boolean[][] getSplashRange() {
+        return decorated.getSplashRange();
     }
 
     @Override

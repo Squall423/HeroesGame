@@ -105,6 +105,11 @@ public class SplashDamageCreatureDecorator extends Creature {
     }
 
     @Override
+    void performAfterAttack(int aDamageToDeal) {
+        decorated.performAfterAttack(aDamageToDeal);
+    }
+
+    @Override
     public boolean[][] getSplashRange() {
         return splashDamageTable;
     }

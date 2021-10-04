@@ -3,7 +3,6 @@ package pl.sdk.creatures;
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.sdk.creatures.CalculateDamageIncreaseWithRandomChanceStrategy;
 
 import java.util.Random;
 
@@ -14,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 class DoubleDamageChanceCalculatorTest {
 
-    private static final int NON_IMPORTANT = 5;
+    private static final int NOT_IMPORTANT = 5;
     private static final int THE_SAME_FOR_BOTH_CREATURES = 10;
     private Creature defender;
     private Creature attacker;
@@ -26,9 +25,9 @@ class DoubleDamageChanceCalculatorTest {
                 .name("Double Damage Chance Test Unit")
                 .attack(THE_SAME_FOR_BOTH_CREATURES)
                 .armor(THE_SAME_FOR_BOTH_CREATURES)
-                .maxHp(NON_IMPORTANT)
+                .maxHp(NOT_IMPORTANT)
                 .amount(1)
-                .moveRange(NON_IMPORTANT)
+                .moveRange(NOT_IMPORTANT)
                 .damage(Range.closed(10, 20))
                 .amount(10)
                 .build();
@@ -37,10 +36,10 @@ class DoubleDamageChanceCalculatorTest {
                 .name("Defender")
                 .attack(THE_SAME_FOR_BOTH_CREATURES)
                 .armor(THE_SAME_FOR_BOTH_CREATURES)
-                .maxHp(NON_IMPORTANT)
-                .moveRange(NON_IMPORTANT)
-                .damage(Range.closed(NON_IMPORTANT, NON_IMPORTANT))
-                .amount(NON_IMPORTANT)
+                .maxHp(NOT_IMPORTANT)
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(NOT_IMPORTANT, NOT_IMPORTANT))
+                .amount(NOT_IMPORTANT)
                 .build();
         rand = mock(Random.class);
         when(rand.nextInt(anyInt())).thenReturn(0);

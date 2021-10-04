@@ -58,7 +58,22 @@ import java.beans.PropertyChangeEvent;
         return decorated.getMoveRange();
     }
 
-    @Override
+     @Override
+     public boolean isAlive() {
+         return decorated.isAlive();
+     }
+
+     @Override
+     void performAfterAttack(int aDamageToDeal) {
+         decorated.performAfterAttack(aDamageToDeal);
+     }
+
+     @Override
+     public boolean[][] getSplashRange() {
+         return decorated.getSplashRange();
+     }
+
+     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
         decorated.propertyChange(aPropertyChangeEvent);
     }
@@ -74,7 +89,7 @@ import java.beans.PropertyChangeEvent;
     }
 
     @Override
-    Range<Integer> getDamage() {
+    public Range<Integer> getDamage() {
         return decorated.getDamage();
     }
 

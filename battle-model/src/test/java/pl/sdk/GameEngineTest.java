@@ -3,33 +3,29 @@ package pl.sdk;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.sdk.creatures.Creature;
+import pl.sdk.creatures.NecropolisFactory;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.spy;
 
 class GameEngineTest {
 
-    private Creature attacker;
-    private Creature defender;
-    GameEngine engine;
-
-    @BeforeEach
-    void init() {
-
-        attacker = new Creature("DefName", 1, 1, 10, 10);
-        defender = new Creature("DefName", 1, 1, 10, 10);
-        engine = new GameEngine(List.of(attacker), List.of(defender));
-    }
 
     @Test
-    void creatureCanAttack() {
+    void shouldRecognizeFriendlyCreatureAndDoNotAttackHer() {
+        NecropolisFactory factory = new NecropolisFactory();
+        List<Creature> l1 = List.of(factory.create(true, 5), spy(Creature.class));
+        List<Creature> l2 = List.of(factory.create(true, 5), spy(Creature.class));
 
-      engine.move(new Point(4, 5));
-      assertTrue(engine.canAttack(5, 5));
-      engine.pass();
-      assertFalse(engine.canAttack(5, 5));
+
+        GameEngine engine = new GameEngine(l1,l2);
+        assertTrue(engine.canAttack(GameEngine.BOARD_WIDTH-1, 1));
+        assertFalse(engine.canAttack(0, 1));
+        assertFalse(engine.canAttack(0, 1));
+
+
     }
-
 }

@@ -8,47 +8,63 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class CreatureCounterAttackTest {
 
-    private static final int NON_IMPORTANT = 10;
-    private Creature defender;
-    private Creature attacker;
+    private static final int NOT_IMPORTANT = 5;
 
-    @BeforeEach
-    void init() {
-         defender = new Creature.Builder()
-                .name("Name")
-                .attack(10)
-                .armor(NON_IMPORTANT)
+    @Test
+    void creatureShouldCounterAttack(){
+        Creature attacker = new Creature.Builder()
+                .name("Attacker")
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
                 .maxHp(100)
-                .amount(1)
-                .moveRange(NON_IMPORTANT)
-                .damage(Range.closed(NON_IMPORTANT, NON_IMPORTANT))
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(NOT_IMPORTANT,NOT_IMPORTANT))
+                .build();
+        Creature defender = new Creature.Builder()
+                .name("Defender")
+                .attack(NOT_IMPORTANT)
+                .armor(10)
+                .maxHp(100)
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(10,10))
                 .build();
 
-         attacker = new Creature.Builder()
-                .name("Name")
-                .attack(10)
-                .armor(NON_IMPORTANT)
-                .maxHp(100)
-                .moveRange(1)
-                .damage(Range.closed(100, 100))
-                .build();
+        attacker.attack(defender);
+
+        assertEquals(90,attacker.getCurrentHp());
     }
 
     @Test
-    void creatureShouldCounterAttack() {
+    void creatureShouldCounterAttackOnlyOnceAtTurn(){
+        Creature attacker = new Creature.Builder()
+                .name("Attacker")
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
+                .maxHp(100)
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(NOT_IMPORTANT,NOT_IMPORTANT))
+                .build();
+        Creature attacker2 = new Creature.Builder()
+                .name("Attacker")
+                .attack(NOT_IMPORTANT)
+                .armor(NOT_IMPORTANT)
+                .maxHp(100)
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(NOT_IMPORTANT,NOT_IMPORTANT))
+                .build();
+        Creature defender = new Creature.Builder()
+                .name("Defender")
+                .attack(NOT_IMPORTANT)
+                .armor(10)
+                .maxHp(100)
+                .moveRange(NOT_IMPORTANT)
+                .damage(Range.closed(10,10))
+                .build();
 
         attacker.attack(defender);
-        assertEquals(90, attacker.getCurrentHp());
+        attacker2.attack(defender);
 
-    }
-
-    @Test
-    void creatureShouldCounterAttackOnlyOnceAtTurn() {
-
-        attacker.attack(defender);
-        attacker.attack(defender);
-
-        assertEquals(90, attacker.getCurrentHp());
-        assertEquals(90, attacker.getCurrentHp());
+        assertEquals(90,attacker.getCurrentHp());
+        assertEquals(100,attacker2.getCurrentHp());
     }
 }

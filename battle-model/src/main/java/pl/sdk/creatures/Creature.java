@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class Creature implements PropertyChangeListener {
 
-    private CreatureStatistic stats;
+    private final CreatureStatistic stats;
     private int currentHp;
     private boolean counterAttackedInThisTurn;
     private CalculateDamageStrategy calculateDamageStrategy;
@@ -20,7 +20,7 @@ public class Creature implements PropertyChangeListener {
 
     //Mockito constructor
     Creature() {
-        new CreatureStatistic("Name", 1, 1, 1, 1, Range.closed(2, 2));
+        stats = new CreatureStatistic("Name", 1, 1, 1, 1, Range.closed(2, 2));
     }
 
     Creature(CreatureStatistic aStats) {
@@ -28,27 +28,9 @@ public class Creature implements PropertyChangeListener {
         currentHp = stats.getMaxHp();
     }
 
-    //do zaorania
-    public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange) {
-        this(aName, aAttack, aArmor, aMaxHp, aMoveRange, aAttack);
-    }
-
-    public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, int aDamage) {
-        this(aName, aAttack, aArmor, aMaxHp, aMoveRange, Range.closed(aDamage, aDamage),
-                new DefaultCalculateStrategy());
-    }
-
-    public Creature(String aName, int aAttack, int aArmor, int aMaxHp, int aMoveRange, Range<Integer> aDamage,
-                    CalculateDamageStrategy aCalculateDamageStrategy) {
-        stats = new CreatureStatistic(aName, aAttack, aArmor, aMaxHp, aMoveRange, aDamage);
-        currentHp = stats.getMaxHp();
-        calculateDamageStrategy = aCalculateDamageStrategy;
-    }
-////////////////////////////////////////////////
-
    public void attack(Creature aDefender) {
         if (isAlive()) {
-            int damageToDeal = calculateDamage(aDefender, this);
+            int damageToDeal = calculateDamage(this, aDefender);
             aDefender.applyDamage(damageToDeal);
 
             performAfterAttack(damageToDeal);
@@ -67,7 +49,7 @@ public class Creature implements PropertyChangeListener {
 
     void counterAttack(Creature aDefender) {
         if (!aDefender.counterAttackedInThisTurn) {
-            int damageToDealInCounterAttack = calculateDamage(this, aDefender);
+            int damageToDealInCounterAttack = calculateDamage(aDefender, this);
             applyDamage(damageToDealInCounterAttack);
             aDefender.counterAttackedInThisTurn = true;
         }
@@ -163,11 +145,7 @@ public class Creature implements PropertyChangeListener {
 
     public boolean[][] getSplashRange() {
         boolean[][] ret = new boolean[3][3];
-        ret[0][1] = true;
-        ret[2][1] = true;
         ret[1][1] = true;
-        ret[1][2] = true;
-        ret[1][0] = true;
         return ret;
     }
 
@@ -181,8 +159,8 @@ public class Creature implements PropertyChangeListener {
         private CalculateDamageStrategy damageCalculator;
         private Integer amount;
 
-        Builder name(String aName) {
-            this.name = aName;
+        Builder name(String name) {
+            this.name = name;
             return this;
         }
 
@@ -243,8 +221,7 @@ public class Creature implements PropertyChangeListener {
                 emptyFields.add("damage");
             }
             if (!emptyFields.isEmpty()) {
-                throw new IllegalStateException("These fields: " + Arrays.toString(emptyFields.toArray()) + "cannot " +
-                        "be empty");
+                throw new IllegalStateException("These fields: " + Arrays.toString(emptyFields.toArray()) + "cannot be empty");
             }
 
             CreatureStatistic stats = new CreatureStatistic(name, attack, armor, maxHp, moveRange, damage);

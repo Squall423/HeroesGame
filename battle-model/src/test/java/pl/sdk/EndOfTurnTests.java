@@ -33,7 +33,7 @@ class EndOfTurnTests {
     @Test
     void shouldCallPropertyChangeAfterEndOfTurn() {
         Creature attacker = spy(Creature.class);
-        Creature defender = NecropolisFactory.createDefaultForTests();;
+        Creature defender = NecropolisFactory.createDefaultForTests();
         GameEngine engine = new GameEngine(List.of(attacker), List.of(defender));
 
         engine.pass();

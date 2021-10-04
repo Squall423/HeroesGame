@@ -34,7 +34,7 @@ public class Point {
         return Objects.hash(x, y);
     }
 
-    public double distance(Point aPoint) {
+    double distance(Point aPoint) {
         return Math.sqrt((aPoint.y - y) * (aPoint.y - y) + (aPoint.x - x) * (aPoint.x - x));
     }
 }
