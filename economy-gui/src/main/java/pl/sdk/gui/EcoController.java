@@ -22,20 +22,32 @@ public class EcoController {
     Button readyButton;
 
     private final List<Creature> creatureList;
+    private final List<Creature> creatureList2;
+    private List<Creature> currentCreatureList;
 
     public EcoController() {
         creatureList = new ArrayList<>();
+        creatureList2 = new ArrayList<>();
+        currentCreatureList = creatureList;
     }
 
 
     @FXML
     void initialize() {
         refreshGui();
-        readyButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> refreshGui());
+        readyButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            if (currentCreatureList == creatureList) {
+                currentCreatureList = creatureList2;
+
+            } else {
+                currentCreatureList = creatureList;
+            }
+            refreshGui();
+        });
 
     }
 
-    private void refreshGui() {
+    void refreshGui() {
         shopsBox.getChildren().clear();
         heroStateHBox.getChildren().clear();
 
@@ -49,12 +61,12 @@ public class EcoController {
         shopsBox.getChildren().add(creatureShop);
 
         VBox creaturesBox = new VBox();
-        creatureList.forEach(c -> creaturesBox.getChildren().add(new Label(c.getName())));
+        currentCreatureList.forEach(c -> creaturesBox.getChildren().add(new Label(c.getName())));
         heroStateHBox.getChildren().add(creaturesBox);
 
     }
 
     void buy(Creature aCreature) {
-        creatureList.add(aCreature);
+        currentCreatureList.add(aCreature);
     }
 }
