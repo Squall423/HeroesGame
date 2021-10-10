@@ -14,14 +14,13 @@ import java.util.ArrayList;
 
 public class Start extends Application {
 
-    public Start() {
-
-    }
 
     @Override
     public void start(Stage aStage) throws Exception {
-        Scene scene = new Scene(FXMLLoader.load(getClass().getClassLoader().getResource("fxml/battleMap.fxml")));
-
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getClassLoader().getResource("fxml/battleMap.fxml"));
+        loader.setController(new BattleMapController());
+        Scene scene = new Scene(loader.load());
         aStage.setScene(scene);
         aStage.setX(5);
         aStage.setY(5);

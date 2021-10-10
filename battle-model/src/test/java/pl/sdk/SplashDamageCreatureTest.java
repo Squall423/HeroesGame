@@ -13,7 +13,7 @@ public class SplashDamageCreatureTest {
 
     @Test
     void checkSplashDamage() {
-        Creature splashCreature = new NecropolisFactory().create(true, 5);
+        Creature splashCreature = new NecropolisFactory().create(true, 5, 1);
         Creature defender = spy(Creature.class);
         Creature splashMock1 = spy(Creature.class);
         Creature splashMock2 = spy(Creature.class);
@@ -49,7 +49,7 @@ public class SplashDamageCreatureTest {
 
     @Test
     void checkUnitWithoutSplashDamage() {
-        Creature notSplashCreature = new NecropolisFactory().create(true, 2);
+        Creature notSplashCreature = new NecropolisFactory().create(true, 2, 1);
         Creature defender = spy(Creature.class);
         Creature splashMock1 = spy(Creature.class);
         Creature splashMock2 = spy(Creature.class);

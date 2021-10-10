@@ -7,29 +7,33 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="969.0" prefWidth="1490.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.sdk.gui.EcoController">
-   <center>
-      <HBox fx:id="heroStateHBox" BorderPane.alignment="TOP_LEFT">
-      </HBox>
-      <HBox fx:id="shopsBox" BorderPane.alignment="TOP_RIGHT">
-      </HBox>
-   </center>
-   <top>
-      <HBox prefHeight="51.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
-         <children>
-            <Label text="Player" />
-         </children>
-      </HBox>
-   </top>
-   <bottom>
-      <HBox prefHeight="0.0" prefWidth="356.0" BorderPane.alignment="CENTER">
-         <children>
-            <Button fx:id="readyButton" mnemonicParsing="false" text="READY" />
-         </children>
-      </HBox>
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="969.0"
+            prefWidth="1490.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="pl.sdk.gui.EcoController">
+    <center>
+        <HBox>
+            <HBox fx:id="heroStateHBox" BorderPane.alignment="TOP_LEFT">
+            </HBox>
+            <HBox fx:id="shopsBox" BorderPane.alignment="TOP_RIGHT">
+            </HBox>
+        </HBox>
+    </center>
+    <top>
+        <HBox prefHeight="51.0" prefWidth="1366.0" BorderPane.alignment="CENTER">
+            <children>
+                <Label text="Player"/>
+            </children>
+        </HBox>
+    </top>
+    <bottom>
+        <HBox prefHeight="0.0" prefWidth="356.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button fx:id="readyButton" mnemonicParsing="false" text="READY"/>
+            </children>
+        </HBox>
+    </bottom>
 
     <stylesheets>
-        <URL value="@main.css" />
+        <URL value="@main.css"/>
     </stylesheets>
 </BorderPane>

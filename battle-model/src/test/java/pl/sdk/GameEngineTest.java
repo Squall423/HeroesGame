@@ -17,8 +17,8 @@ class GameEngineTest {
     @Test
     void shouldRecognizeFriendlyCreatureAndDoNotAttackHer() {
         NecropolisFactory factory = new NecropolisFactory();
-        List<Creature> l1 = List.of(factory.create(true, 5), spy(Creature.class));
-        List<Creature> l2 = List.of(factory.create(true, 5), spy(Creature.class));
+        List<Creature> l1 = List.of(factory.create(true, 5, 1), spy(Creature.class));
+        List<Creature> l2 = List.of(spy(Creature.class));
 
 
         GameEngine engine = new GameEngine(l1,l2);

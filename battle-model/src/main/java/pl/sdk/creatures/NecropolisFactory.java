@@ -31,7 +31,7 @@ public class NecropolisFactory {
                 .build();
     }
 
-    public Creature create(boolean aIsUpgraded, int aTier) {
+    public Creature create(boolean aIsUpgraded, int aTier,int aAmount) {
         if (aIsUpgraded) {
             switch (aTier) {
                 case 1:
@@ -42,7 +42,7 @@ public class NecropolisFactory {
                             .armor(4)
                             .damage(Range.closed(1, 3))
                             .moveRange(4)
-                            .amount(70)
+                            .amount(aAmount)
                             .build();
                 case 2:
                     return new Creature.Builder()
@@ -52,7 +52,7 @@ public class NecropolisFactory {
                             .armor(5)
                             .damage(Range.closed(2, 3))
                             .moveRange(3)
-                            .amount(60)
+                            .amount(aAmount)
                             .build();
                 case 3:
                     return new Creature.Builder()
@@ -62,7 +62,7 @@ public class NecropolisFactory {
                             .armor(7)
                             .damage(Range.closed(3, 5))
                             .moveRange(5)
-                            .amount(50)
+                            .amount(aAmount)
                             .build();
                 case 4:
                     return new BlockCounterAttackCreatureDecorator.Builder()
@@ -72,7 +72,7 @@ public class NecropolisFactory {
                             .armor(9)
                             .damage(Range.closed(5, 8))
                             .moveRange(6)
-                            .amount(40)
+                            .amount(aAmount)
                             .build();
                 case 5:
                     Creature lich = new Creature.Builder()
@@ -82,7 +82,7 @@ public class NecropolisFactory {
                             .armor(10)
                             .damage(Range.closed(11, 13))
                             .moveRange(6)
-                            .amount(30)
+                            .amount(aAmount)
                             .build();
                     return new BlockCounterAttackCreatureDecorator(new ShootingCreatureDecorator(new SplashDamageCreatureDecorator(lich, getSplashForLich())));
 
@@ -95,7 +95,7 @@ public class NecropolisFactory {
                             .damage(Range.closed(15, 30))
                             .damageCalculator(new CalculateDamageIncreaseWithRandomChanceStrategy(0.2, 2.0))
                             .moveRange(7)
-                            .amount(20)
+                            .amount(aAmount)
                             .build();
                 case 7:
                     return new Creature.Builder()
@@ -105,7 +105,7 @@ public class NecropolisFactory {
                             .armor(15)
                             .damage(Range.closed(25, 50))
                             .moveRange(9)
-                            .amount(10)
+                            .amount(aAmount)
                             .build();
                 default:
                     throw new IllegalArgumentException(EXCEPTION_MESSAGE);
@@ -120,7 +120,7 @@ public class NecropolisFactory {
                             .armor(6)
                             .damage(Range.closed(1, 3))
                             .moveRange(5)
-                            .amount(75)
+                            .amount(aAmount)
                             .build();
                 case 2:
                     return new Creature.Builder()
@@ -130,7 +130,7 @@ public class NecropolisFactory {
                             .armor(5)
                             .damage(Range.closed(2, 3))
                             .moveRange(4)
-                            .amount(65)
+                            .amount(aAmount)
                             .build();
                 case 3:
                     return new RegenerationOnEndOfTurnCreatureDecorator(new Creature.Builder()
@@ -140,7 +140,7 @@ public class NecropolisFactory {
                             .armor(5)
                             .damage(Range.closed(2, 3))
                             .moveRange(4)
-                            .amount(65)
+                            .amount(aAmount)
                             .build());
                 case 4:
                     return new Creature.Builder()
@@ -150,7 +150,7 @@ public class NecropolisFactory {
                             .armor(10)
                             .damage(Range.closed(5, 8))
                             .moveRange(9)
-                            .amount(45)
+                            .amount(aAmount)
                             .build();
                 case 5:
                     Creature c = new Creature.Builder()
@@ -160,7 +160,7 @@ public class NecropolisFactory {
                             .armor(10)
                             .damage(Range.closed(11, 15))
                             .moveRange(7)
-                            .amount(35)
+                            .amount(aAmount)
                             .build();
                     boolean[][] splashDamageTable = getSplashForLich();
                     return new SplashDamageCreatureDecorator(new BlockCounterAttackCreatureDecorator(new ShootingCreatureDecorator(c)), splashDamageTable);
@@ -174,7 +174,7 @@ public class NecropolisFactory {
                             .damage(Range.closed(15, 30))
                             .damageCalculator(new CalculateDamageIncreaseWithRandomChanceStrategy(0.2, 2.0))
                             .moveRange(9)
-                            .amount(25)
+                            .amount(aAmount)
                             .build();
                 case 7:
                     return new Creature.Builder()
@@ -184,7 +184,7 @@ public class NecropolisFactory {
                             .armor(17)
                             .damage(Range.closed(25, 50))
                             .moveRange(14)
-                            .amount(15)
+                            .amount(aAmount)
                             .build();
 
                 default:

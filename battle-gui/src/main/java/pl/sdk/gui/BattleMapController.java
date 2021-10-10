@@ -29,14 +29,18 @@ public class BattleMapController implements PropertyChangeListener {
         List<Creature> upgradedCreatures = new ArrayList<>();
         NecropolisFactory factory = new NecropolisFactory();
         for (int i = 1; i <= 7; i++) {
-            notUpgradedCreatures.add(factory.create(false, i));
+            notUpgradedCreatures.add(factory.create(false, i, 10));
         }
         for (int i = 1; i <= 7; i++) {
-            upgradedCreatures.add(factory.create(true, i));
+            upgradedCreatures.add(factory.create(true, i, 10));
         }
 
         gameEngine = new GameEngine(notUpgradedCreatures, upgradedCreatures);
 
+    }
+
+    public BattleMapController(List<Creature> aCreatures1, List<Creature> aCreatures2) {
+        gameEngine = new GameEngine(aCreatures1, aCreatures2);
     }
 
     @FXML

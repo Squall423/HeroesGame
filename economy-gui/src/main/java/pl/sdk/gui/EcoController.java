@@ -1,14 +1,18 @@
 package pl.sdk.gui;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +28,13 @@ public class EcoController {
     private final List<Creature> creatureList;
     private final List<Creature> creatureList2;
     private List<Creature> currentCreatureList;
+    private int roundCounter = 1;
 
     public EcoController() {
         creatureList = new ArrayList<>();
         creatureList2 = new ArrayList<>();
         currentCreatureList = creatureList;
+        roundCounter += 1;
     }
 
 
@@ -38,13 +44,35 @@ public class EcoController {
         readyButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             if (currentCreatureList == creatureList) {
                 currentCreatureList = creatureList2;
-
             } else {
                 currentCreatureList = creatureList;
+                roundCounter += 1;
             }
-            refreshGui();
-        });
+            if (roundCounter < 4) {
+                refreshGui();
 
+            } else {
+                goToBattle();
+            }
+        });
+    }
+
+    private void goToBattle() {
+        Scene scene = null;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getClassLoader().getResource("fxml/battleMap.fxml"));
+            loader.setController(new BattleMapController(creatureList, creatureList2));
+            scene = new Scene(loader.load());
+            Stage aStage = new Stage();
+
+            aStage.setScene(scene);
+            aStage.setX(5);
+            aStage.setY(5);
+            aStage.show();
+        } catch (IOException aE) {
+            aE.printStackTrace();
+        }
     }
 
     void refreshGui() {
@@ -55,8 +83,8 @@ public class EcoController {
         VBox creatureShop = new VBox();
 
         for (int i = 1; i < 8; i++) {
-            creatureShop.getChildren().add(new CreatureButton(this, factory.create(false, i)));
-            creatureShop.getChildren().add(new CreatureButton(this, factory.create(true, i)));
+            creatureShop.getChildren().add(new CreatureButton(this, factory.create(false, i,1)));
+            creatureShop.getChildren().add(new CreatureButton(this, factory.create(true, i,1)));
         }
         shopsBox.getChildren().add(creatureShop);
 
