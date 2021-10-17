@@ -16,11 +16,11 @@
     </properties>
 
     <modules>
-        <module>battle-model</module>
-        <module>battle-gui</module>
+        <module>hero-common</module>
         <module>economy-model</module>
         <module>economy-gui</module>
-        <module>hero-common</module>
+        <module>battle-model</module>
+        <module>battle-gui</module>
     </modules>
 
     <build>
