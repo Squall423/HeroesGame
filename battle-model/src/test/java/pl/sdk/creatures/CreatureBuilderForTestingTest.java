@@ -7,13 +7,13 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-class CreatureBuilderTest {
+class CreatureBuilderForTestingTest {
 
     private static final int NOT_IMPORTANT = 5;
 
     @Test
     void shouldCreateCorrectCreatureFromBuilder() {
-        Creature creature = new Creature.Builder()
+        Creature creature = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .armor(5)
                 .attack(10)
@@ -22,7 +22,7 @@ class CreatureBuilderTest {
                 .moveRange(5)
 
                 .build();
-        Creature creatureFromBuilder = new Creature.Builder()
+        Creature creatureFromBuilder = new Creature.BuilderForTesting()
                 .name("Defender")
                 .armor(5)
                 .attack(10)

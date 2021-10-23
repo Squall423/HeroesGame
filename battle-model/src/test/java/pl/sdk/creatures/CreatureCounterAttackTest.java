@@ -1,7 +1,6 @@
 package pl.sdk.creatures;
 
 import com.google.common.collect.Range;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -12,7 +11,7 @@ public class CreatureCounterAttackTest {
 
     @Test
     void creatureShouldCounterAttack(){
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -20,7 +19,7 @@ public class CreatureCounterAttackTest {
                 .moveRange(NOT_IMPORTANT)
                 .damage(Range.closed(NOT_IMPORTANT,NOT_IMPORTANT))
                 .build();
-        Creature defender = new Creature.Builder()
+        Creature defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(NOT_IMPORTANT)
                 .armor(10)
@@ -36,7 +35,7 @@ public class CreatureCounterAttackTest {
 
     @Test
     void creatureShouldCounterAttackOnlyOnceAtTurn(){
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -44,7 +43,7 @@ public class CreatureCounterAttackTest {
                 .moveRange(NOT_IMPORTANT)
                 .damage(Range.closed(NOT_IMPORTANT,NOT_IMPORTANT))
                 .build();
-        Creature attacker2 = new Creature.Builder()
+        Creature attacker2 = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -52,7 +51,7 @@ public class CreatureCounterAttackTest {
                 .moveRange(NOT_IMPORTANT)
                 .damage(Range.closed(NOT_IMPORTANT,NOT_IMPORTANT))
                 .build();
-        Creature defender = new Creature.Builder()
+        Creature defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(NOT_IMPORTANT)
                 .armor(10)
