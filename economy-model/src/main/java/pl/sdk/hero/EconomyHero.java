@@ -1,9 +1,11 @@
-package pl.sdk.creatures;
+package pl.sdk.hero;
 
+import pl.sdk.creatures.EconomyCreature;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class EconomyHero {
-
 
     public enum Fraction {
         NECROPOLIS
@@ -13,10 +15,10 @@ public class EconomyHero {
     private final List<EconomyCreature> creatureList;
     private int gold;
 
-    public EconomyHero(Fraction aFraction, List<EconomyCreature> aCreatureList, int aGold) {
+    public EconomyHero(Fraction aFraction, int aGold) {
         fraction = aFraction;
-        creatureList = aCreatureList;
         gold = aGold;
+        creatureList = new ArrayList<>();
     }
 
     void addCreature(EconomyCreature aCreature) {
@@ -30,7 +32,7 @@ public class EconomyHero {
         gold += aAmount;
     }
 
-    void substrac(int aAmount) {
+    void substract(int aAmount) {
         if (aAmount > gold) {
             throw new IllegalStateException("Hero has not enougjt money");
         }

@@ -3,7 +3,7 @@
 [INFO] Reactor Build Order:
 [INFO] 
 [INFO] heroes-bundle                                                      [pom]
-[INFO] hero-common                                                        [jar]
+[INFO] pl.sdk.creatures.hero-common                                                        [jar]
 [INFO] battle-model                                                       [jar]
 [INFO] economy-model                                                      [jar]
 [INFO] battle-gui                                                         [jar]
@@ -16,12 +16,12 @@
 [INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ heroes-bundle ---
 [INFO] pl.sdk:heroes-bundle:pom:1.0.0-SNAPSHOT
 [INFO] 
-[INFO] -------------------------< pl.sdk:hero-common >-------------------------
-[INFO] Building hero-common 1.0.0-SNAPSHOT                                [2/6]
+[INFO] -------------------------< pl.sdk:pl.sdk.creatures.hero-common >-------------------------
+[INFO] Building pl.sdk.creatures.hero-common 1.0.0-SNAPSHOT                                [2/6]
 [INFO] --------------------------------[ jar ]---------------------------------
 [INFO] 
-[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ hero-common ---
-[INFO] pl.sdk:hero-common:jar:1.0.0-SNAPSHOT
+[INFO] --- maven-dependency-plugin:2.8:tree (default-cli) @ pl.sdk.creatures.hero-common ---
+[INFO] pl.sdk:pl.sdk.creatures.hero-common:jar:1.0.0-SNAPSHOT
 [INFO] \- com.google.guava:guava:jar:30.0-jre:compile
 [INFO]    +- com.google.guava:failureaccess:jar:1.0.1:compile
 [INFO]    +- com.google.guava:listenablefuture:jar:9999.0-empty-to-avoid-conflict-with-guava:compile
@@ -51,7 +51,7 @@
 [INFO] |  +- net.bytebuddy:byte-buddy:jar:1.8.15:test
 [INFO] |  +- net.bytebuddy:byte-buddy-agent:jar:1.8.15:test
 [INFO] |  \- org.objenesis:objenesis:jar:2.6:test
-[INFO] \- pl.sdk:hero-common:jar:1.0.0-SNAPSHOT:compile
+[INFO] \- pl.sdk:pl.sdk.creatures.hero-common:jar:1.0.0-SNAPSHOT:compile
 [INFO] 
 [INFO] ------------------------< pl.sdk:economy-model >------------------------
 [INFO] Building economy-model 1.0.0-SNAPSHOT                              [4/6]
@@ -71,7 +71,7 @@
 [INFO] |     +- org.checkerframework:checker-qual:jar:3.5.0:compile
 [INFO] |     +- com.google.errorprone:error_prone_annotations:jar:2.3.4:compile
 [INFO] |     \- com.google.j2objc:j2objc-annotations:jar:1.3:compile
-[INFO] \- pl.sdk:hero-common:jar:1.0.0-SNAPSHOT:compile
+[INFO] \- pl.sdk:pl.sdk.creatures.hero-common:jar:1.0.0-SNAPSHOT:compile
 [INFO] 
 [INFO] -------------------------< pl.sdk:battle-gui >--------------------------
 [INFO] Building battle-gui 1.0.0-SNAPSHOT                                 [5/6]
@@ -116,7 +116,7 @@
 [INFO] Reactor Summary for heroes-bundle 1.0.0-SNAPSHOT:
 [INFO] 
 [INFO] heroes-bundle ...................................... SUCCESS [  3.073 s]
-[INFO] hero-common ........................................ SUCCESS [  0.082 s]
+[INFO] pl.sdk.creatures.hero-common ........................................ SUCCESS [  0.082 s]
 [INFO] battle-model ....................................... SUCCESS [  0.095 s]
 [INFO] economy-model ...................................... SUCCESS [  0.050 s]
 [INFO] battle-gui ......................................... SUCCESS [  0.078 s]

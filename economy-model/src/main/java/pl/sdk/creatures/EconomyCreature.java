@@ -1,5 +1,6 @@
 package pl.sdk.creatures;
 
+
 public class EconomyCreature {
 
     private final CreatureStatistic stats;
@@ -12,5 +13,5 @@ public class EconomyCreature {
         amount = aAmount;
         goldCost = aGoldCost;
     }
-    
+
 }
