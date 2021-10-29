@@ -7,7 +7,7 @@ public class EconomyNecropolisFactory {
     public static final String EXCEPTION_MESSAGE = "We support tiers from 1 to 7";
 
     public EconomyCreature create(boolean aIsUpgraded, int aTier, int aAmount) {
-        if (aIsUpgraded) {
+        if (!aIsUpgraded) {
             switch (aTier) {
                 case 1:
                     return new EconomyCreature(CreatureStatistic.SKELETON, aAmount, 60);

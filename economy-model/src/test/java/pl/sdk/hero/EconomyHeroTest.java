@@ -32,6 +32,6 @@ class EconomyHeroTest {
     void shouldThrowExceptionWhileYouTrySubstractMoreGoldThanHeroHas() {
 
 
-        assertThrows(IllegalStateException.class, () -> hero.substract(3001));
+        assertThrows(IllegalStateException.class, () -> hero.substractGold(3001));
     }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 public class EconomyHero {
 
+
     public enum Fraction {
         NECROPOLIS
     }
@@ -28,15 +29,26 @@ public class EconomyHero {
         creatureList.add(aCreature);
     }
 
+    List<EconomyCreature> getCreatures() {
+        return creatureList;
+    }
+
     void addGold(int aAmount) {
         gold += aAmount;
     }
 
-    void substract(int aAmount) {
+    void substractGold(int aAmount) {
         if (aAmount > gold) {
-            throw new IllegalStateException("Hero has not enougjt money");
+            throw new IllegalStateException("Hero has not enought money");
         }
         gold -= aAmount;
+    }
+
+    void buy(EconomyCreature aCreature) {
+    }
+
+    public int getGold() {
+        return gold;
     }
 
 }
