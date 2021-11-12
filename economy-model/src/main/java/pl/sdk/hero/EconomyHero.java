@@ -16,10 +16,12 @@ public class EconomyHero {
     private final List<EconomyCreature> creatureList;
     private int gold;
 
+
     public EconomyHero(Fraction aFraction, int aGold) {
         fraction = aFraction;
         gold = aGold;
         creatureList = new ArrayList<>();
+
     }
 
     void addCreature(EconomyCreature aCreature) {
@@ -29,7 +31,7 @@ public class EconomyHero {
         creatureList.add(aCreature);
     }
 
-    List<EconomyCreature> getCreatures() {
+    public List<EconomyCreature> getCreatures() {
         return creatureList;
     }
 

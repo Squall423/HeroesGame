@@ -21,4 +21,8 @@ public class EconomyCreature {
     public int getGoldCost() {
         return goldCost;
     }
+
+    public String getName(){
+       return stats.getTranslatedName();
+    }
 }

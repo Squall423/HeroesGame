@@ -7,37 +7,39 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="969.0" prefWidth="1490.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.sdk.gui.EcoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="969.0" prefWidth="1490.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <HBox>
-         <children>
-                 <Separator fx:id="separator" orientation="VERTICAL" prefHeight="899.0" prefWidth="129.0" />
-         </children>
+            <children>
+                <Separator fx:id="separator" orientation="VERTICAL" prefHeight="899.0" prefWidth="129.0" />
+            </children>
         </HBox>
     </center>
     <bottom>
         <HBox BorderPane.alignment="CENTER">
-         <children>
+            <children>
                 <Button fx:id="readyButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="READY" />
-         </children>
+            </children>
         </HBox>
     </bottom>
 
     <stylesheets>
         <URL value="@main.css" />
     </stylesheets>
-   <top>
+    <top>
         <HBox fx:id="topBox" prefHeight="23.0" prefWidth="1490.0" BorderPane.alignment="CENTER">
             <children>
-                <Label fx:id="label" prefHeight="15.0" prefWidth="94.0" text="Player" />
+                <Label fx:id="playerLabel" prefHeight="33.0" prefWidth="236.0" />
+                <Label fx:id="currentGoldLabel" prefHeight="33.0" prefWidth="231.0" />
+                <Label fx:id="roundNumberLabel" prefHeight="33.0" prefWidth="220.0" />
             </children>
         </HBox>
-   </top>
-   <left>
-         <HBox fx:id="heroStateHBox" prefHeight="904.0" prefWidth="484.0" BorderPane.alignment="CENTER">
-            </HBox>
-   </left>
-   <right>
-         <HBox fx:id="shopsBox" prefHeight="898.0" prefWidth="895.0" BorderPane.alignment="CENTER" />
-   </right>
+    </top>
+    <left>
+        <HBox fx:id="heroStateHBox" prefHeight="904.0" prefWidth="484.0" BorderPane.alignment="CENTER">
+        </HBox>
+    </left>
+    <right>
+        <HBox fx:id="shopsBox" prefHeight="898.0" prefWidth="895.0" BorderPane.alignment="CENTER" />
+    </right>
 </BorderPane>

@@ -62,7 +62,7 @@ public class BuyingCreatureTest {
 
         assertThrows(IllegalStateException.class, (() -> economyEngine.buy(creatureFactory.create(false, 1, 1))));
 
-        assertEquals(500, hero1.getGold());
+        assertEquals(580, hero1.getGold());
         assertEquals(7, hero1.getCreatures().size());
     }
 }
