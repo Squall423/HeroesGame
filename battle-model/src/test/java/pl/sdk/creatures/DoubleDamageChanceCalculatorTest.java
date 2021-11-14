@@ -21,7 +21,7 @@ class DoubleDamageChanceCalculatorTest {
 
     @BeforeEach
     void init() {
-        attacker = new Creature.Builder()
+        attacker = new Creature.BuilderForTesting()
                 .name("Double Damage Chance Test Unit")
                 .attack(THE_SAME_FOR_BOTH_CREATURES)
                 .armor(THE_SAME_FOR_BOTH_CREATURES)
@@ -32,7 +32,7 @@ class DoubleDamageChanceCalculatorTest {
                 .amount(10)
                 .build();
 
-        defender = new Creature.Builder()
+        defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(THE_SAME_FOR_BOTH_CREATURES)
                 .armor(THE_SAME_FOR_BOTH_CREATURES)

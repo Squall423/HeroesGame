@@ -12,9 +12,13 @@
     <properties>
         <maven.compiler.target>11</maven.compiler.target>
         <maven.compiler.source>11</maven.compiler.source>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <modules>
+        <module>hero-common</module>
+        <module>economy-model</module>
+        <module>economy-gui</module>
         <module>battle-model</module>
         <module>battle-gui</module>
     </modules>
@@ -46,6 +50,11 @@
                 <artifactId>junit-jupiter-api</artifactId>
                 <version>5.4.0</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.openjfx</groupId>
+                <artifactId>javafx-fxml</artifactId>
+                <version>11-ea+25</version>
             </dependency>
             <dependency>
                 <groupId>org.openjfx</groupId>

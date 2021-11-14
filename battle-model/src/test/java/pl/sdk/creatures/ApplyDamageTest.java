@@ -13,7 +13,7 @@ public class ApplyDamageTest {
 
     @BeforeEach
     void init() {
-        defender = new Creature.Builder()
+        defender = new Creature.BuilderForTesting()
                 .name("Name")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -26,7 +26,7 @@ public class ApplyDamageTest {
 
     @Test
     void shouldLostOneCreatureFromStackAndHasFullHp() {
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Name")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -43,7 +43,7 @@ public class ApplyDamageTest {
 
     @Test
     void shouldLostTwoCreatureFromStackAndHasFullHp() {
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Name")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -58,7 +58,7 @@ public class ApplyDamageTest {
 
     @Test
     void shouldLostOneCreatureFromnStackAndHas1Hp() {
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Name")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -73,7 +73,7 @@ public class ApplyDamageTest {
 
     @Test
     void shouldLost99HpButWithoutCreatureFromStack() {
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Name")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)
@@ -88,7 +88,7 @@ public class ApplyDamageTest {
 
     @Test
     void shouldLost198HpBecauseAttackTwiceShouldBe9StackAnd2Hp() {
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Name")
                 .attack(NOT_IMPORTANT)
                 .armor(NOT_IMPORTANT)

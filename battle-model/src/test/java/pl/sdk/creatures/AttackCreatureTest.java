@@ -3,7 +3,6 @@ package pl.sdk.creatures;
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.sdk.creatures.DefaultCalculateStrategy;
 
 import java.util.Random;
 
@@ -28,7 +27,7 @@ public class AttackCreatureTest {
 
     @Test
     void creatureShouldDealExactlyDamageWhenAttackAndArmorAreEquals(){
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(10)
                 .armor(NOT_IMPORTANT)
@@ -36,7 +35,7 @@ public class AttackCreatureTest {
                 .moveRange(NOT_IMPORTANT)
                 .damage(Range.closed(20,20))
                 .build();
-        Creature defender = new Creature.Builder()
+        Creature defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(NOT_IMPORTANT)
                 .armor(10)
@@ -52,7 +51,7 @@ public class AttackCreatureTest {
 
     @Test
     void creatureShouldDealDamagePlus10PercentWhenAttackIsGreaterThenArmorBy2Points(){
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(10)
                 .armor(NOT_IMPORTANT)
@@ -60,7 +59,7 @@ public class AttackCreatureTest {
                 .moveRange(NOT_IMPORTANT)
                 .damage(Range.closed(20,20))
                 .build();
-        Creature defender = new Creature.Builder()
+        Creature defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(NOT_IMPORTANT)
                 .armor(8)
@@ -76,7 +75,7 @@ public class AttackCreatureTest {
 
     @Test
     void creatureShouldDealDamageMinus5PercentWhenArmorIsGreaterThenAttackBy2Points(){
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(10)
                 .armor(NOT_IMPORTANT)
@@ -84,7 +83,7 @@ public class AttackCreatureTest {
                 .damage(Range.closed(10,20))
                 .damageCalculator(new DefaultCalculateStrategy(randomizer))
                 .build();
-        Creature defender = new Creature.Builder()
+        Creature defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(NOT_IMPORTANT)
                 .armor(12)
@@ -99,7 +98,7 @@ public class AttackCreatureTest {
 
     @Test
     void shouldDealTwoXMoreDamageWhenStackHasTwoUnits(){
-        Creature attacker = new Creature.Builder()
+        Creature attacker = new Creature.BuilderForTesting()
                 .name("Attacker")
                 .attack(10).armor(NOT_IMPORTANT)
                 .maxHp(100).moveRange(NOT_IMPORTANT)
@@ -107,7 +106,7 @@ public class AttackCreatureTest {
                 .damageCalculator(new DefaultCalculateStrategy(randomizer))
                 .amount(2)
                 .build();
-        Creature defender = new Creature.Builder()
+        Creature defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .attack(NOT_IMPORTANT)
                 .armor(12)

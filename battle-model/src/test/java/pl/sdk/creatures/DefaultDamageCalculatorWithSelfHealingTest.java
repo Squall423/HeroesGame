@@ -3,9 +3,6 @@ package pl.sdk.creatures;
 import com.google.common.collect.Range;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.sdk.creatures.Creature;
-import pl.sdk.creatures.DefaultCalculateStrategy;
-import pl.sdk.creatures.HealAfterAttackCreatureDecorator;
 
 import java.util.Random;
 
@@ -26,7 +23,7 @@ class DefaultDamageCalculatorWithSelfHealingTest {
     void init(){
         rand = mock(Random.class);
         when(rand.nextInt(anyInt())).thenReturn(0);
-        attacker = new Creature.Builder()
+        attacker = new Creature.BuilderForTesting()
                 .name("Selfheal Test Unit")
                 .maxHp(30)
                 .attack(THE_SAME_FOR_BOTH_CREATURES)
@@ -37,7 +34,7 @@ class DefaultDamageCalculatorWithSelfHealingTest {
                 .amount(10)
                 .build();
         attacker = new HealAfterAttackCreatureDecorator(attacker, 0.5);
-        defender = new Creature.Builder()
+        defender = new Creature.BuilderForTesting()
                 .name("Defender")
                 .maxHp(NOT_IMPORTANT)
                 .attack(THE_SAME_FOR_BOTH_CREATURES)
