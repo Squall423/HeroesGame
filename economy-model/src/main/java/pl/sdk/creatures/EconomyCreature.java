@@ -22,7 +22,16 @@ public class EconomyCreature {
         return goldCost;
     }
 
-    public String getName(){
-       return stats.getTranslatedName();
+    public String getName() {
+        return stats.getTranslatedName();
+    }
+
+    public boolean isUpgraded() {
+        return stats.isUpgrade();
+    }
+
+    public int getTier() {
+        return stats.getTier();
+
     }
 }

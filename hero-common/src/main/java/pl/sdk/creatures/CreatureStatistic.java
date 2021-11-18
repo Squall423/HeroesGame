@@ -79,4 +79,7 @@ enum CreatureStatistic implements CreatureStatisticIf {
         return description;
     }
 
+    boolean isUpgrade() {
+        return isUpgrade;
+    }
 }

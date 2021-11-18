@@ -22,7 +22,7 @@ public class EconomyNecropolisFactory {
                 case 6:
                     return new EconomyCreature(CreatureStatistic.BLACK_KNIGHT, aAmount, 1200);
                 case 7:
-                    return new EconomyCreature(CreatureStatistic.DREAD_KNIGHT, aAmount, 1800);
+                    return new EconomyCreature(CreatureStatistic.BONE_DRAGON, aAmount, 1800);
                 default:
                     throw new IllegalArgumentException(EXCEPTION_MESSAGE);
             }

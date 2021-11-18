@@ -1,15 +1,13 @@
 package pl.sdk.gui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Separator;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import pl.sdk.converter.EcoBattleConverter;
 import pl.sdk.creatures.EconomyCreature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
 import pl.sdk.hero.EconomyEngine;
@@ -18,9 +16,6 @@ import pl.sdk.hero.EconomyHero;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class EcoController implements PropertyChangeListener {
 
@@ -63,23 +58,10 @@ public class EcoController implements PropertyChangeListener {
             }
         });
     }
-
+//
     private void goToBattle() {
-        Scene scene = null;
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getClassLoader().getResource("fxml/battleMap.fxml"));
-//            loader.setController(new BattleMapController(creatureList, creatureList2));
-            scene = new Scene(loader.load());
-            Stage aStage = new Stage();
+        EcoBattleConverter.startBattle(economyEngine.getPlayer1(),economyEngine.getPlayer2());
 
-            aStage.setScene(scene);
-            aStage.setX(5);
-            aStage.setY(5);
-            aStage.show();
-        } catch (IOException aE) {
-            aE.printStackTrace();
-        }
     }
 
     void refreshGui() {
@@ -115,7 +97,6 @@ public class EcoController implements PropertyChangeListener {
 
 
     }
-
 
     void buy(EconomyCreature aCreature) {
         economyEngine.buy(aCreature);

@@ -59,4 +59,14 @@ public class EconomyEngine {
     public void addObserver(String aPropertyName, PropertyChangeListener aObserver) {
         observerSupport.addPropertyChangeListener(aPropertyName, aObserver);
     }
+
+    public EconomyHero getPlayer1() {
+        //TODO make copy
+        return hero1;
+    }
+
+    public EconomyHero getPlayer2() {
+        //TODO make copy
+        return hero2;
+    }
 }
