@@ -26,4 +26,8 @@ public class EconomyStart extends Application {
         aStage.show();
 
     }
+
+    static void main(String[] aArgs) {
+        launch();
+    }
 }
