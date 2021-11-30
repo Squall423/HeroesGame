@@ -1,1 +1,1 @@
-java\bin\javaw.exe -cp economy-gui-${project.version}.jar;lib/* pl.sdk.gui.LaunchApp
+java\bin\java.exe -cp economy-gui-${project.version}.jar;lib/* pl.sdk.gui.LaunchApp

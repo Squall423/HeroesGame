@@ -64,7 +64,8 @@ public class BattleMapController implements PropertyChangeListener {
 
                 Creature c = gameEngine.get(x, y);
                 if (c != null) {
-                    rec.addCreature(c.getName(), c.getAmount());
+                    boolean shouldFlip = gameEngine.isHeroTwoGotCreature(c);
+                    rec.addCreature(c.getName(), c.getAmount(), shouldFlip);
 
                     if (c == gameEngine.getActiveCreature()) {
                         rec.setBackground(Color.GREEN);

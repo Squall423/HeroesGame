@@ -134,4 +134,8 @@ public class GameEngine {
 
         return !theSamePlayerUnit && board.get(getActiveCreature()).distance(new Point(aX, aY)) <= getActiveCreature().getAttackRange();
     }
+
+    public boolean isHeroTwoGotCreature(Creature aCreature) {
+        return creatures2.contains(aCreature);
+    }
 }
