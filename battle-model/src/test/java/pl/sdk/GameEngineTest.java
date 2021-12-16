@@ -35,7 +35,6 @@ class GameEngineTest {
         Creature creature = factory.create(false, 1, 1);
         GameEngine engine = new GameEngine(List.of(), List.of(creature));
 
-        assertFalse(engine.isHeroTwoGotCreature(creature));
         assertTrue(engine.isHeroTwoGotCreature(creature));
     }
 }

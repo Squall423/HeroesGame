@@ -39,4 +39,18 @@
 
 #readyButton{
     -fx-pref-width: 1600;
+
+.desc-text{
+    -fx-font-weight:bold;
+    -fx-text-fill:#000000;
+    -fx-font-family: "Leelawadee UI";
+    -fx-font-size:11px
+    }
+
+.creature-name-text{
+    -fx-font-weight:bold;
+    -fx-text-fill:#000000;
+    -fx-font-family: "Verdana";
+    -fx-font-size:16px
+    }
 }
