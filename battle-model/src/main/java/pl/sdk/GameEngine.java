@@ -102,6 +102,7 @@ public class GameEngine {
         blockMoving = true;
         notifyObservers(new PropertyChangeEvent(this, CREATURE_ATTACKED, null, null));
         observerSupport.firePropertyChange(AFTER_ATTACK, null, null);
+        observerSupport.firePropertyChange(AFTER_MOVE, null, null);
     }
 
     private void putCreaturesToBoard(List<Creature> aCreatures1, List<Creature> aCreatures2) {

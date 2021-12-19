@@ -18,8 +18,7 @@ import pl.sdk.creatures.EconomyNecropolisFactory;
 public class CreatureButton extends Button {
 
     private final String creatureName;
-    private StatisticCreatureDialog statisticCreatureDialog;
-    private BuyCreatureDialog buyCreatureDialog;
+
 
 
     public CreatureButton(EcoController aEcoController, EconomyNecropolisFactory aFactory, boolean aUpgraded,
@@ -31,7 +30,7 @@ public class CreatureButton extends Button {
 
         addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             if (e.getButton() == MouseButton.PRIMARY) {
-                buyCreatureDialog = new BuyCreatureDialog(this);
+                BuyCreatureDialog buyCreatureDialog = new BuyCreatureDialog(this);
                 buyCreatureDialog.startDialog();
                 int amount = buyCreatureDialog.getCreatureAmount();
                 if (amount != 0) {
@@ -39,7 +38,8 @@ public class CreatureButton extends Button {
                 }
                 aEcoController.refreshGui();
             } else if (e.getButton() == MouseButton.SECONDARY) {
-                statisticCreatureDialog = new StatisticCreatureDialog(this, aFactory.create(aUpgraded, aTier, 1));
+                StatisticCreatureDialog statisticCreatureDialog = new StatisticCreatureDialog(this,
+                        aFactory.create(aUpgraded, aTier, 1));
                 statisticCreatureDialog.startDialog();
             }
         });
