@@ -12,12 +12,19 @@ import javafx.stage.Stage;
 
 class BuyCreatureDialog {
 
-    private CreatureButton creatureButton;
+
+    private final String creatureName;
+    private final int creatureGold;
+    private final int heroGold;
     private Stage dialog;
     private Slider slider;
 
-    BuyCreatureDialog(CreatureButton aCreatureButton) {
-        creatureButton = aCreatureButton;
+
+    public BuyCreatureDialog(String aCreatureName, int aGold, int aGoldCost) {
+        creatureName = aCreatureName;
+        heroGold = aGold;
+        creatureGold = aGoldCost;
+
     }
 
     void startDialog() {
@@ -54,7 +61,7 @@ class BuyCreatureDialog {
         scene.getStylesheets().add("fxml/main.css");
         dialog.setScene(scene);
         dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.setTitle("Buying " + creatureButton.getCreatureName());
+        dialog.setTitle("Buying " + creatureName);
 
         pane.setTop(aTop);
         pane.setCenter(aCenter);
@@ -83,7 +90,7 @@ class BuyCreatureDialog {
     private Slider createSlider() {
         Slider slider = new Slider();
         slider.setMin(0);
-        slider.setMax(100);
+        slider.setMax(heroGold/creatureGold);
         slider.setValue(0);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
