@@ -16,7 +16,7 @@ public class CreatureSlider {
     Slider createSlider() {
         Slider slider = new Slider();
         slider.setMin(0);
-        slider.setMax(heroGold / creatureGold);
+        slider.setMax(heroGold/creatureGold);
         slider.setValue(0);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
