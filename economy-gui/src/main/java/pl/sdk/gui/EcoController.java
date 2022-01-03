@@ -64,7 +64,7 @@ public class EcoController implements PropertyChangeListener {
 
     void refreshGui() {
         playerLabel.setText(String.valueOf(economyEngine.getActiveHero()));
-        currentGoldLabel.setText(String.valueOf(economyEngine.getActiveHero().getGold()));
+        currentGoldLabel.setText(String.valueOf(getGold()));
         roundNumberLabel.setText(String.valueOf(economyEngine.getRoundNumber()));
         separator = new Separator();
         shopsBox.getChildren().add(separator);
@@ -95,8 +95,16 @@ public class EcoController implements PropertyChangeListener {
 
     }
 
+    public int getGold() {
+        return economyEngine.getActiveHero().getGold();
+    }
+
     void buy(EconomyCreature aCreature) {
         economyEngine.buy(aCreature);
+    }
+
+    public int calculateMaxAmount(EconomyCreature aCreature) {
+        return economyEngine.calculateMaxAmount(economyEngine.getActiveHero(), aCreature);
     }
 
     @Override

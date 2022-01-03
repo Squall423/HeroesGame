@@ -12,12 +12,16 @@ import javafx.stage.Stage;
 
 class BuyCreatureDialog {
 
-    private CreatureButton creatureButton;
-    private Stage dialog;
-    private Slider slider;
 
-    BuyCreatureDialog(CreatureButton aCreatureButton) {
-        creatureButton = aCreatureButton;
+    private final CreatureSlider creatureSlider;
+    private final String creatureName;
+    private Stage dialog;
+
+
+    public BuyCreatureDialog(String aCreatureName, int aMaxValue) {
+        creatureName = aCreatureName;
+        creatureSlider = new CreatureSlider(aMaxValue);
+
     }
 
     void startDialog() {
@@ -25,7 +29,7 @@ class BuyCreatureDialog {
         HBox bottomPane = new HBox();
         HBox topPane = new HBox();
         Stage dialog = prepareWindow(centerPane, bottomPane, topPane);
-        slider = createSlider();
+        Slider slider = creatureSlider.createSlider();
         prepareConfirmAndCancelButton(bottomPane, slider);
         prepareTop(topPane, slider);
         centerPane.getChildren().add(slider);
@@ -35,7 +39,7 @@ class BuyCreatureDialog {
     }
 
     int getCreatureAmount() {
-        return (int) slider.getValue();
+        return (int) creatureSlider.getCreatureAmount();
     }
 
     private void prepareTop(HBox aTopPane, Slider aSlider) {
@@ -54,7 +58,7 @@ class BuyCreatureDialog {
         scene.getStylesheets().add("fxml/main.css");
         dialog.setScene(scene);
         dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.setTitle("Buying " + creatureButton.getCreatureName());
+        dialog.setTitle("Buying " + creatureName);
 
         pane.setTop(aTop);
         pane.setCenter(aCenter);
@@ -80,17 +84,5 @@ class BuyCreatureDialog {
         aBottomPane.getChildren().add(cancelButton);
     }
 
-    private Slider createSlider() {
-        Slider slider = new Slider();
-        slider.setMin(0);
-        slider.setMax(100);
-        slider.setValue(0);
-        slider.setShowTickLabels(true);
-        slider.setShowTickMarks(true);
-        slider.setMajorTickUnit(10);
-        slider.setMinorTickCount(5);
-        slider.setBlockIncrement(10);
-        return slider;
-    }
 
 }
