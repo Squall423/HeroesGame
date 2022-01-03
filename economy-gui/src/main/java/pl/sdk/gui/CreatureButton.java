@@ -29,8 +29,8 @@ public class CreatureButton extends Button {
 
         addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             if (e.getButton() == MouseButton.PRIMARY) {
-                BuyCreatureDialog buyCreatureDialog = new BuyCreatureDialog(creatureName, aEcoController.getGold(),
-                        aFactory.create(aUpgraded, aTier, 1).getGoldCost());
+                BuyCreatureDialog buyCreatureDialog = new BuyCreatureDialog(creatureName,
+                        aEcoController.calculateMaxAmount(aFactory.create(aUpgraded, aTier, 1)));
                 buyCreatureDialog.startDialog();
                 int amount = buyCreatureDialog.getCreatureAmount();
                 if (amount != 0) {

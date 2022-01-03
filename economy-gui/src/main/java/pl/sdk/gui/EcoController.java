@@ -103,6 +103,10 @@ public class EcoController implements PropertyChangeListener {
         economyEngine.buy(aCreature);
     }
 
+    public int calculateMaxAmount(EconomyCreature aCreature) {
+        return economyEngine.calculateMaxAmount(economyEngine.getActiveHero(), aCreature);
+    }
+
     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
         if (aPropertyChangeEvent.getPropertyName().equals(END_OF_TURN)) {

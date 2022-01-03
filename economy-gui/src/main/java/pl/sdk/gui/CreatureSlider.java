@@ -4,19 +4,17 @@ import javafx.scene.control.Slider;
 
 public class CreatureSlider {
 
-    private final int creatureGold;
-    private final int heroGold;
+    private final int maxValue;
     private Slider slider;
 
-    CreatureSlider(int aCreatureGold, int aHeroGold) {
-        creatureGold = aCreatureGold;
-        heroGold = aHeroGold;
+    CreatureSlider(int aMaxValue) {
+        maxValue = aMaxValue;
     }
 
     Slider createSlider() {
         Slider slider = new Slider();
         slider.setMin(0);
-        slider.setMax(heroGold/creatureGold);
+        slider.setMax(maxValue);
         slider.setValue(0);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
@@ -26,8 +24,12 @@ public class CreatureSlider {
         return slider;
     }
 
+    public int getMaxValue() {
+        return maxValue;
+    }
+
     public int getCreatureAmount() {
-        return (int) slider.getValue();
+        return (int) this.getMaxValue();
     }
 }
 
