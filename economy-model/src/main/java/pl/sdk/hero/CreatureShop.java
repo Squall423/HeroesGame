@@ -2,9 +2,20 @@ package pl.sdk.hero;
 
 import pl.sdk.creatures.EconomyCreature;
 
+import java.util.Random;
+
 public class CreatureShop {
 
     private CreatureShopCalculator calculator = new CreatureShopCalculator();
+
+    public CreatureShop() {
+        calculator = new CreatureShopCalculator();
+    }
+
+    public CreatureShop(Random aRand) {
+        calculator = new CreatureShopCalculator(aRand);
+
+    }
 
     public void buy(EconomyHero aHero, EconomyCreature aEconomyCreature) {
         aHero.substractGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
@@ -16,10 +27,16 @@ public class CreatureShop {
         }
 
     }
-    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature){
-        return calculator.calculateMaxAmount(aHero,aCreature);
+
+    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
+        return calculator.calculateMaxAmount(aHero, aCreature);
     }
-    public void generateRandom(){
+
+    public void generateRandom() {
         calculator.generateRandomFactor();
+    }
+
+    int getCurrentPopulation(int aTier) {
+        return 0;
     }
 }

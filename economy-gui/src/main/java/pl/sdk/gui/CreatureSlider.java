@@ -2,6 +2,8 @@ package pl.sdk.gui;
 
 import javafx.scene.control.Slider;
 
+import javax.annotation.processing.Completion;
+
 public class CreatureSlider {
 
     private final int maxValue;
@@ -12,7 +14,7 @@ public class CreatureSlider {
     }
 
     Slider createSlider() {
-        Slider slider = new Slider();
+        slider = new Slider();
         slider.setMin(0);
         slider.setMax(maxValue);
         slider.setValue(0);
@@ -24,12 +26,8 @@ public class CreatureSlider {
         return slider;
     }
 
-    public int getMaxValue() {
-        return maxValue;
-    }
-
     public int getCreatureAmount() {
-        return (int) this.getMaxValue();
+        return (int) slider.getValue();
     }
 }
 

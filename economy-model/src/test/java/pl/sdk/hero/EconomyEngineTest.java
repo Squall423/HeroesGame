@@ -17,7 +17,7 @@ class EconomyEngineTest {
     void init() {
         h1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
         h2 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        economyEngine = new EconomyEngine(h1, h2);
+        economyEngine = new EconomyEngine(h1, h2, shop);
         creatureFactory = new EconomyNecropolisFactory();
     }
 

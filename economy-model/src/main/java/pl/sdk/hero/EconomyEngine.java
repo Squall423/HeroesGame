@@ -13,17 +13,18 @@ public class EconomyEngine {
     private final EconomyHero hero1;
     private final EconomyHero hero2;
     private EconomyHero activeHero;
-    private final CreatureShop creatureShop = new CreatureShop();
+    private final CreatureShop creatureShop;
     private int roundNumber;
     private final PropertyChangeSupport observerSupport;
     private int turnNumber;
 
-    public EconomyEngine(EconomyHero aHero1, EconomyHero aHero2) {
+    public EconomyEngine(EconomyHero aHero1, EconomyHero aHero2, CreatureShop aShop) {
         hero1 = aHero1;
         hero2 = aHero2;
         activeHero = hero1;
         roundNumber = 1;
         turnNumber = 1;
+        creatureShop = new CreatureShop();
         observerSupport = new PropertyChangeSupport(this);
     }
 
@@ -58,7 +59,7 @@ public class EconomyEngine {
         } else {
             hero1.addGold(2000 * roundNumber);
             hero2.addGold(2000 * roundNumber);
-            creatureShop.generateRandom();
+//            creatureShop.generateRandom();
             observerSupport.firePropertyChange(NEXT_ROUND, roundNumber - 1, roundNumber);
         }
     }
@@ -89,5 +90,9 @@ public class EconomyEngine {
 
     int getTurnNumber() {
         return turnNumber;
+    }
+
+    public int getCurrentPopulation(int aTier) {
+        return  creatureShop.getCurrentPopulation(aTier);
     }
 }

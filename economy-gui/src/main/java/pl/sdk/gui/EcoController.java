@@ -41,7 +41,7 @@ public class EcoController implements PropertyChangeListener {
     private String activeHeroName;
 
     public EcoController(EconomyHero aHero1, EconomyHero aHero2) {
-        economyEngine = new EconomyEngine(aHero1, aHero2);
+        economyEngine = new EconomyEngine(aHero1, aHero2, shop);
     }
 
 
