@@ -10,6 +10,7 @@ import javafx.scene.layout.VBox;
 import pl.sdk.converter.EcoBattleConverter;
 import pl.sdk.creatures.EconomyCreature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
+import pl.sdk.hero.CreatureShop;
 import pl.sdk.hero.EconomyEngine;
 import pl.sdk.hero.EconomyHero;
 
@@ -38,10 +39,12 @@ public class EcoController implements PropertyChangeListener {
 
 
     private final EconomyEngine economyEngine;
+    private final CreatureShop creatureShop;
     private String activeHeroName;
 
-    public EcoController(EconomyHero aHero1, EconomyHero aHero2) {
-        economyEngine = new EconomyEngine(aHero1, aHero2, shop);
+    public EcoController(EconomyHero aHero1, EconomyHero aHero2, CreatureShop aCreatureShop) {
+        creatureShop = aCreatureShop;
+        economyEngine = new EconomyEngine(aHero1, aHero2, aCreatureShop);
     }
 
 

@@ -24,7 +24,7 @@ public class EconomyEngine {
         activeHero = hero1;
         roundNumber = 1;
         turnNumber = 1;
-        creatureShop = new CreatureShop();
+        creatureShop = aShop;
         observerSupport = new PropertyChangeSupport(this);
     }
 
