@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 import static pl.sdk.hero.EconomyEngine.ACTIVE_HERO_CHANGED;
+import static pl.sdk.hero.EconomyEngine.NEXT_ROUND;
 
 public class CreatureShop implements PropertyChangeListener {
 
@@ -88,6 +89,19 @@ public class CreatureShop implements PropertyChangeListener {
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
         if (aPropertyChangeEvent.getPropertyName().equals(ACTIVE_HERO_CHANGED)) {
             changeCurrentPopulation();
+        } else if (aPropertyChangeEvent.getPropertyName().equals(NEXT_ROUND)) {
+            addPopulation(heroTwoPopulation);
+            addPopulation(heroOnePopulation);
         }
+    }
+
+    private void addPopulation(HashMap<Integer, Integer> aPopulationMap) {
+        aPopulationMap.put(1, aPopulationMap.get(1) + calculatePopulation(1));
+        aPopulationMap.put(2, aPopulationMap.get(2) + calculatePopulation(2));
+        aPopulationMap.put(3, aPopulationMap.get(3) + calculatePopulation(3));
+        aPopulationMap.put(4, aPopulationMap.get(4) + calculatePopulation(4));
+        aPopulationMap.put(5, aPopulationMap.get(5) + calculatePopulation(5));
+        aPopulationMap.put(6, aPopulationMap.get(6) + calculatePopulation(6));
+        aPopulationMap.put(7, aPopulationMap.get(7) + calculatePopulation(7));
     }
 }

@@ -27,6 +27,7 @@ public class EconomyEngine {
         creatureShop = new CreatureShop();
         observerSupport = new PropertyChangeSupport(this);
         addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, creatureShop);
+        addObserver(EconomyEngine.NEXT_ROUND, creatureShop);
 
     }
 
@@ -39,7 +40,7 @@ public class EconomyEngine {
         creatureShop = aShop;
         observerSupport = new PropertyChangeSupport(this);
         addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, creatureShop);
-
+        addObserver(EconomyEngine.NEXT_ROUND, creatureShop);
     }
 
     public void buy(EconomyCreature aEconomyCreature) {
