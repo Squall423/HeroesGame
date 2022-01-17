@@ -3,10 +3,14 @@ package pl.sdk.hero;
 import pl.sdk.creatures.EconomyCreature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Random;
 
-public class CreatureShop {
+import static pl.sdk.hero.EconomyEngine.ACTIVE_HERO_CHANGED;
+
+public class CreatureShop implements PropertyChangeListener {
 
     private CreatureShopCalculator calculator;
     private final HashMap<Integer, Integer> heroOnePopulation;
@@ -70,5 +74,20 @@ public class CreatureShop {
 
     int getCurrentPopulation(int aTier) {
         return currentPopulation.get(aTier);
+    }
+
+    void changeCurrentPopulation() {
+        if (currentPopulation == heroOnePopulation) {
+            currentPopulation = heroTwoPopulation;
+        } else {
+            currentPopulation = heroOnePopulation;
+        }
+    }
+
+    @Override
+    public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
+        if (aPropertyChangeEvent.getPropertyName().equals(ACTIVE_HERO_CHANGED)) {
+            changeCurrentPopulation();
+        }
     }
 }

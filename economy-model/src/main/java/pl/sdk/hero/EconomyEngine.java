@@ -18,6 +18,18 @@ public class EconomyEngine {
     private final PropertyChangeSupport observerSupport;
     private int turnNumber;
 
+    public EconomyEngine(EconomyHero aHero1, EconomyHero aHero2) {
+        hero1 = aHero1;
+        hero2 = aHero2;
+        activeHero = hero1;
+        roundNumber = 1;
+        turnNumber = 1;
+        creatureShop = new CreatureShop();
+        observerSupport = new PropertyChangeSupport(this);
+        addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, creatureShop);
+
+    }
+
     public EconomyEngine(EconomyHero aHero1, EconomyHero aHero2, CreatureShop aShop) {
         hero1 = aHero1;
         hero2 = aHero2;
@@ -26,14 +38,17 @@ public class EconomyEngine {
         turnNumber = 1;
         creatureShop = aShop;
         observerSupport = new PropertyChangeSupport(this);
+        addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, creatureShop);
+
     }
 
     public void buy(EconomyCreature aEconomyCreature) {
         creatureShop.buy(activeHero, aEconomyCreature);
         observerSupport.firePropertyChange(HERO_BOUGHT_CREATURE, null, null);
     }
-    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature){
-        return creatureShop.calculateMaxAmount(aHero,aCreature);
+
+    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
+        return creatureShop.calculateMaxAmount(aHero, aCreature);
     }
 
     public EconomyHero getActiveHero() {
@@ -93,6 +108,6 @@ public class EconomyEngine {
     }
 
     public int getCurrentPopulation(int aTier) {
-        return  creatureShop.getCurrentPopulation(aTier);
+        return creatureShop.getCurrentPopulation(aTier);
     }
 }
