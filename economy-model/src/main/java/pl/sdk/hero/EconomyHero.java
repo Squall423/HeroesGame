@@ -39,7 +39,7 @@ public class EconomyHero {
         gold += aAmount;
     }
 
-    void substractGold(int aAmount) {
+    void subtractGold(int aAmount) {
         if (aAmount > gold) {
             throw new IllegalStateException("Hero has not enought money");
         }
