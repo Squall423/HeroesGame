@@ -56,13 +56,27 @@ public class CreatureShop implements PropertyChangeListener {
 
     public void buy(EconomyHero aHero, EconomyCreature aEconomyCreature) {
         aHero.substractGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
+        subtractPopulation(aEconomyCreature.getTier(), aEconomyCreature.getAmount());
         try {
             aHero.addCreature(aEconomyCreature);
         } catch (Exception e) {
             aHero.addGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
+            restorePopulation(aEconomyCreature.getTier(), aEconomyCreature.getAmount());
             throw new IllegalStateException("Hero cannot consume more creature");
         }
 
+    }
+
+    private void subtractPopulation(int aTier, int aAmount) {
+        if (currentPopulation.get(aTier) >= aAmount) {
+            currentPopulation.put(aTier, currentPopulation.get(1) - aAmount);
+        } else {
+            throw new IllegalStateException("hero cannot buy more creatures than population is");
+        }
+    }
+
+    private void restorePopulation(int aTier, int aAmount) {
+        currentPopulation.put(aTier, currentPopulation.get(aTier) + aAmount);
     }
 
     public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
