@@ -25,28 +25,28 @@ class CreatureShopCalculatorTest {
     void shouldCorrectlyCalculateMaxAmountToBuyWhenGrowthIsSmallerThanPurchaseOpportunity() {
         // randomFactor - 0.5 + (1 - 0.5) * rand.nextDouble();
         // smallerValue + randomFactor
-        EconomyHero hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 3000);
+        EconomyHero hero = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 3000);
         rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(0.5);
         CreatureShopCalculator calculator = new CreatureShopCalculator(rand);
-        assertEquals(9, calculator.calculateMaxAmount(hero1, creature));
+        assertEquals(250, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth(), creature.getGoldCost()));
     }
 
     @Test
     void shouldCorrectlyCalculateMaxAmountToBuyWhenGrowthIsBiggerThanPurchaseOpportunity() {
-        EconomyHero hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 600);
+        EconomyHero hero = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 600);
         rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(1.0);
         CreatureShopCalculator calculator = new CreatureShopCalculator(rand);
-        assertEquals(10, calculator.calculateMaxAmount(hero1, creature));
+        assertEquals(50, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth(), creature.getGoldCost()));
     }
 
     @Test
     void shouldCorrectlyCalculateMaxAmountToBuyWhenGrowthEqualsPurchaseOpportunity() {
-        EconomyHero hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 720);
+        EconomyHero hero = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 720);
         rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(1.0);
         CreatureShopCalculator calculator = new CreatureShopCalculator(rand);
-        assertEquals(12, calculator.calculateMaxAmount(hero1, creature));
+        assertEquals(60, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth(), creature.getGoldCost()));
     }
 }

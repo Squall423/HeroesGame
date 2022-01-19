@@ -13,7 +13,7 @@ public class EconomyEngine {
     private final EconomyHero hero1;
     private final EconomyHero hero2;
     private EconomyHero activeHero;
-    private final CreatureShop creatureShop = new CreatureShop();
+    private final CreatureShop creatureShop;
     private int roundNumber;
     private final PropertyChangeSupport observerSupport;
     private int turnNumber;
@@ -24,15 +24,32 @@ public class EconomyEngine {
         activeHero = hero1;
         roundNumber = 1;
         turnNumber = 1;
+        creatureShop = new CreatureShop();
         observerSupport = new PropertyChangeSupport(this);
+        addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, creatureShop);
+        addObserver(EconomyEngine.NEXT_ROUND, creatureShop);
+
+    }
+
+    public EconomyEngine(EconomyHero aHero1, EconomyHero aHero2, CreatureShop aShop) {
+        hero1 = aHero1;
+        hero2 = aHero2;
+        activeHero = hero1;
+        roundNumber = 1;
+        turnNumber = 1;
+        creatureShop = aShop;
+        observerSupport = new PropertyChangeSupport(this);
+        addObserver(EconomyEngine.ACTIVE_HERO_CHANGED, creatureShop);
+        addObserver(EconomyEngine.NEXT_ROUND, creatureShop);
     }
 
     public void buy(EconomyCreature aEconomyCreature) {
         creatureShop.buy(activeHero, aEconomyCreature);
         observerSupport.firePropertyChange(HERO_BOUGHT_CREATURE, null, null);
     }
-    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature){
-        return creatureShop.calculateMaxAmount(aHero,aCreature);
+
+    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
+        return creatureShop.calculateMaxAmount(aHero, aCreature);
     }
 
     public EconomyHero getActiveHero() {
@@ -58,7 +75,6 @@ public class EconomyEngine {
         } else {
             hero1.addGold(2000 * roundNumber);
             hero2.addGold(2000 * roundNumber);
-            creatureShop.generateRandom();
             observerSupport.firePropertyChange(NEXT_ROUND, roundNumber - 1, roundNumber);
         }
     }
@@ -89,5 +105,9 @@ public class EconomyEngine {
 
     int getTurnNumber() {
         return turnNumber;
+    }
+
+    public int getCurrentPopulation(int aTier) {
+        return creatureShop.getCurrentPopulation(aTier);
     }
 }

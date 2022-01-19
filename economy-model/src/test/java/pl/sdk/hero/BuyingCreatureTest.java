@@ -13,12 +13,14 @@ public class BuyingCreatureTest {
     private EconomyHero hero2;
     private final EconomyNecropolisFactory creatureFactory = new EconomyNecropolisFactory();
     private EconomyEngine economyEngine;
+    private CreatureShop creatureShop;
 
     @BeforeEach
     void init() {
         hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
         hero2 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        economyEngine = new EconomyEngine(hero1,hero2);
+        creatureShop = new CreatureShop();
+        economyEngine = new EconomyEngine(hero1,hero2, creatureShop);
     }
 
     @Test
