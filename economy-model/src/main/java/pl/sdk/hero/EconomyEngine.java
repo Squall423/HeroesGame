@@ -75,7 +75,6 @@ public class EconomyEngine {
         } else {
             hero1.addGold(2000 * roundNumber);
             hero2.addGold(2000 * roundNumber);
-//            creatureShop.generateRandom();
             observerSupport.firePropertyChange(NEXT_ROUND, roundNumber - 1, roundNumber);
         }
     }

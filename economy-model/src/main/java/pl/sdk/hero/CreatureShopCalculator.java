@@ -1,7 +1,5 @@
 package pl.sdk.hero;
 
-import pl.sdk.creatures.EconomyCreature;
-
 import java.util.Random;
 
 public class CreatureShopCalculator {
@@ -9,30 +7,26 @@ public class CreatureShopCalculator {
     private final Random rand;
     private double randomFactor;
 
-     CreatureShopCalculator() {
+    CreatureShopCalculator() {
         rand = new Random();
         generateRandomFactor();
     }
 
-     CreatureShopCalculator(Random aRand) {
+    CreatureShopCalculator(Random aRand) {
         rand = aRand;
         generateRandomFactor();
 
+    }
+
+    int calculateMaxAmount(int aHeroGold, Integer aPopulation) {
+        return aHeroGold / aPopulation;
     }
 
     void generateRandomFactor() {
         randomFactor = 0.5 + (1 - 0.5) * rand.nextDouble();
     }
 
-    int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
-        return randomize(getSmallerValue(aHero.getGold() / aCreature.getGoldCost(), aCreature.getGrowth()));
-    }
-
-    private int getSmallerValue(int aHero, int aCreature) {
-        return Math.min(aHero, aCreature);
-    }
-
-    private int randomize(int aSmallerValue) {
-        return (int) (aSmallerValue * randomFactor);
+    int randomize(int aPopulation) {
+        return (int) (aPopulation * randomFactor);
     }
 }

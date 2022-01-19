@@ -49,8 +49,8 @@ public class CreatureShop implements PropertyChangeListener {
         aPopulation.put(7, calculatePopulation(7));
     }
 
-    private Integer calculatePopulation(int aTier) {
-        return creatureFactory.create(false, aTier, 1).getGrowth();
+    private int calculatePopulation(int aTier) {
+        return calculator.randomize(creatureFactory.create(false, aTier, 1).getGrowth());
 
     }
 
@@ -80,7 +80,7 @@ public class CreatureShop implements PropertyChangeListener {
     }
 
     public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
-        return calculator.calculateMaxAmount(aHero, aCreature);
+        return calculator.calculateMaxAmount(aHero.getGold(), currentPopulation.get(aCreature.getTier()));
     }
 
     public void generateRandom() {
@@ -104,8 +104,9 @@ public class CreatureShop implements PropertyChangeListener {
         if (aPropertyChangeEvent.getPropertyName().equals(ACTIVE_HERO_CHANGED)) {
             changeCurrentPopulation();
         } else if (aPropertyChangeEvent.getPropertyName().equals(NEXT_ROUND)) {
-            addPopulation(heroOnePopulation);
+            generateRandom();
             addPopulation(heroTwoPopulation);
+            addPopulation(heroOnePopulation);
         }
     }
 

@@ -115,44 +115,44 @@ class CreatureShopTest {
         CreatureShop shop = new CreatureShop(rand);
         EconomyHero hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
         EconomyHero hero2 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        economyEngine = new EconomyEngine(hero1, hero2, shop);
+        EconomyEngine economyEngine = new EconomyEngine(hero1, hero2, shop);
 
-        assertEquals(6, economyEngine.getCurrentPopulation(1));
-        assertEquals(4, economyEngine.getCurrentPopulation(2));
-        assertEquals(3, economyEngine.getCurrentPopulation(3));
-        assertEquals(2, economyEngine.getCurrentPopulation(4));
-        assertEquals(1, economyEngine.getCurrentPopulation(5));
+        assertEquals(9, economyEngine.getCurrentPopulation(1));
+        assertEquals(6, economyEngine.getCurrentPopulation(2));
+        assertEquals(5, economyEngine.getCurrentPopulation(3));
+        assertEquals(3, economyEngine.getCurrentPopulation(4));
+        assertEquals(2, economyEngine.getCurrentPopulation(5));
         assertEquals(1, economyEngine.getCurrentPopulation(6));
         assertEquals(0, economyEngine.getCurrentPopulation(7));
 
         economyEngine.pass();
 
-        assertEquals(6, economyEngine.getCurrentPopulation(1));
-        assertEquals(4, economyEngine.getCurrentPopulation(2));
-        assertEquals(3, economyEngine.getCurrentPopulation(3));
-        assertEquals(2, economyEngine.getCurrentPopulation(4));
-        assertEquals(1, economyEngine.getCurrentPopulation(5));
+        assertEquals(9, economyEngine.getCurrentPopulation(1));
+        assertEquals(6, economyEngine.getCurrentPopulation(2));
+        assertEquals(5, economyEngine.getCurrentPopulation(3));
+        assertEquals(3, economyEngine.getCurrentPopulation(4));
+        assertEquals(2, economyEngine.getCurrentPopulation(5));
         assertEquals(1, economyEngine.getCurrentPopulation(6));
         assertEquals(0, economyEngine.getCurrentPopulation(7));
 
         economyEngine.pass();
 
-        assertEquals(12, economyEngine.getCurrentPopulation(1));
-        assertEquals(8, economyEngine.getCurrentPopulation(2));
-        assertEquals(7, economyEngine.getCurrentPopulation(3));
-        assertEquals(4, economyEngine.getCurrentPopulation(4));
-        assertEquals(3, economyEngine.getCurrentPopulation(5));
+        assertEquals(18, economyEngine.getCurrentPopulation(1));
+        assertEquals(12, economyEngine.getCurrentPopulation(2));
+        assertEquals(10, economyEngine.getCurrentPopulation(3));
+        assertEquals(6, economyEngine.getCurrentPopulation(4));
+        assertEquals(4, economyEngine.getCurrentPopulation(5));
         assertEquals(2, economyEngine.getCurrentPopulation(6));
-        assertEquals(1, economyEngine.getCurrentPopulation(7));
+        assertEquals(0, economyEngine.getCurrentPopulation(7));
 
         economyEngine.pass();
 
-        assertEquals(12, economyEngine.getCurrentPopulation(1));
-        assertEquals(8, economyEngine.getCurrentPopulation(2));
-        assertEquals(7, economyEngine.getCurrentPopulation(3));
-        assertEquals(4, economyEngine.getCurrentPopulation(4));
-        assertEquals(3, economyEngine.getCurrentPopulation(5));
+        assertEquals(18, economyEngine.getCurrentPopulation(1));
+        assertEquals(12, economyEngine.getCurrentPopulation(2));
+        assertEquals(10, economyEngine.getCurrentPopulation(3));
+        assertEquals(6, economyEngine.getCurrentPopulation(4));
+        assertEquals(4, economyEngine.getCurrentPopulation(5));
         assertEquals(2, economyEngine.getCurrentPopulation(6));
-        assertEquals(1, economyEngine.getCurrentPopulation(7));
+        assertEquals(0, economyEngine.getCurrentPopulation(7));
     }
 }
