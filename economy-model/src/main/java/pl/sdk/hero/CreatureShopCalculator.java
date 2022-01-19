@@ -18,8 +18,8 @@ public class CreatureShopCalculator {
 
     }
 
-    int calculateMaxAmount(int aHeroGold, Integer aPopulation) {
-        return aHeroGold / aPopulation;
+    int calculateMaxAmount(int aHeroGold, Integer aPopulation, int aGoldCost) {
+        return Math.min(aHeroGold/aGoldCost, aPopulation);
     }
 
     void generateRandomFactor() {

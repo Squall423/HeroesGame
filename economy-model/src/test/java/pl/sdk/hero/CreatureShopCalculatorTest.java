@@ -29,7 +29,7 @@ class CreatureShopCalculatorTest {
         rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(0.5);
         CreatureShopCalculator calculator = new CreatureShopCalculator(rand);
-        assertEquals(250, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth()));
+        assertEquals(250, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth(), creature.getGoldCost()));
     }
 
     @Test
@@ -38,7 +38,7 @@ class CreatureShopCalculatorTest {
         rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(1.0);
         CreatureShopCalculator calculator = new CreatureShopCalculator(rand);
-        assertEquals(50, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth()));
+        assertEquals(50, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth(), creature.getGoldCost()));
     }
 
     @Test
@@ -47,6 +47,6 @@ class CreatureShopCalculatorTest {
         rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(1.0);
         CreatureShopCalculator calculator = new CreatureShopCalculator(rand);
-        assertEquals(60, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth()));
+        assertEquals(60, calculator.calculateMaxAmount(hero.getGold(), creature.getGrowth(), creature.getGoldCost()));
     }
 }
