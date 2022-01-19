@@ -80,7 +80,8 @@ public class CreatureShop implements PropertyChangeListener {
     }
 
     public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
-        return calculator.calculateMaxAmount(aHero.getGold(), currentPopulation.get(aCreature.getTier()), aGoldCost);
+        return calculator.calculateMaxAmount(aHero.getGold(), currentPopulation.get(aCreature.getTier()),
+                aCreature.getGoldCost());
     }
 
     public void generateRandom() {

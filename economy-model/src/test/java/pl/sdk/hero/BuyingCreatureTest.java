@@ -4,8 +4,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.sdk.creatures.EconomyNecropolisFactory;
 
+import java.util.Random;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class BuyingCreatureTest {
 
@@ -13,14 +17,17 @@ public class BuyingCreatureTest {
     private EconomyHero hero2;
     private final EconomyNecropolisFactory creatureFactory = new EconomyNecropolisFactory();
     private EconomyEngine economyEngine;
-    private CreatureShop creatureShop;
+    
+
 
     @BeforeEach
     void init() {
+        Random rand = mock(Random.class);
+        when(rand.nextDouble()).thenReturn(1.0);
+        CreatureShop creatureShop = new CreatureShop(rand);
         hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
         hero2 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        creatureShop = new CreatureShop();
-        economyEngine = new EconomyEngine(hero1,hero2, creatureShop);
+        economyEngine = new EconomyEngine(hero1, hero2, creatureShop);
     }
 
     @Test
