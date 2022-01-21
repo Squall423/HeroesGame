@@ -5,22 +5,27 @@
         linear-gradient(#dddddd 0%, #f6f6f6 50%);
     -fx-text-fill: black;
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
-    -fx-font: bold 15pt "Arial";
+    -fx-font: bold 15pt "Garamond";
+    -fx-border-color: black;
+    -fx-background-size: 15;
 }
 
 .creatureButton {
     -fx-max-width: infinity;
-    -fx-hgrow-policy:always;
+    -fx-hgrow-policy: always;
+    -fx-font: bold 15pt "Garamond";
+    -fx-font-size: 15px;
 }
 
 .label {
-   -fx-font: bold 15pt "Arial";
-   -fx-padding: 5px
+   -fx-font: bold 20pt "Garamond";
+   -fx-padding: 10px
+   -fx-text-fill: black;
 }
 
 .centerHBox {
     -fx-border-color: black;
-    -fx-border-width: 1;
+    -fx-border-width: 6;
     -fx-pref-width: 800;
 }
 
@@ -53,5 +58,32 @@
     -fx-text-fill:#000000;
     -fx-font-family: "Verdana";
     -fx-font-size:16px
+    }
+.buy-creature-text{
+     -fx-font-weight:bold;
+        -fx-text-fill:#000000;
+        -fx-font-family: "Garamond";
+        -fx-font-size:20px
+        }
+
+    .border{
+    -fx-border-color: blac;
+    -fx-border-instets: 5;
+    }
+.creature-button-statistic{
+    -fx-font: 7pt "Verdana";
+     -fx-font-padding:2px;
+        -fx-text-fill: black;
+        -fx-font-weight: bold;
+    }
+.troop-box {
+    -fx-border.color: black;
+    -fx-pref-width: 220;
+    }
+.hero-state{
+    -fx-font-weight:bold;
+    -fx-text-fill:#000000;
+    -fx-font-family: "Garamond";
+    -fx-font-size: 30px;
     }
 }

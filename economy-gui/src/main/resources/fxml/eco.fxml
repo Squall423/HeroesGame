@@ -7,39 +7,90 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="969.0" prefWidth="1490.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.geometry.Insets?>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1000"
+            prefWidth="1600" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <center>
         <HBox>
-            <children>
-                <Separator fx:id="separator" orientation="VERTICAL" prefHeight="899.0" prefWidth="129.0" />
-            </children>
+            <HBox fx:id="heroStateBox" styleClass="centerBox" BorderPane.alignment="CENTER"></HBox>
+            <HBox fx:id="shopBox" styleClass="centerBox" BorderPane.alignment="TOP_RIGHT"></HBox>
+            <!--            <children>-->
+            <!--                <Separator fx:id="separator" orientation="VERTICAL" prefHeight="899.0" prefWidth="129.0"/>-->
+            <!--            </children>-->
         </HBox>
     </center>
+
+    <top>
+        <HBox>
+            <children>
+                <ImageView fx:id="playerIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <Image url="/graphics.icons/knight.png">
+
+                    </Image>
+                </ImageView>
+                <Label fx:id="playerLabel" text="Player"/>
+            </children>
+            <padding>
+                <Insets left="10.0" right="10.0" top="10.0"/>
+            </padding>
+
+        </HBox>
+
+        <HBox>
+            <children>
+                <ImageView fx:id="roundIcon" fitHeight="35.0" fitWidth="35.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <Image url="/graphics.icons/cross-swords.png">
+
+                    </Image>
+                </ImageView>
+                <Label fx:id="roundNumberStaticLabel" text="Round: "/>
+                <Label fx:id="roundNumberLabel" text="X"/>
+            </children>
+            <padding>
+                <Insets left="10.0" right="10.0" top="10.0"/>
+            </padding>
+        </HBox>
+
+        <HBox>
+            <children>
+                <ImageView fx:id="goldICon" fitHeight="41.0" fitWidth="40.0" pickOnBounds="true"
+                           preserveRatio="true">
+                    <Image url="/graphics.icons/money-bag.png">
+
+                    </Image>
+                </ImageView>
+                <Label fx:id="currentStationLabel" text="GOLD: "/>
+                <Label fx:id="currentGoldLabel" text="XXX"/>
+            </children>
+            <padding>
+                <Insets left="10.0" right="10.0" top="10.0"/>
+            </padding>
+        </HBox>
+
+
+    </top>
+
     <bottom>
         <HBox BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="readyButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="READY" />
+                <Button fx:id="readyButton" alignment="BOTTOM_CENTER" mnemonicParsing="false" text="READY"/>
             </children>
         </HBox>
     </bottom>
 
+    <!--    <left>-->
+    <!--        <HBox fx:id="heroStateHBox" prefHeight="904.0" prefWidth="484.0" BorderPane.alignment="CENTER">-->
+    <!--        </HBox>-->
+    <!--    </left>-->
+    <!--    <right>-->
+    <!--        <HBox fx:id="shopsBox" prefHeight="898.0" prefWidth="895.0" BorderPane.alignment="CENTER"/>-->
+    <!--    </right>-->
+
     <stylesheets>
-        <URL value="@main.css" />
+        <URL value="@main.css"/>
     </stylesheets>
-    <top>
-        <HBox fx:id="topBox" prefHeight="23.0" prefWidth="1490.0" BorderPane.alignment="CENTER">
-            <children>
-                <Label fx:id="playerLabel" prefHeight="33.0" prefWidth="236.0" />
-                <Label fx:id="currentGoldLabel" prefHeight="33.0" prefWidth="231.0" />
-                <Label fx:id="roundNumberLabel" prefHeight="33.0" prefWidth="220.0" />
-            </children>
-        </HBox>
-    </top>
-    <left>
-        <HBox fx:id="heroStateHBox" prefHeight="904.0" prefWidth="484.0" BorderPane.alignment="CENTER">
-        </HBox>
-    </left>
-    <right>
-        <HBox fx:id="shopsBox" prefHeight="898.0" prefWidth="895.0" BorderPane.alignment="CENTER" />
-    </right>
 </BorderPane>

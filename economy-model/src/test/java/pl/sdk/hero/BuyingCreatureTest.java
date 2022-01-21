@@ -17,7 +17,7 @@ public class BuyingCreatureTest {
     private EconomyHero hero2;
     private final EconomyNecropolisFactory creatureFactory = new EconomyNecropolisFactory();
     private EconomyEngine economyEngine;
-    
+
 
 
     @BeforeEach
