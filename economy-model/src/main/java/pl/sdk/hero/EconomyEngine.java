@@ -18,6 +18,7 @@ public class EconomyEngine {
     private final PropertyChangeSupport observerSupport;
     private int turnNumber;
 
+
     public EconomyEngine(EconomyHero aHero1, EconomyHero aHero2) {
         hero1 = aHero1;
         hero2 = aHero2;
@@ -109,5 +110,14 @@ public class EconomyEngine {
 
     public int getCurrentPopulation(int aTier) {
         return creatureShop.getCurrentPopulation(aTier);
+    }
+
+    public String heroToString() {
+        if (activeHero == hero1) {
+            return "Player I";
+        } else {
+            return "Player II";
+        }
+
     }
 }

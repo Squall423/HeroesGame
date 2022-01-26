@@ -13,13 +13,13 @@
 .creatureButton {
     -fx-max-width: infinity;
     -fx-hgrow-policy: always;
-    -fx-font: bold 15pt "Garamond";
+    -fx-font-family: "Garamond";
     -fx-font-size: 15px;
 }
 
 .label {
    -fx-font: bold 20pt "Garamond";
-   -fx-padding: 10px
+   -fx-padding: 10px;
    -fx-text-fill: black;
 }
 
@@ -47,43 +47,47 @@
 }
 
 .desc-text{
-    -fx-font-weight:bold;
-    -fx-text-fill:#000000;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
     -fx-font-family: "Leelawadee UI";
-    -fx-font-size:11px
+    -fx-font-size: 11px;
     }
 
 .creature-name-text{
-    -fx-font-weight:bold;
-    -fx-text-fill:#000000;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
     -fx-font-family: "Verdana";
-    -fx-font-size:16px
+    -fx-font-size: 16px;
     }
+
 .buy-creature-text{
-     -fx-font-weight:bold;
-        -fx-text-fill:#000000;
+     -fx-font-weight: bold;
+        -fx-text-fill: #000000;
         -fx-font-family: "Garamond";
-        -fx-font-size:20px
+        -fx-font-size: 20px;
         }
 
-    .border{
-    -fx-border-color: blac;
-    -fx-border-instets: 5;
+.border{
+-fx-font: 8pt "Verdana";
+    -fx-border-color: black;
+    -fx-border-insets: 5;
     }
+
 .creature-button-statistic{
     -fx-font: 7pt "Verdana";
-     -fx-font-padding:2px;
-        -fx-text-fill: black;
-        -fx-font-weight: bold;
+    -fx-padding: 2px;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
     }
+
 .troop-box {
-    -fx-border.color: black;
+    -fx-border-color: black;
     -fx-pref-width: 220;
     }
+
 .hero-state{
-    -fx-font-weight:bold;
-    -fx-text-fill:#000000;
+    -fx-font-weight: bold;
+    -fx-text-fill: #000000;
     -fx-font-family: "Garamond";
     -fx-font-size: 30px;
     }
-}
