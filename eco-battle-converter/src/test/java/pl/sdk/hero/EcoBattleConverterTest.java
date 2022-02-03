@@ -8,12 +8,13 @@ import pl.sdk.converter.EcoBattleConverter;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static pl.sdk.hero.Fraction.NECROPOLIS;
 
 class EcoBattleConverterTest {
 
     @Test
     void shouldConvertCreaturesCorrectly() {
-        EconomyHero ecoHero = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
+        Player ecoHero = new Player(NECROPOLIS, 1000);
         EconomyNecropolisFactory factory = new EconomyNecropolisFactory();
         ecoHero.addCreature(factory.create(false, 1, 1));
         ecoHero.addCreature(factory.create(false, 2, 2));

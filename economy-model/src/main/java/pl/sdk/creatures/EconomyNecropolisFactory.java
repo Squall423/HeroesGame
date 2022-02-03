@@ -2,7 +2,7 @@ package pl.sdk.creatures;
 
 import pl.sdk.creatures.*;
 
-public class EconomyNecropolisFactory {
+public class EconomyNecropolisFactory extends AbstractEconomyFractionFactory{
 
     public static final String EXCEPTION_MESSAGE = "We support tiers from 1 to 7";
 

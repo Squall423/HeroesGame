@@ -2,7 +2,8 @@ package pl.sdk.hero;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import pl.sdk.creatures.EconomyNecropolisFactory;
+import pl.sdk.creatures.AbstractEconomyFractionFactory;
+import pl.sdk.creatures.EconomyTestFractionFactory;
 
 import java.util.Random;
 
@@ -10,19 +11,27 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+import static pl.sdk.hero.Fraction.NECROPOLIS;
 
 class CreatureShopTest {
+
     private EconomyEngine economyEngine;
-    private final EconomyNecropolisFactory creatureFactory = new EconomyNecropolisFactory();
+    private final EconomyTestFractionFactory creatureFactory = new EconomyTestFractionFactory();
+    private Fraction fraction = NECROPOLIS;
+    private Player player1;
+    private Player player2;
 
     @BeforeEach
     void init() {
         Random rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(1.0);
-        CreatureShop shop = new CreatureShop(rand);
-        EconomyHero hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        EconomyHero hero2 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        economyEngine = new EconomyEngine(hero1, hero2, shop);
+        CreatureShop shop1 = new CreatureShop(rand, fraction);
+        CreatureShop shop2 = new CreatureShop(rand, fraction);
+        EconomyHero hero1 = new EconomyHero();
+        EconomyHero hero2 = new EconomyHero();
+        player1 = new Player(hero1, shop1, 1000);
+        player2 = new Player(hero2, shop2, 1000);
+        economyEngine = new EconomyEngine(player1, player2);
     }
 
     @Test
@@ -112,10 +121,13 @@ class CreatureShopTest {
     void shouldCorrectlyRandomizePopulationGrowthForBothPlayers() {
         Random rand = mock(Random.class);
         when(rand.nextDouble()).thenReturn(0.5);
-        CreatureShop shop = new CreatureShop(rand);
-        EconomyHero hero1 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        EconomyHero hero2 = new EconomyHero(EconomyHero.Fraction.NECROPOLIS, 1000);
-        EconomyEngine economyEngine = new EconomyEngine(hero1, hero2, shop);
+        CreatureShop shop1 = new CreatureShop(rand, fraction);
+        CreatureShop shop2 = new CreatureShop(rand, fraction);
+        EconomyHero hero1 = new EconomyHero();
+        EconomyHero hero2 = new EconomyHero();
+        player1 = new Player(hero1, shop1, 1000);
+        player2 = new Player(hero2, shop2, 1000);
+        EconomyEngine economyEngine = new EconomyEngine(player1, player2);
 
         assertEquals(9, economyEngine.getCurrentPopulation(1));
         assertEquals(6, economyEngine.getCurrentPopulation(2));

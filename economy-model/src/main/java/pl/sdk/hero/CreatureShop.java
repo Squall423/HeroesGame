@@ -1,42 +1,33 @@
 package pl.sdk.hero;
 
+import pl.sdk.creatures.AbstractEconomyFractionFactory;
 import pl.sdk.creatures.EconomyCreature;
-import pl.sdk.creatures.EconomyNecropolisFactory;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.util.HashMap;
 import java.util.Random;
 
-import static pl.sdk.hero.EconomyEngine.ACTIVE_HERO_CHANGED;
 import static pl.sdk.hero.EconomyEngine.NEXT_ROUND;
 
-public class CreatureShop implements PropertyChangeListener {
+ class CreatureShop implements PropertyChangeListener {
 
     private CreatureShopCalculator calculator;
-    private final HashMap<Integer, Integer> heroOnePopulation;
-    private final HashMap<Integer, Integer> heroTwoPopulation;
-    private HashMap<Integer, Integer> currentPopulation;
-    private final EconomyNecropolisFactory creatureFactory = new EconomyNecropolisFactory();
+    private HashMap<Integer, Integer> creaturePopulation;
+    private final AbstractEconomyFractionFactory creatureFactory;
 
-    public CreatureShop() {
+    CreatureShop(Fraction aFraction) {
         calculator = new CreatureShopCalculator();
-        heroOnePopulation = new HashMap<>();
-        heroTwoPopulation = new HashMap<>();
-        currentPopulation = new HashMap<>();
-        createPopulation(heroOnePopulation);
-        createPopulation(heroTwoPopulation);
-        currentPopulation = heroOnePopulation;
+        creatureFactory = AbstractEconomyFractionFactory.getInstance(aFraction);
+        creaturePopulation = new HashMap<>();
+        createPopulation(creaturePopulation);
     }
 
-    public CreatureShop(Random aRand) {
+    CreatureShop(Random aRand, Fraction aFraction) {
         calculator = new CreatureShopCalculator(aRand);
-        heroOnePopulation = new HashMap<>();
-        heroTwoPopulation = new HashMap<>();
-        currentPopulation = new HashMap<>();
-        createPopulation(heroOnePopulation);
-        createPopulation(heroTwoPopulation);
-        currentPopulation = heroOnePopulation;
+        creatureFactory = AbstractEconomyFractionFactory.getInstance(aFraction);
+        creaturePopulation = new HashMap<>();
+        createPopulation(creaturePopulation);
     }
 
     private void createPopulation(HashMap<Integer, Integer> aPopulation) {
@@ -54,13 +45,13 @@ public class CreatureShop implements PropertyChangeListener {
 
     }
 
-    public void buy(EconomyHero aHero, EconomyCreature aEconomyCreature) {
-        aHero.subtractGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
+     void buy(Player aPlayer, EconomyCreature aEconomyCreature) {
+        aPlayer.subtractGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
         subtractPopulation(aEconomyCreature.getTier(), aEconomyCreature.getAmount());
         try {
-            aHero.addCreature(aEconomyCreature);
+            aPlayer.addCreature(aEconomyCreature);
         } catch (Exception e) {
-            aHero.addGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
+            aPlayer.addGold(aEconomyCreature.getGoldCost() * aEconomyCreature.getAmount());
             restorePopulation(aEconomyCreature.getTier(), aEconomyCreature.getAmount());
             throw new IllegalStateException("Hero cannot consume more creature");
         }
@@ -68,46 +59,37 @@ public class CreatureShop implements PropertyChangeListener {
     }
 
     private void subtractPopulation(int aTier, int aAmount) {
-        if (currentPopulation.get(aTier) >= aAmount) {
-            currentPopulation.put(aTier, currentPopulation.get(aTier) - aAmount);
+        if (creaturePopulation.get(aTier) >= aAmount) {
+            creaturePopulation.put(aTier, creaturePopulation.get(aTier) - aAmount);
         } else {
             throw new IllegalStateException("hero cannot buy more creatures than population is");
         }
     }
 
     private void restorePopulation(int aTier, int aAmount) {
-        currentPopulation.put(aTier, currentPopulation.get(aTier) + aAmount);
+        creaturePopulation.put(aTier, creaturePopulation.get(aTier) + aAmount);
     }
 
-    public int calculateMaxAmount(EconomyHero aHero, EconomyCreature aCreature) {
-        return calculator.calculateMaxAmount(aHero.getGold(), currentPopulation.get(aCreature.getTier()),
+    public int calculateMaxAmount(Player aPlayer, EconomyCreature aCreature) {
+        return calculator.calculateMaxAmount(aPlayer.getGold(), creaturePopulation.get(aCreature.getTier()),
                 aCreature.getGoldCost());
     }
 
-    public void generateRandom() {
+     void generateRandom() {
         calculator.generateRandomFactor();
     }
 
-    int getCurrentPopulation(int aTier) {
-        return currentPopulation.get(aTier);
+     int getCurrentPopulation(int aTier) {
+        return creaturePopulation.get(aTier);
     }
 
-    void changeCurrentPopulation() {
-        if (currentPopulation == heroOnePopulation) {
-            currentPopulation = heroTwoPopulation;
-        } else {
-            currentPopulation = heroOnePopulation;
-        }
-    }
 
     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
-        if (aPropertyChangeEvent.getPropertyName().equals(ACTIVE_HERO_CHANGED)) {
-            changeCurrentPopulation();
-        } else if (aPropertyChangeEvent.getPropertyName().equals(NEXT_ROUND)) {
+        if (aPropertyChangeEvent.getPropertyName().equals(NEXT_ROUND))
+        {
             generateRandom();
-            addPopulation(heroTwoPopulation);
-            addPopulation(heroOnePopulation);
+            addPopulation(creaturePopulation);
         }
     }
 
