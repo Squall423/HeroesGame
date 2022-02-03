@@ -15,6 +15,9 @@ import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static pl.sdk.GameEngine.AFTER_ATTACK;
+import static pl.sdk.GameEngine.AFTER_MOVE;
+
 public class BattleMapController implements PropertyChangeListener {
 
     @FXML
@@ -61,23 +64,29 @@ public class BattleMapController implements PropertyChangeListener {
             for (int y = 0; y < 15; y++) {
                 MapTile rec = new MapTile();
                 gridMap.add(rec, x, y);
+                gameEngine.addObserver(AFTER_MOVE, rec);
+                gameEngine.addObserver(AFTER_ATTACK, rec);
 
                 Creature c = gameEngine.get(x, y);
                 if (c != null) {
-                    rec.addCreature(c.getName(), c.getAmount());
+                    boolean shouldFlip = gameEngine.isHeroTwoGotCreature(c);
+                    rec.addCreature(c.getName(), c.getAmount(), shouldFlip);
 
                     if (c == gameEngine.getActiveCreature()) {
-                        rec.setBackground(Color.GREEN);
+                        rec.changeState(new MapTileActiveCreatureState(rec));
+                        rec.handleState();
                     } else if (gameEngine.canAttack(x, y)) {
                         final int x1 = x;
                         final int y1 = y;
-                        rec.setBackground(Color.RED);
+                        rec.changeState(new MapTileAttackPossibleState(rec));
+                        rec.handleState();
                         rec.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.attack(x1, y1));
                     }
                 } else if (gameEngine.canMove(x, y)) {
                     final int x1 = x;
                     final int y1 = y;
-                    rec.setBackground(Color.GREY);
+                    rec.changeState(new MapTileMovePossibleState(rec));
+                    rec.handleState();
                     rec.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.move(new Point(x1, y1)));
                 }
             }
