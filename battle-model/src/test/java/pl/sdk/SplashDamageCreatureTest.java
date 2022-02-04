@@ -33,7 +33,8 @@ public class SplashDamageCreatureTest {
         board.add(new Point(11, 13), splashMock4);
         board.add(new Point(0, 2), splashMock4);
 
-        GameEngine gameEngine = new GameEngine(List.of(splashCreature), Collections.emptyList(), board);
+        GameEngine gameEngine = new GameEngine(new Hero (List.of(splashCreature)),new Hero (Collections.emptyList()),
+                board);
         gameEngine.attack(10, 10);
 
         verify(defender).applyDamage(anyInt());
@@ -69,7 +70,8 @@ public class SplashDamageCreatureTest {
         board.add(new Point(11, 13), splashMock4);
         board.add(new Point(3, 2), splashMock4);
 
-        GameEngine gameEngine = new GameEngine(List.of(notSplashCreature), Collections.emptyList(), board);
+        GameEngine gameEngine = new GameEngine(new Hero(List.of(notSplashCreature)), new Hero (Collections.emptyList()),
+                board);
         gameEngine.attack(1, 1);
 
         verify(defender).applyDamage(anyInt());

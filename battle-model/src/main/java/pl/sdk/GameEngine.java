@@ -28,18 +28,18 @@ public class GameEngine {
     private List<Creature> creatures2;
 
 
-    public GameEngine(List<Creature> aCreatures1, List<Creature> aCreatures2) {
-        this(aCreatures1, aCreatures2, new Board());
+    public GameEngine(Hero aHero1, Hero aHero2) {
+        this(aHero1, aHero2, new Board());
     }
 
-    GameEngine(List<Creature> aCreatures1, List<Creature> aCreatures2, Board aBoard) {
+    GameEngine(Hero aHero1, Hero aHero2, Board aBoard) {
         board = aBoard;
-        creatures1 = aCreatures1;
-        creatures2 = aCreatures2;
+        creatures1 = aHero1.getCreatures();
+        creatures2 = aHero2.getCreatures();
         putCreaturesToBoard(creatures1, creatures2);
         List<Creature> twoSidesCreatures = new ArrayList<>();
-        twoSidesCreatures.addAll(aCreatures1);
-        twoSidesCreatures.addAll(aCreatures2);
+        twoSidesCreatures.addAll(creatures1);
+        twoSidesCreatures.addAll(creatures2);
         twoSidesCreatures.sort((c1, c2) -> c2.getMoveRange() - c1.getMoveRange());
         queue = new CreatureTurnQueue(twoSidesCreatures);
 

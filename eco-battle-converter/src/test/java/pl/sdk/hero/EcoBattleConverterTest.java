@@ -24,7 +24,7 @@ class EcoBattleConverterTest {
         ecoHero.addCreature(factory.create(false, 6, 6));
         ecoHero.addCreature(factory.create(false, 7, 7));
 
-        List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero);
+        List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero).getCreatures();
 
         assertEquals(7, convertedCreatures.size());
 

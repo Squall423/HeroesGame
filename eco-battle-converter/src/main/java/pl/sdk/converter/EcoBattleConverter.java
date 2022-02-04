@@ -3,6 +3,7 @@ package pl.sdk.converter;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import pl.sdk.Hero;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
 import pl.sdk.gui.BattleMapController;
@@ -32,12 +33,12 @@ public class EcoBattleConverter {
         }
     }
 
-    public static List<Creature> convert(Player aPlayer1) {
+    public static Hero convert(Player aPlayer1) {
         List<Creature> ret = new ArrayList<>();
         NecropolisFactory factory = new NecropolisFactory();
         aPlayer1.getCreatures()
                 .forEach(ecoCreature -> ret.add(factory
                         .create(ecoCreature.isUpgraded(), ecoCreature.getTier(), ecoCreature.getAmount())));
-        return ret;
+        return new Hero(ret);
     }
 }

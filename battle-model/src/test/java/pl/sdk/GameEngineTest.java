@@ -21,7 +21,7 @@ class GameEngineTest {
         List<Creature> l2 = List.of(spy(Creature.class));
 
 
-        GameEngine engine = new GameEngine(l1, l2);
+        GameEngine engine = new GameEngine(new Hero(l1), new Hero(l2));
         assertTrue(engine.canAttack(GameEngine.BOARD_WIDTH - 1, 1));
         assertFalse(engine.canAttack(0, 1));
         assertFalse(engine.canAttack(0, 1));
@@ -33,7 +33,7 @@ class GameEngineTest {
     void checkIfHeroesHasCreature() {
         NecropolisFactory factory = new NecropolisFactory();
         Creature creature = factory.create(false, 1, 1);
-        GameEngine engine = new GameEngine(List.of(), List.of(creature));
+        GameEngine engine = new GameEngine(new Hero(List.of()), new Hero(List.of(creature)));
 
         assertTrue(engine.isHeroTwoGotCreature(creature));
     }
