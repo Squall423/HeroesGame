@@ -1,6 +1,6 @@
 package pl.sdk;
 
-enum SpellsStatistic {
+public enum SpellsStatistic {
 
     HASTE("Haste", "Increases the speed of the selected unit.", 1, SpellElement.AIR, SpellType.BUFF,
             SplashType.TARGET_ALLY, 6),

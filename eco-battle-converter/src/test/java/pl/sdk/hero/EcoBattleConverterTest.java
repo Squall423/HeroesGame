@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
 import pl.sdk.converter.EcoBattleConverter;
+import pl.sdk.spells.EconomySpell;
 
 import java.util.List;
 
@@ -48,5 +49,17 @@ class EcoBattleConverterTest {
 
         assertEquals("Bone Dragon", convertedCreatures.get(6).getName());
         assertEquals(7, convertedCreatures.get(6).getAmount());
+    }
+
+
+    @Test
+    void shouldConvertImplosionSpellsCorrectly() {
+        EconomyHero ecoHero = new EconomyHero(NECROPOLIS, new HeroStats(1, 1, 1, 1), 1000);
+        ecoHero.addSpell(new EconomySpell(SpellStatistic.IMPLOSION, 100));
+
+        Spell spell = EcoBattleConverter(ecoHero);
+
+        assertEquals(175, spell.getDamage());
+        assertEquals(0, spell.getSplashRange());
     }
 }

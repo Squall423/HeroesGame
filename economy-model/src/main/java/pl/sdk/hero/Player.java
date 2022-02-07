@@ -1,6 +1,7 @@
 package pl.sdk.hero;
 
 import pl.sdk.creatures.EconomyCreature;
+import pl.sdk.spells.EconomySpell;
 
 import java.util.List;
 
@@ -16,11 +17,18 @@ public class Player {
         gold = aGold;
     }
 
+    Player(Fraction aFraction, int aGold, EconomyHero aEconomyHero) {
+        hero = aEconomyHero;
+        creatureShop = new CreatureShop(aFraction);
+        gold = aGold;
+    }
+
     Player(EconomyHero aHero, CreatureShop aCreatureShop, int aGold) {
         hero = aHero;
         creatureShop = aCreatureShop;
         gold = aGold;
     }
+
 
     EconomyHero getHero() {
         return hero;
@@ -64,6 +72,22 @@ public class Player {
     public int getCurrentPopulation(int aTier) {
         return creatureShop.getCurrentPopulation(aTier);
     }
+    void addSpell(EconomySpell aEconomySpell) {
+        hero.addSpell(aEconomySpell);
+    }
+
+    List<EconomySpell> getSpells() {
+        return hero.getSpells();
+    }
+
+    public int getPower() {
+        return hero.getPower();
+    }
+
+    public int getWisdom() {
+        return hero.getWisdom();
+    }
+
 }
 
 
