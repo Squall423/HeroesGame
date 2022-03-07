@@ -4,11 +4,11 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import pl.sdk.*;
+import pl.sdk.GameEngine;
+import pl.sdk.Hero;
+import pl.sdk.Point;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
-
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -25,7 +25,12 @@ public class BattleMapController implements PropertyChangeListener {
 
     @FXML
     private Button passButton;
+
+    @FXML
+    private Button spellBookButton;
+
     private final GameEngine gameEngine;
+    private String SPELLBOOK_NOT_IMPLEMENTED = "spellbook not implemented yet";
 
     public BattleMapController() {
         List<Creature> notUpgradedCreatures = new ArrayList<>();
@@ -56,10 +61,16 @@ public class BattleMapController implements PropertyChangeListener {
             gameEngine.pass();
         });
 
+        spellBookButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            throw new UnsupportedOperationException(SPELLBOOK_NOT_IMPLEMENTED);
+        });
+
         refreshGui();
     }
 
     private void refreshGui() {
+        spellBookButton.setDisable(gameEngine.canCastSpell());
+
         for (int x = 0; x < 20; x++) {
             for (int y = 0; y < 15; y++) {
                 MapTile rec = new MapTile();

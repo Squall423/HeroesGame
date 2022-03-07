@@ -54,12 +54,8 @@ class EcoBattleConverterTest {
 
     @Test
     void shouldConvertImplosionSpellsCorrectly() {
-        EconomyHero ecoHero = new EconomyHero(NECROPOLIS, new HeroStats(1, 1, 1, 1), 1000);
-        ecoHero.addSpell(new EconomySpell(SpellStatistic.IMPLOSION, 100));
 
-        Spell spell = EcoBattleConverter(ecoHero);
-
-        assertEquals(175, spell.getDamage());
-        assertEquals(0, spell.getSplashRange());
     }
+
+
 }
