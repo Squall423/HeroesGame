@@ -35,7 +35,7 @@ public class SpellMasteries {
     }
 
     public SpellMasterLevel findMaxLevel() {
-        return List.of(air, fire, earth).stream().max((l1, l2) -> l1.value - l2.value).get();
+        return List.of(air, fire, earth,water).stream().max((l1, l2) -> l1.value - l2.value).get();
     }
 
     public SpellMasterLevel getAir() {

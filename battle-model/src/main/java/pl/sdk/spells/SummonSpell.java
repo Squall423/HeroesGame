@@ -14,4 +14,14 @@ public class SummonSpell extends AbstractSpell {
     public int getSplashRange() {
         return 0;
     }
+
+    public String getSummoningCreatureAmount() {
+        return "Air Elemental";
+
+    }
+
+    public int getDuration() {
+        return 0;
+
+    }
 }

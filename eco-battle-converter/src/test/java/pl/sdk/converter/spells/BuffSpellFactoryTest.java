@@ -2,6 +2,7 @@ package pl.sdk.converter.spells;
 
 import org.junit.jupiter.api.Test;
 import pl.sdk.SpellsStatistic;
+import pl.sdk.converter.SpellMasteries;
 import pl.sdk.spells.BuffSpell;
 import pl.sdk.spells.EconomySpell;
 
@@ -12,8 +13,9 @@ class BuffSpellFactoryTest {
     @Test
     void shouldConvertHasteSpellsCorrectly() {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.HASTE);
+        SpellMasteries masteries = new SpellMasteries();
 
-        BuffSpell spell = (BuffSpell) new BuffSpellFactory().createInner(toCovert, 1);
+        BuffSpell spell = (BuffSpell) new BuffSpellFactory().createInner(toCovert, 1, masteries);
 
         assertEquals(1, spell.getDuration());
         assertEquals(0, spell.getSplashRange());
