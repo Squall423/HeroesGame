@@ -15,7 +15,7 @@ public class Hero  {
 
 
     public Hero(List<Creature> aCreatures) {
-        this(aCreatures, new SpellBook());
+        this(aCreatures, new SpellBook(10));
     }
 
     Hero(List<Creature> aCreatures, SpellBook aSpellBook) {
