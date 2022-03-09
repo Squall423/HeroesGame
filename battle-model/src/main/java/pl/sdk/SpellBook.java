@@ -27,6 +27,7 @@ public class SpellBook implements PropertyChangeListener {
             throw new IllegalStateException(CANNOT_CAST_MORE_SPELLS);
         }
         spellWasCastedInThisTurn = true;
+        mana = mana - aSpell.getManaCost();
 
     }
 
@@ -35,7 +36,7 @@ public class SpellBook implements PropertyChangeListener {
     }
 
     public boolean canCastSpell(AbstractSpell aSpell) {
-        return false;
+        return mana >= aSpell.getManaCost();
     }
 
     public void endOfTurn() {
@@ -45,5 +46,9 @@ public class SpellBook implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
         endOfTurn();
+    }
+
+    public int getMana() {
+        return mana;
     }
 }

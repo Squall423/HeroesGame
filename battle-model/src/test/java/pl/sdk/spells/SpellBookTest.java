@@ -3,6 +3,8 @@ package pl.sdk.spells;
 import org.junit.jupiter.api.Test;
 import pl.sdk.SpellBook;
 
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -42,4 +44,11 @@ class SpellBookTest {
         SpellBook spellBook = new SpellBook(2);
         assertFalse(spellBook.canCastSpell(SpellFactoryForTests.createMagicArrow()));
     }
+
+    @Test
+    void shouldSubtractManaCorrectly() {
+        SpellBook spellBook = new SpellBook(10);
+        spellBook.cast(SpellFactoryForTests.createMagicArrow());
+        assertEquals(5,spellBook.getMana());
     }
+}
