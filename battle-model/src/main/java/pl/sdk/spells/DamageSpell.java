@@ -1,6 +1,7 @@
 package pl.sdk.spells;
 
 import pl.sdk.SpellsStatistic;
+import pl.sdk.creatures.Creature;
 
 public class DamageSpell extends AbstractSpell {
 
@@ -19,6 +20,8 @@ public class DamageSpell extends AbstractSpell {
         return 0;
 
     }
+
+
 
     public int getDamage() {
         return damage;

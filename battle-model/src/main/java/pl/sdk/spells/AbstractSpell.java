@@ -2,6 +2,7 @@ package pl.sdk.spells;
 
 import pl.sdk.Point;
 import pl.sdk.SpellsStatistic;
+import pl.sdk.creatures.Creature;
 
 public abstract class AbstractSpell {
     protected final int manaCost;
@@ -25,5 +26,8 @@ public abstract class AbstractSpell {
 
     public abstract int getSplashRange();
 
-//    public abstract void cast(Point aPoint);
+   public  void cast(Creature aT){};
+
+
 }
+

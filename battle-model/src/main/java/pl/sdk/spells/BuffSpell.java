@@ -1,6 +1,7 @@
 package pl.sdk.spells;
 
 import pl.sdk.SpellsStatistic;
+import pl.sdk.creatures.Creature;
 
 public class BuffSpell extends AbstractSpell {
 
@@ -21,4 +22,6 @@ public class BuffSpell extends AbstractSpell {
         return 0;
 
     }
+
+
 }

@@ -48,13 +48,13 @@ class GameEngineTest {
                                 factory.create(false, 1, 1))));
         //hero1  is active
         assertTrue(engine.canCastSpell());
-        engine.cast(SpellFactoryForTests.createMagicArrow());
+        engine.cast(SpellFactoryForTests.createMagicArrow(), new Point(19,0));
         assertFalse(engine.canCastSpell());
         engine.pass();
 
         //hero2  is active
         assertTrue(engine.canCastSpell());
-        engine.cast(SpellFactoryForTests.createMagicArrow());
+        engine.cast(SpellFactoryForTests.createMagicArrow(), new Point(0,1));
         assertFalse(engine.canCastSpell());
         engine.pass();
         assertFalse(engine.canCastSpell());

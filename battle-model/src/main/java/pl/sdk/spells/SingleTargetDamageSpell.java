@@ -1,6 +1,7 @@
 package pl.sdk.spells;
 
 import pl.sdk.SpellsStatistic;
+import pl.sdk.creatures.Creature;
 
 public class SingleTargetDamageSpell extends AbstractSpell {
 
@@ -19,4 +20,6 @@ public class SingleTargetDamageSpell extends AbstractSpell {
     public int getSplashRange() {
         return 0;
     }
+
+
 }

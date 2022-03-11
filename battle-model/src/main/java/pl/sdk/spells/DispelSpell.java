@@ -1,6 +1,7 @@
 package pl.sdk.spells;
 
 import pl.sdk.SpellsStatistic;
+import pl.sdk.creatures.Creature;
 
 public class DispelSpell extends AbstractSpell{
     private final int duration;
@@ -14,4 +15,6 @@ public class DispelSpell extends AbstractSpell{
     public int getSplashRange() {
         return 0;
     }
+
+
 }

@@ -7,6 +7,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GameEngine {
 
@@ -22,8 +23,8 @@ public class GameEngine {
     private final Board board;
     private final TurnQueue queue;
     private final PropertyChangeSupport observerSupport;
-    private  Hero hero1;
-    private  Hero hero2;
+    private Hero hero1;
+    private Hero hero2;
     private boolean blockMoving;
     private boolean blockAttacking;
     private List<Creature> creatures1;
@@ -37,7 +38,7 @@ public class GameEngine {
         board = aBoard;
         hero1 = aHero1;
         hero2 = aHero2;
-        queue = new TurnQueue(aHero1,aHero2);
+        queue = new TurnQueue(aHero1, aHero2);
         hero1.toSubscribeEndOfTurn(queue);
         hero2.toSubscribeEndOfTurn(queue);
         creatures1 = aHero1.getCreatures();
@@ -148,7 +149,13 @@ public class GameEngine {
         return queue.getActiveHero().canCastSpell();
     }
 
-    void cast(AbstractSpell aMagicArrow) {
-        queue.getActiveHero().castSpell(aMagicArrow);
+    void cast(AbstractSpell aSpell, Point aTargetPoint) {
+        queue.getActiveHero().castSpell(aSpell);
+        SpellSplashCalculator spellSplashCalculator = new SpellSplashCalculator();
+        List<Creature> creatures = (spellSplashCalculator.calc(aSpell, board, aTargetPoint))
+                .stream()
+                .map(board::get)
+                                .collect(Collectors.toList());
+        creatures.forEach(t -> aSpell.cast(t));
     }
 }

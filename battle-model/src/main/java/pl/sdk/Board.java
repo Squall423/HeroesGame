@@ -4,6 +4,7 @@ import pl.sdk.creatures.Creature;
 
 import java.util.HashMap;
 import java.util.Map;
+
 import static pl.sdk.GameEngine.BOARD_HEIGHT;
 import static pl.sdk.GameEngine.BOARD_WIDTH;
 
@@ -42,6 +43,10 @@ class Board {
         return map.get(new Point(aX, aY));
     }
 
+    Creature get(Point aPoint) {
+        return map.get(aPoint);
+    }
+
     Point get(Creature aCreature) {
         if (map.containsValue(aCreature)) {
             return map.keySet().stream().filter(p -> map.get(p).equals(aCreature)).findAny().get();
@@ -72,7 +77,6 @@ class Board {
         double distance = currentPosition.distance(new Point(aX, aY));
         return distance <= aCreature.getMoveRange() && !isTileTaken(new Point(aX, aY));
     }
-
 
 
 }
