@@ -16,7 +16,7 @@ class Board {
         map = new HashMap<>();
     }
 
-    void add(Point aPoint, Creature aCreature) {
+    void add( Point aPoint, Creature aCreature) {
         throwExceptionWhenIsOutsideMap(aPoint);
         throwExceptionIfTileIsTaken(aPoint);
         map.put(aPoint, aCreature);
@@ -43,7 +43,7 @@ class Board {
         return map.get(new Point(aX, aY));
     }
 
-    Creature get(Point aPoint) {
+   Creature get(Point aPoint) {
         return map.get(aPoint);
     }
 

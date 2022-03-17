@@ -10,4 +10,8 @@ public class SpellFactoryForTests {
         return new DamageSpell(5, SpellsStatistic.TargetType.ENEMY, SpellsStatistic.SpellElement.AIR, aSplash, 5);
     }
 
+    public static AbstractSpell createMagicArrowWithSplashAndTargetType(int aSplash, SpellsStatistic.TargetType aTargetType)
+    {
+        return new DamageSpell(5, aTargetType, SpellsStatistic.SpellElement.AIR, aSplash, 5);
+    }
 }

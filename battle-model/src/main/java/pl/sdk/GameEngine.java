@@ -113,7 +113,7 @@ public class GameEngine {
 
     private void putCreaturesFromOneSideToBoard(List<Creature> aCreatures, int aX) {
         for (int i = 0; i < aCreatures.size(); i++) {
-            board.add(new Point(aX, i * 2 + 1), aCreatures.get(i));
+            board.add( new Point(aX, i * 2 + 1), aCreatures.get(i));
         }
     }
 
@@ -152,10 +152,19 @@ public class GameEngine {
     void cast(AbstractSpell aSpell, Point aTargetPoint) {
         queue.getActiveHero().castSpell(aSpell);
         SpellSplashCalculator spellSplashCalculator = new SpellSplashCalculator();
-        List<Creature> creatures = (spellSplashCalculator.calc(aSpell, board, aTargetPoint))
+        List<Creature> creatures = (spellSplashCalculator.calc(aSpell, board, aTargetPoint, this))
                 .stream()
                 .map(board::get)
-                                .collect(Collectors.toList());
+                .collect(Collectors.toList());
         creatures.forEach(t -> aSpell.cast(t));
+    }
+
+
+    boolean isAllyCreature(Point aP) {
+        return queue.getActiveHero().getCreatures().contains(board.get(aP));
+    }
+
+    boolean isEnemyCreature(Point aP) {
+        return board.get(aP) != null && queue.getActiveHero().getCreatures().contains(board.get(aP));
     }
 }

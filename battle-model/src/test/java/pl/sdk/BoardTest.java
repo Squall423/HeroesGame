@@ -22,7 +22,7 @@ class BoardTest {
     @Test
     void shouldAddCreature() {
         Board board = new Board();
-        board.add(new Point(0, 0), creature);
+        board.add( new Point(0, 0), creature);
         Creature creatureFromBoard = board.get(0, 0);
         assertEquals(creature, creatureFromBoard);
     }
@@ -36,16 +36,16 @@ class BoardTest {
 
     @Test
     void shouldThrowIllegalArgumentExceptionXWhenYouTryAddCreatureToNotEmptyField() {
-        board.add(new Point(0, 0), creature);
+        board.add( new Point(0, 0), creature);
         Creature creature2 = NecropolisFactory.createDefaultForTests();
-        assertThrows(IllegalArgumentException.class, () -> board.add(new Point(0, 0), creature2));
+        assertThrows(IllegalArgumentException.class, () -> board.add( new Point(0, 0), creature2));
         Creature creatureFromBoard = board.get(0, 0);
         assertEquals(creature, creatureFromBoard);
     }
 
     @Test
     void shouldReturnCorrectLocationForByCreature() {
-        board.add(new Point(5, 5), creature);
+        board.add( new Point(5, 5), creature);
         Point result = board.get(creature);
         assertEquals(new Point(5, 5), result);
     }

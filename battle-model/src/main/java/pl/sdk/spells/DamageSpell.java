@@ -17,7 +17,7 @@ public class DamageSpell extends AbstractSpell {
     }
     @Override
     public int getSplashRange() {
-        return 0;
+        return 1;
 
     }
 

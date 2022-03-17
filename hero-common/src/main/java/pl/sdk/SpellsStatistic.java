@@ -39,7 +39,7 @@ public enum SpellsStatistic {
     }
 
     public enum TargetType {
-        ALLY, ALL_ALLIES, ENEMY, ALL_ENEMIES, CREATURE, MAP, SPLASH_MAP, ALL, SPECIAL;
+        ALLY, ALL_ALLIES, ENEMY, ALL_ENEMIES, CREATURE, All_CREATURES, MAP, SPLASH_MAP, ALL, SPECIAL;
     }
     private final String name;
 

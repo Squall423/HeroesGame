@@ -10,6 +10,11 @@ import java.util.List;
 
 
 public class Hero  {
+
+    public enum Site{
+        LEFT, RIGHT
+    }
+
     private final List<Creature> creatures;
     private final SpellBook spellBook;
 
