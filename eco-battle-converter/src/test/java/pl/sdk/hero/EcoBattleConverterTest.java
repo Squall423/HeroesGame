@@ -1,9 +1,11 @@
 package pl.sdk.hero;
 
 import org.junit.jupiter.api.Test;
+import pl.sdk.SpellsStatistic;
+import pl.sdk.converter.EcoBattleConverter;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
-import pl.sdk.converter.EcoBattleConverter;
+import pl.sdk.spells.DamageSpell;
 import pl.sdk.spells.EconomySpell;
 
 import java.util.List;
@@ -54,7 +56,12 @@ class EcoBattleConverterTest {
 
     @Test
     void shouldConvertImplosionSpellsCorrectly() {
+        Player ecoHero = new Player(Fraction.NECROPOLIS, 1000, new EconomyHero(new HeroStats(1, 1, 1, 1)));
+        ecoHero.addSpell(new EconomySpell(SpellsStatistic.IMPLOSION));
+        DamageSpell spell = (DamageSpell) EcoBattleConverter.convert(ecoHero).getSpells().get(0);
 
+        assertEquals(175, spell.getDamage());
+        assertEquals(0, spell.getSplashRange());
     }
 
 

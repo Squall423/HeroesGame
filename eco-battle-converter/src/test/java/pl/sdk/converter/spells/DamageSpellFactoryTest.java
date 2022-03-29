@@ -19,8 +19,8 @@ class DamageSpellFactoryTest {
                 (SingleTargetDamageSpell) DamageSpellFactory.create(toCovert
                 , 1, masteries);
 
-        assertEquals(175, singleTargetDamageSpell.getDamage());
-        assertEquals(0, singleTargetDamageSpell.getSplashRange());
+        assertEquals(20, singleTargetDamageSpell.getDamage());
+        assertEquals(3, singleTargetDamageSpell.getSplashRange());
         assertEquals(5, singleTargetDamageSpell.getManaCost());
         assertEquals(SpellsStatistic.TargetType.ENEMY, singleTargetDamageSpell.getTargetType());
     }

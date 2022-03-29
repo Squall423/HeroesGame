@@ -1,24 +1,27 @@
 package pl.sdk.spells;
 
 import pl.sdk.SpellsStatistic;
-import pl.sdk.creatures.Creature;
 
-public class SingleTargetDamageSpell extends AbstractSpell {
+public class SingleTargetDamageSpell extends DamageSpell {
 
+    private final int damage;
+    private final int splashRange;
 
     public SingleTargetDamageSpell(int aManaCost, SpellsStatistic.TargetType aTargetType,
-                                   SpellsStatistic.SpellElement aElement,int aSpellDamage, int aSplashRange ) {
-        super(aManaCost,aTargetType, aElement);
+                                   SpellsStatistic.SpellElement aElement, int aSpellDamage,  int aSplashRange) {
+        super(aManaCost, aTargetType, aElement, aSpellDamage, aSplashRange);
+        damage = aSpellDamage;
+        splashRange = aSplashRange;
     }
 
-
-
+    @Override
     public int getDamage() {
-        return 175;
+        return damage;
     }
 
+    @Override
     public int getSplashRange() {
-        return 0;
+        return splashRange;
     }
 
 

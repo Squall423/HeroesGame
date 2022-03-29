@@ -8,6 +8,7 @@ public class SummonSpell extends AbstractSpell {
     public SummonSpell(int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
         super(aManaCost, SpellsStatistic.TargetType.MAP, aElement);
         duration = aDuration;
+
     }
 
     @Override

@@ -3,15 +3,13 @@ package pl.sdk;
 import pl.sdk.creatures.Creature;
 import pl.sdk.spells.AbstractSpell;
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.util.ArrayList;
 import java.util.List;
 
 
+public class Hero {
 
-public class Hero  {
-
-    public enum Site{
+    public enum Site {
         LEFT, RIGHT
     }
 
@@ -20,10 +18,10 @@ public class Hero  {
 
 
     public Hero(List<Creature> aCreatures) {
-        this(aCreatures, new SpellBook(10));
+        this(aCreatures, new SpellBook(10, new ArrayList<>()));
     }
 
-    Hero(List<Creature> aCreatures, SpellBook aSpellBook) {
+    public Hero(List<Creature> aCreatures, SpellBook aSpellBook) {
         creatures = aCreatures;
         spellBook = aSpellBook;
     }
@@ -33,7 +31,7 @@ public class Hero  {
 
     }
 
-    List<AbstractSpell> getSpells() {
+    public List<AbstractSpell> getSpells() {
         return spellBook.getSpells();
     }
 
@@ -46,7 +44,7 @@ public class Hero  {
     }
 
     void toSubscribeEndOfTurn(TurnQueue aQueue) {
-      aQueue.addObserver(spellBook);
+        aQueue.addObserver(spellBook);
     }
 
 }

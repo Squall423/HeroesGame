@@ -6,13 +6,14 @@ import pl.sdk.spells.EconomySpell;
 import java.util.ArrayList;
 import java.util.List;
 
-class EconomyHero {
+public class EconomyHero {
 
     private final List<EconomyCreature> creatureList;
     private final HeroStats stats;
     private final List<EconomySpell> spellList;
 
-    EconomyHero() {
+
+    public EconomyHero() {
         this(new HeroStats(0, 0, 0, 0));
     }
 
@@ -22,6 +23,7 @@ class EconomyHero {
         stats = aStats;
     }
 
+
     void addCreature(EconomyCreature aCreature) {
         if (creatureList.size() >= 7) {
             throw new IllegalStateException("Hero has not empty slot for creature");
@@ -29,7 +31,7 @@ class EconomyHero {
         creatureList.add(aCreature);
     }
 
-    List<EconomyCreature> getCreatures() {
+    public List<EconomyCreature> getCreatures() {
         return creatureList;
     }
 
@@ -37,15 +39,15 @@ class EconomyHero {
         spellList.add(aEconomySpell);
     }
 
-    List<EconomySpell> getSpells() {
+    public List<EconomySpell> getSpells() {
         return List.copyOf(spellList);
     }
 
-     int getPower() {
+    public int getPower() {
         return stats.getPower();
     }
 
-     int getWisdom() {
+    public int getWisdom() {
         return stats.getWisdom();
     }
 }

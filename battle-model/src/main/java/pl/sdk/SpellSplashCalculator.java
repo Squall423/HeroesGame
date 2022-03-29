@@ -24,11 +24,26 @@ public class SpellSplashCalculator {
             }
             if (shouldCastOnlyForEnemyCreatures(aSpell)) {
                 ret = ret.stream().filter(aGameEngine::isEnemyCreature).collect(Collectors.toSet());
-
             }
-
         }
         return ret;
+    }
+
+    boolean canCast(AbstractSpell aSpell, Point aPoint, GameEngine aGameEngine, Board aBoard) {
+        if (shouldCastOnlyForEnemyCreatures(aSpell)) {
+            return aGameEngine.isEnemyCreature(aPoint);
+        }
+        if (shouldCastOnlyForAllyCreatures(aSpell)) {
+            return aGameEngine.isAllyCreature(aPoint);
+        }
+        if (isForAnyCreature(aSpell)) {
+            return aBoard.get(aPoint) != null;
+        }
+        return false;
+    }
+
+    private boolean isForAnyCreature(AbstractSpell aSpell) {
+        return aSpell.getTargetType() == SpellsStatistic.TargetType.CREATURE || aSpell.getTargetType() == SpellsStatistic.TargetType.ALL_ALLIES;
     }
 
     private boolean shouldCastOnlyForAllyCreatures(AbstractSpell aSpell) {

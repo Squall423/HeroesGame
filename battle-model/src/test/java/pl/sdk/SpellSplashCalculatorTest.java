@@ -64,13 +64,16 @@ class SpellSplashCalculatorTest {
         board.add(new Point(12, 11), NecropolisFactory.createDefaultForTests());
         board.add(new Point(9, 8), NecropolisFactory.createDefaultForTests());
         board.add(new Point(8, 9), NecropolisFactory.createDefaultForTests());
+
         GameEngine gameEngine = mock(GameEngine.class);
         when(gameEngine.isAllyCreature(any())).thenReturn(false);
         when(gameEngine.isEnemyCreature(any())).thenReturn(true);
+//
 
-
-        Set<Point> result = spellSplashCalculator.calc(SpellFactoryForTests
-                .createMagicArrowWithSplash(1), board, new Point(10, 10), gameEngine);
+        Set<Point> result = spellSplashCalculator
+                .calc(SpellFactoryForTests
+                    .createMagicArrowWithSplashAndTargetType(1, SpellsStatistic.TargetType.ENEMY),
+                board, new Point(10, 10), gameEngine);
 
         assertEquals(9, result.size());
     }
@@ -127,7 +130,7 @@ class SpellSplashCalculatorTest {
 
         assertEquals(1, result.size());
         assertTrue(result.contains(new Point(10, 10)));
-     
+
 
     }
 }

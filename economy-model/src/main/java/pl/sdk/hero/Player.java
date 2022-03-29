@@ -72,11 +72,12 @@ public class Player {
     public int getCurrentPopulation(int aTier) {
         return creatureShop.getCurrentPopulation(aTier);
     }
+
     void addSpell(EconomySpell aEconomySpell) {
         hero.addSpell(aEconomySpell);
     }
 
-    List<EconomySpell> getSpells() {
+    public List<EconomySpell> getSpells() {
         return hero.getSpells();
     }
 

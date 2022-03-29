@@ -12,13 +12,17 @@ public class SpellBook implements PropertyChangeListener {
     private boolean spellWasCastedInThisTurn;
     private static final String CANNOT_CAST_MORE_SPELLS = "You cannot cast more spells in this turn!";
     private int mana;
+    private List<AbstractSpell> spells;
 
-    public SpellBook(int aMana) {
+
+    public SpellBook(int aMana, List<AbstractSpell> aSpells) {
         mana = aMana;
+        spells = aSpells;
+
     }
 
     public List<AbstractSpell> getSpells() {
-        return null;
+        return spells;
 
     }
 
