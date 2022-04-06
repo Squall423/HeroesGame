@@ -7,14 +7,19 @@ public abstract class AbstractSpell {
     protected final SpellsStatistic.TargetType targetType;
     protected final SpellsStatistic.SpellElement element;
     protected final int manaCost;
+    protected final String name;
 
 
-
-    AbstractSpell(int aManaCost, SpellsStatistic.TargetType aTargetType, SpellsStatistic.SpellElement aElement) {
+    AbstractSpell( String aName, int aManaCost, SpellsStatistic.TargetType aTargetType,
+                   SpellsStatistic.SpellElement aElement) {
+        name = aName;
         manaCost = aManaCost;
         targetType = aTargetType;
         element = aElement;
+    }
 
+    public String getName() {
+        return name;
     }
 
     public int getManaCost() {
@@ -28,7 +33,5 @@ public abstract class AbstractSpell {
     public abstract int getSplashRange();
 
     public void cast(Creature aT) {};
-
-
 }
 

@@ -7,8 +7,8 @@ public class BuffSpell extends AbstractSpell {
     private final int duration;
 
 
-    public BuffSpell(int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
-        super(aManaCost, SpellsStatistic.TargetType.ALLY, aElement);
+    public BuffSpell(String aName, int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
+        super(aName, aManaCost, SpellsStatistic.TargetType.ALLY, aElement);
         duration = aDuration;
 
     }

@@ -7,9 +7,9 @@ public class SingleTargetDamageSpell extends DamageSpell {
     private final int damage;
     private final int splashRange;
 
-    public SingleTargetDamageSpell(int aManaCost, SpellsStatistic.TargetType aTargetType,
-                                   SpellsStatistic.SpellElement aElement, int aSpellDamage,  int aSplashRange) {
-        super(aManaCost, aTargetType, aElement, aSpellDamage, aSplashRange);
+    public SingleTargetDamageSpell(String aName, int aManaCost, SpellsStatistic.TargetType aTargetType,
+                                   SpellsStatistic.SpellElement aElement, int aSpellDamage, int aSplashRange) {
+        super(aName, aManaCost, aTargetType, aElement, aSpellDamage, aSplashRange);
         damage = aSpellDamage;
         splashRange = aSplashRange;
     }

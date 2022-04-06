@@ -1,9 +1,13 @@
 package pl.sdk.hero;
 
+import pl.sdk.SpellFactoryForTests;
+import pl.sdk.SpellsStatistic;
 import pl.sdk.creatures.EconomyCreature;
+import pl.sdk.spells.AbstractSpell;
 import pl.sdk.spells.EconomySpell;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class EconomyHero {

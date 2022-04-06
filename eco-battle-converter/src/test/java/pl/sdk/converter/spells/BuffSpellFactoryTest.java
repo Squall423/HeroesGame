@@ -15,7 +15,7 @@ class BuffSpellFactoryTest {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.HASTE);
         SpellMasteries masteries = new SpellMasteries();
 
-        BuffSpell spell = (BuffSpell) new BuffSpellFactory().createInner(toCovert, 1, masteries);
+        BuffSpell spell = (BuffSpell) new BuffSpellFactory().createInner(toCovert.getName(), toCovert, 1, masteries);
 
         assertEquals(1, spell.getDuration());
         assertEquals(0, spell.getSplashRange());

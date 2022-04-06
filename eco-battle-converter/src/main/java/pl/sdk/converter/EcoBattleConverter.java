@@ -43,15 +43,17 @@ public class EcoBattleConverter {
         List<Creature> creatures = new ArrayList<>();
         NecropolisFactory factory = new NecropolisFactory();
         aPlayer1.getCreatures()
-                .forEach(ecoCreature -> creatures.add(factory
+                .forEach(ecoCreature -> creatures
+                        .add(factory
                         .create(ecoCreature.isUpgraded(), ecoCreature.getTier(), ecoCreature.getAmount())));
 
         SpellMasteries masteries = new SpellMasteries(BASIC, BASIC, BASIC, BASIC);
 
         List<AbstractSpell> spells = aPlayer1.getSpells().stream()
-                .map(es -> SpellFactory.create(es, aPlayer1.getPower(), masteries))
+                .map(es -> SpellFactory.create(es.getName(),es, aPlayer1.getPower(), masteries))
                 .collect(Collectors.toList());
 
+        //Economy spells shop not done yet. You have to remove the second argument for battle gui.
         return new Hero(creatures, new SpellBook(aPlayer1.getWisdom(), spells));
     }
 }

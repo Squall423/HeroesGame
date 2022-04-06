@@ -6,8 +6,8 @@ public class DebuffSpell extends AbstractSpell{
     private final int duration;
 
 
-    public DebuffSpell(int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
-        super(aManaCost, SpellsStatistic.TargetType.ENEMY, aElement);
+    public DebuffSpell(String aName,int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
+        super( aName,aManaCost, SpellsStatistic.TargetType.ENEMY, aElement);
         duration = aDuration;
 
     }

@@ -124,6 +124,9 @@ public class GameEngine {
     public Creature getActiveCreature() {
         return queue.getActiveCreature();
     }
+    public Hero getActiveHero() {
+        return queue.getActiveHero();
+    }
 
     public boolean canMove(int aX, int aY) {
         return board.canMove(getActiveCreature(), aX, aY);
@@ -149,14 +152,12 @@ public class GameEngine {
         return queue.getActiveHero().canCastSpell();
     }
 
-    public boolean canCastSpell(AbstractSpell aSpell) {
-        return queue.getActiveHero().canCastSpell();
+    public boolean canCastSpell(AbstractSpell aSpell) {return queue.getActiveHero().canCastSpell();
     }
     public boolean canCastSpell(AbstractSpell aSpell, Point aPoint) {
       SpellSplashCalculator calc = new SpellSplashCalculator();
      return calc.canCast(aSpell,aPoint,this,board);
     }
-
 
     void cast(AbstractSpell aSpell, Point aTargetPoint) {
         queue.getActiveHero().castSpell(aSpell);
@@ -167,7 +168,6 @@ public class GameEngine {
                 .collect(Collectors.toList());
         creatures.forEach(t -> aSpell.cast(t));
     }
-
 
     boolean isAllyCreature(Point aP) {
         return queue.getActiveHero().getCreatures().contains(board.get(aP));

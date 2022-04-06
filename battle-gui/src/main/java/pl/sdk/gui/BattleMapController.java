@@ -7,8 +7,10 @@ import javafx.scene.layout.GridPane;
 import pl.sdk.GameEngine;
 import pl.sdk.Hero;
 import pl.sdk.Point;
+import pl.sdk.SpellBook;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
+import pl.sdk.spells.AbstractSpell;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
@@ -30,7 +32,7 @@ public class BattleMapController implements PropertyChangeListener {
     private Button spellBookButton;
 
     private final GameEngine gameEngine;
-    private String SPELLBOOK_NOT_IMPLEMENTED = "spellbook not implemented yet";
+    private SpellBook spellBook;
 
     public BattleMapController() {
         List<Creature> notUpgradedCreatures = new ArrayList<>();
@@ -62,14 +64,16 @@ public class BattleMapController implements PropertyChangeListener {
         });
 
         spellBookButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-            throw new UnsupportedOperationException(SPELLBOOK_NOT_IMPLEMENTED);
+            SpellChooserDialog spellChooser = new SpellChooserDialog(gameEngine.getActiveHero().getSpells(),
+                    gameEngine.getActiveHero().getSpellBook().getMana());
+            spellChooser.startDialog(this::prepareToCastSpell);
         });
 
         refreshGui();
     }
 
     private void refreshGui() {
-        spellBookButton.setDisable(gameEngine.canCastSpell());
+        spellBookButton.setDisable(!gameEngine.canCastSpell());
 
         for (int x = 0; x < 20; x++) {
             for (int y = 0; y < 15; y++) {
@@ -103,6 +107,10 @@ public class BattleMapController implements PropertyChangeListener {
             }
 
         }
+    }
+
+    void prepareToCastSpell(AbstractSpell aChosenSpell) {
+        refreshGui();
     }
 
     @Override

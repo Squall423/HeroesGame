@@ -2,6 +2,7 @@ package pl.sdk.spells;
 
 import org.junit.jupiter.api.Test;
 import pl.sdk.SpellBook;
+import pl.sdk.SpellFactoryForTests;
 
 import java.util.List;
 

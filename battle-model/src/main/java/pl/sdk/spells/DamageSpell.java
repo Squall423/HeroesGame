@@ -7,9 +7,9 @@ public class DamageSpell extends AbstractSpell {
     private final int damage;
     private final int splashRange;
 
-    public DamageSpell(int aManaCost, SpellsStatistic.TargetType aTargetType,
+    public DamageSpell(String aName, int aManaCost, SpellsStatistic.TargetType aTargetType,
                        SpellsStatistic.SpellElement aElement, int aSpellDamage, int aSplashRange) {
-        super(aManaCost, aTargetType, aElement);
+        super(aName, aManaCost, aTargetType, aElement);
         damage = aSpellDamage;
         splashRange = aSplashRange;
 

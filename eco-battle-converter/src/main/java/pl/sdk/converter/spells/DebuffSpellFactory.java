@@ -8,10 +8,10 @@ import pl.sdk.spells.EconomySpell;
 class DebuffSpellFactory extends SpellFactory {
 
     @Override
-    public AbstractSpell createInner(EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
+    public AbstractSpell createInner(String aName, EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
         switch (aEs.getSpellStatistic()) {
             case SLOW:
-                return new DebuffSpell(aEs.getManaCost(), aHeroPower, aEs.getElement() );
+                return new DebuffSpell(aName ,aEs.getManaCost(), aHeroPower, aEs.getElement() );
             default:
                 throw new UnsupportedOperationException("Cannot recognize spell");
 

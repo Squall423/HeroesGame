@@ -16,7 +16,7 @@ class DamageSpellFactoryTest {
         SpellMasteries masteries = new SpellMasteries();
 
         SingleTargetDamageSpell singleTargetDamageSpell =
-                (SingleTargetDamageSpell) DamageSpellFactory.create(toCovert
+                (SingleTargetDamageSpell) DamageSpellFactory.create(toCovert.getName(),toCovert
                 , 1, masteries);
 
         assertEquals(20, singleTargetDamageSpell.getDamage());
@@ -29,7 +29,8 @@ class DamageSpellFactoryTest {
     void shouldConvertImplosionSpellsCorrectly() {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.IMPLOSION);
         SpellMasteries masteries = new SpellMasteries();
-        SingleTargetDamageSpell singleTargetDamageSpell = (SingleTargetDamageSpell) DamageSpellFactory.create(toCovert, 1, masteries);
+        SingleTargetDamageSpell singleTargetDamageSpell =
+                (SingleTargetDamageSpell) DamageSpellFactory.create(toCovert.getName(),toCovert, 1, masteries);
 
         assertEquals(175, singleTargetDamageSpell.getDamage());
         assertEquals(0, singleTargetDamageSpell.getSplashRange());

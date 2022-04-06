@@ -5,8 +5,8 @@ import pl.sdk.SpellsStatistic;
 public class SummonSpell extends AbstractSpell {
     private final int duration;
 
-    public SummonSpell(int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
-        super(aManaCost, SpellsStatistic.TargetType.MAP, aElement);
+    public SummonSpell(String aName, int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
+        super(aName,aManaCost, SpellsStatistic.TargetType.MAP, aElement);
         duration = aDuration;
 
     }
