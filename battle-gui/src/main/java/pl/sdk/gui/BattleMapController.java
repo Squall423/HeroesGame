@@ -69,53 +69,67 @@ public class BattleMapController implements PropertyChangeListener {
             spellChooser.startDialog(this::prepareToCastSpell);
         });
 
-        refreshGui();
+        refreshGui(null);
     }
 
-    private void refreshGui() {
+    private void refreshGui(AbstractSpell aSpellToCast) {
         spellBookButton.setDisable(!gameEngine.canCastSpell());
 
         for (int x = 0; x < 20; x++) {
             for (int y = 0; y < 15; y++) {
                 MapTile rec = new MapTile();
                 gridMap.add(rec, x, y);
-                gameEngine.addObserver(AFTER_MOVE, rec);
-                gameEngine.addObserver(AFTER_ATTACK, rec);
-
                 Creature c = gameEngine.get(x, y);
                 if (c != null) {
                     boolean shouldFlip = gameEngine.isHeroTwoGotCreature(c);
                     rec.addCreature(c.getName(), c.getAmount(), shouldFlip);
-
-                    if (c == gameEngine.getActiveCreature()) {
-                        rec.changeState(new MapTileActiveCreatureState(rec));
-                        rec.handleState();
-                    } else if (gameEngine.canAttack(x, y)) {
-                        final int x1 = x;
-                        final int y1 = y;
-                        rec.changeState(new MapTileAttackPossibleState(rec));
-                        rec.handleState();
-                        rec.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.attack(x1, y1));
-                    }
-                } else if (gameEngine.canMove(x, y)) {
-                    final int x1 = x;
-                    final int y1 = y;
-                    rec.changeState(new MapTileMovePossibleState(rec));
-                    rec.handleState();
-                    rec.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.move(new Point(x1, y1)));
+                }
+                if (aSpellToCast == null) {
+                    prepareTile(x, y, rec);
+                } else {
+                    prepareTileWithSpells(x, y, rec, aSpellToCast);
                 }
             }
+        }
+    }
 
+    private void prepareTileWithSpells(int x, int y, MapTile rec, AbstractSpell aSpellToCast) {
+        if (gameEngine.canCastSpell(aSpellToCast, new Point(x, y))) {
+            rec.changeState(new MapTileCastSpellPossibleState());
+        }
+
+    }
+
+    private void prepareTile(int x, int y, MapTile rec) {
+
+        gameEngine.addObserver(AFTER_MOVE, rec);
+        gameEngine.addObserver(AFTER_ATTACK, rec);
+        Creature c = gameEngine.get(x, y);
+        if (c != null) {
+            if (c == gameEngine.getActiveCreature()) {
+                rec.changeState(new MapTileActiveCreatureState());
+
+            } else if (gameEngine.canAttack(x, y)) {
+                final int x1 = x;
+                final int y1 = y;
+                rec.changeState(new MapTileAttackPossibleState());
+                rec.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.attack(x1, y1));
+            }
+        } else if (gameEngine.canMove(x, y)) {
+            final int x1 = x;
+            final int y1 = y;
+            rec.changeState(new MapTileMovePossibleState());
+            rec.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> gameEngine.move(new Point(x1, y1)));
         }
     }
 
     void prepareToCastSpell(AbstractSpell aChosenSpell) {
-        refreshGui();
+        refreshGui(aChosenSpell);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
-        refreshGui();
+        refreshGui(null);
     }
 }
 

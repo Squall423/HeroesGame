@@ -29,13 +29,14 @@ class MapTile extends StackPane implements PropertyChangeListener {
     public MapTile() {
         rec = new Rectangle(40, 40);
         rec.setStroke(Color.BLACK);
-        state = new MapTileDefaultState(this);
+        state = new MapTileDefaultState();
         handleState();
         getChildren().add(rec);
     }
 
-    void changeState(MapTileState aState) {
+     void changeState(MapTileState aState) {
         state = aState;
+        handleState();
     }
 
     String getState() {
@@ -79,12 +80,11 @@ class MapTile extends StackPane implements PropertyChangeListener {
     }
 
     private void afterAttack() {
-        changeState(new MapTileAfterAttackState(this));
-        handleState();
+        changeState(new MapTileAfterAttackState());
+
     }
 
     private void afterMove() {
-        changeState(new MapTileAfterMoveState(this));
-        handleState();
+        changeState(new MapTileAfterMoveState());
     }
 }

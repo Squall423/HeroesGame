@@ -3,19 +3,18 @@ package pl.sdk.gui;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class MapTileMovePossibleState extends MapTileState {
-
-    private static final String AFTER_MOVE = "Move Possible";
+public class MapTileCastSpellPossibleState extends MapTileState {
+    private static final String STATE_NAME = "Can cast spell";
 
 
 
     @Override
     void updateBackground(Rectangle aRec) {
-        aRec.setFill(Color.GRAY);
+        aRec.setFill(Color.BLUE);
     }
 
     @Override
     String currentState() {
-        return AFTER_MOVE;
+        return STATE_NAME;
     }
 }

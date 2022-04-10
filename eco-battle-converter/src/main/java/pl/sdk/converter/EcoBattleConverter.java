@@ -53,7 +53,7 @@ public class EcoBattleConverter {
                 .map(es -> SpellFactory.create(es.getName(),es, aPlayer1.getPower(), masteries))
                 .collect(Collectors.toList());
 
-        //Economy spells shop not done yet. You have to remove the second argument for battle gui.
-        return new Hero(creatures, new SpellBook(aPlayer1.getWisdom(), spells));
+        //Economy spells shop not done yet. You have to add the second argument for battle gui.
+        return new Hero(creatures);
     }
 }
