@@ -2,6 +2,7 @@ package pl.sdk.hero;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.sdk.Fraction;
 import pl.sdk.creatures.EconomyTestFractionFactory;
 
 import java.util.Random;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static pl.sdk.hero.Fraction.NECROPOLIS;
+import static pl.sdk.Fraction.NECROPOLIS;
 
 public class BuyingCreatureTest {
 

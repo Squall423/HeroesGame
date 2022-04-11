@@ -10,8 +10,8 @@ public abstract class AbstractSpell {
     protected final String name;
 
 
-    AbstractSpell( String aName, int aManaCost, SpellsStatistic.TargetType aTargetType,
-                   SpellsStatistic.SpellElement aElement) {
+    AbstractSpell(String aName, int aManaCost, SpellsStatistic.TargetType aTargetType,
+                  SpellsStatistic.SpellElement aElement) {
         name = aName;
         manaCost = aManaCost;
         targetType = aTargetType;
@@ -32,6 +32,6 @@ public abstract class AbstractSpell {
 
     public abstract int getSplashRange();
 
-    public void cast(Creature aT) {};
+    public abstract void cast(Creature aCreature);
 }
 

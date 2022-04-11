@@ -124,6 +124,7 @@ public class GameEngine {
     public Creature getActiveCreature() {
         return queue.getActiveCreature();
     }
+
     public Hero getActiveHero() {
         return queue.getActiveHero();
     }
@@ -150,16 +151,25 @@ public class GameEngine {
 
     public boolean canCastSpell() {
         return queue.getActiveHero().canCastSpell();
+
     }
 
-    public boolean canCastSpell(AbstractSpell aSpell) {return queue.getActiveHero().canCastSpell();
+    public boolean canCastSpell(AbstractSpell aSpell) {
+        return queue.getActiveHero().canCastSpell();
     }
+
     public boolean canCastSpell(AbstractSpell aSpell, Point aPoint) {
-      SpellSplashCalculator calc = new SpellSplashCalculator();
-     return calc.canCast(aSpell,aPoint,this,board);
+        SpellSplashCalculator calc = new SpellSplashCalculator();
+        return calc.canCast(aSpell, aPoint, this, board);
+
     }
 
-    void cast(AbstractSpell aSpell, Point aTargetPoint) {
+    public void castSpell(AbstractSpell aSpell, Point aPoint) {
+        queue.getActiveHero().castSpell(aSpell);
+        aSpell.cast(board.get(aPoint));
+    }
+
+    public void cast(AbstractSpell aSpell, Point aTargetPoint) {
         queue.getActiveHero().castSpell(aSpell);
         SpellSplashCalculator spellSplashCalculator = new SpellSplashCalculator();
         List<Creature> creatures = (spellSplashCalculator.calc(aSpell, board, aTargetPoint, this))

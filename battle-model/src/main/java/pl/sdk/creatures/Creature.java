@@ -3,7 +3,6 @@ package pl.sdk.creatures;
 import com.google.common.collect.Range;
 
 import java.beans.PropertyChangeEvent;
-
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -73,6 +72,10 @@ public class Creature implements PropertyChangeListener {
                 }
             }
         }
+    }
+
+    public void applyMagicDamage(int aDamage) {
+        applyDamage(aDamage);
     }
 
     public boolean isAlive() {

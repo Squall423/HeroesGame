@@ -54,6 +54,6 @@ public class EcoBattleConverter {
                 .collect(Collectors.toList());
 
         //Economy spells shop not done yet. You have to add the second argument for battle gui.
-        return new Hero(creatures);
+        return new Hero(creatures,new SpellBook(aPlayer1.getWisdom(), spells));
     }
 }

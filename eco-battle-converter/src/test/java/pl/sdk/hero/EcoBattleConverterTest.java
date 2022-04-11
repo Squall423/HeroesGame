@@ -1,6 +1,7 @@
 package pl.sdk.hero;
 
 import org.junit.jupiter.api.Test;
+import pl.sdk.Fraction;
 import pl.sdk.SpellsStatistic;
 import pl.sdk.converter.EcoBattleConverter;
 import pl.sdk.creatures.Creature;
@@ -11,7 +12,7 @@ import pl.sdk.spells.EconomySpell;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static pl.sdk.hero.Fraction.NECROPOLIS;
+import static pl.sdk.Fraction.NECROPOLIS;
 
 class EcoBattleConverterTest {
 

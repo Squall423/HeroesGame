@@ -1,6 +1,7 @@
 package pl.sdk.spells;
 
 import pl.sdk.SpellsStatistic;
+import pl.sdk.creatures.Creature;
 
 public class DamageSpell extends AbstractSpell {
 
@@ -17,6 +18,11 @@ public class DamageSpell extends AbstractSpell {
 
     public int getDamage() {
         return damage;
+    }
+
+    @Override
+    public void cast(Creature aCreature) {
+        aCreature.applyMagicDamage(damage);
     }
 
     @Override

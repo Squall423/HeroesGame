@@ -5,7 +5,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import pl.sdk.hero.Fraction;
+import pl.sdk.Fraction;
 import pl.sdk.hero.Player;
 
 public class EconomyStart extends Application {
