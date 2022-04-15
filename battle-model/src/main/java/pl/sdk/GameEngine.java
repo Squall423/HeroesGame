@@ -164,12 +164,12 @@ public class GameEngine {
 
     }
 
-    public void castSpell(AbstractSpell aSpell, Point aPoint) {
-        queue.getActiveHero().castSpell(aSpell);
-        aSpell.cast(board.get(aPoint));
-    }
+//    public void castSpell(AbstractSpell aSpell, Point aPoint) {
+//        queue.getActiveHero().castSpell(aSpell);
+//        aSpell.cast(board.get(aPoint));
+//    }
 
-    public void cast(AbstractSpell aSpell, Point aTargetPoint) {
+    public void castSpell(AbstractSpell aSpell, Point aTargetPoint) {
         queue.getActiveHero().castSpell(aSpell);
         SpellSplashCalculator spellSplashCalculator = new SpellSplashCalculator();
         List<Creature> creatures = (spellSplashCalculator.calc(aSpell, board, aTargetPoint, this))

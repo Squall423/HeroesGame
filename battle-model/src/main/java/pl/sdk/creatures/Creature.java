@@ -10,12 +10,13 @@ import java.util.Set;
 
 
 public class Creature implements PropertyChangeListener {
-
     private final CreatureStatisticIf stats;
+
     private int currentHp;
     private boolean counterAttackedInThisTurn;
     private CalculateDamageStrategy calculateDamageStrategy;
     private int amount;
+    private DefaultMagicDamageApplier magicDamageApplier;
 
     //Mockito constructor
     Creature() {
@@ -75,7 +76,7 @@ public class Creature implements PropertyChangeListener {
     }
 
     public void applyMagicDamage(int aDamage) {
-        applyDamage(aDamage);
+        applyDamage(magicDamageApplier.reduceDamage(aDamage));
     }
 
     public boolean isAlive() {
@@ -117,6 +118,10 @@ public class Creature implements PropertyChangeListener {
 
     public int getAmount() {
         return amount;
+    }
+
+    DefaultMagicDamageApplier getMagicDamageApplier() {
+        return magicDamageApplier;
     }
 
     public String currentHealth() {
@@ -202,6 +207,7 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
+    //TODO refactor
     static class BuilderForTesting {
         private String name;
         private Integer attack;
@@ -211,6 +217,7 @@ public class Creature implements PropertyChangeListener {
         private Range<Integer> damage;
         private CalculateDamageStrategy damageCalculator;
         private Integer amount;
+        private DefaultMagicDamageApplier magicDamageApplier;
 
         public BuilderForTesting name(String aName) {
             this.name = aName;
@@ -252,6 +259,11 @@ public class Creature implements PropertyChangeListener {
             return this;
         }
 
+        public BuilderForTesting magicDamageApplier(DefaultMagicDamageApplier magicDamageApplier) {
+            this.magicDamageApplier = magicDamageApplier;
+            return this;
+        }
+
         public Creature build() {
             Set<String> emptyFields = new HashSet<>();
             if (name == null) {
@@ -289,6 +301,11 @@ public class Creature implements PropertyChangeListener {
                 ret.calculateDamageStrategy = damageCalculator;
             } else {
                 ret.calculateDamageStrategy = new DefaultCalculateStrategy();
+            }
+            if (magicDamageApplier != null) {
+                ret.magicDamageApplier = magicDamageApplier;
+            } else {
+                ret.magicDamageApplier = new DefaultMagicDamageApplier();
             }
             return ret;
         }
