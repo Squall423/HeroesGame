@@ -16,6 +16,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.*;
+import static pl.sdk.creatures.TestingFactory.FOR_DAMAGE_MAGIC_SPELL;
 import static pl.sdk.creatures.TestingFactory.FOR_MAGIC_RESISTANCE;
 
 
@@ -26,8 +27,6 @@ class DamageSpellTest {
     @BeforeEach
     void init() {
         cretureFactory = new EconomyTestFractionFactory();
-        creatureForTesting = prepareCreatureWith1KHP();
-
     }
 
     @Test
@@ -35,6 +34,9 @@ class DamageSpellTest {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.MAGIC_ARROW);
         DamageSpell spell = (DamageSpell) new DamageSpellFactory()
                 .createInner("Magic Arrow", toCovert, 1, new SpellMasteries());
+
+        creatureForTesting = AbstractFractionFactory.getInstance(Fraction.TEST_FRACTION)
+                .create(true, FOR_DAMAGE_MAGIC_SPELL, 5);
 
         spell.cast(creatureForTesting);
 
@@ -100,9 +102,4 @@ class DamageSpellTest {
 
     }
 
-
-    // -----------------------------------------------------------------
-    private Creature prepareCreatureWith1KHP() {
-        return AbstractFractionFactory.getInstance(Fraction.TEST_FRACTION).create(true, 6, 5);
-    }
 }

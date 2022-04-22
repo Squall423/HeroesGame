@@ -10,6 +10,7 @@ import java.util.Set;
 
 
 public class Creature implements PropertyChangeListener {
+
     private final CreatureStatisticIf stats;
 
     private int currentHp;
@@ -21,11 +22,13 @@ public class Creature implements PropertyChangeListener {
     //Mockito constructor
     Creature() {
         stats = CreatureStatistic.TEST;
+        magicDamageApplier = new DefaultMagicDamageApplier();
     }
 
     Creature(CreatureStatisticIf aStats) {
         stats = aStats;
         currentHp = stats.getMaxHp();
+        magicDamageApplier = new DefaultMagicDamageApplier();
     }
 
     public void attack(Creature aDefender) {
@@ -161,6 +164,7 @@ public class Creature implements PropertyChangeListener {
         private CreatureStatisticIf stats;
         private CalculateDamageStrategy damageCalculator;
         private Integer amount;
+        private DefaultMagicDamageApplier magicDamageApplier;
 
         Builder statistic(CreatureStatisticIf aStats) {
             this.stats = aStats;
@@ -198,6 +202,11 @@ public class Creature implements PropertyChangeListener {
                 ret.calculateDamageStrategy = damageCalculator;
             } else {
                 ret.calculateDamageStrategy = new DefaultCalculateStrategy();
+            }
+            if (magicDamageApplier != null) {
+                ret.magicDamageApplier = magicDamageApplier;
+            } else {
+                ret.magicDamageApplier = new DefaultMagicDamageApplier();
             }
             return ret;
         }

@@ -164,10 +164,7 @@ public class GameEngine {
 
     }
 
-//    public void castSpell(AbstractSpell aSpell, Point aPoint) {
-//        queue.getActiveHero().castSpell(aSpell);
-//        aSpell.cast(board.get(aPoint));
-//    }
+
 
     public void castSpell(AbstractSpell aSpell, Point aTargetPoint) {
         queue.getActiveHero().castSpell(aSpell);
