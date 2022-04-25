@@ -1,9 +1,9 @@
 package pl.sdk.spells;
 
-public class BuffStatistic {
+public class BuffOrDebuffStatistic {
     private int moveRange;
 
-    BuffStatistic(int aMoveRange) {
+    BuffOrDebuffStatistic(int aMoveRange) {
         moveRange = aMoveRange;
     }
 

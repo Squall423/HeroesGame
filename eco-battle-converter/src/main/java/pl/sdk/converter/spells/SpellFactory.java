@@ -15,9 +15,7 @@ public abstract class SpellFactory {
             case DAMAGE:
                 return new DamageSpellFactory().createInner(aName,aEs, aHeroPower, aMasteries);
             case BUFF:
-                return new BuffSpellFactory().createInner(aName,aEs, aHeroPower, aMasteries);
-            case DEBUFF:
-                return new DebuffSpellFactory().createInner(aName, aEs, aHeroPower, aMasteries);
+                return new BuffOrDebuffSpellFactory().createInner(aName,aEs, aHeroPower, aMasteries);
             case SUMMON:
                 return new SummonSpellFactory().createInner(aName, aEs, aHeroPower, aMasteries);
             case SPECIAL:

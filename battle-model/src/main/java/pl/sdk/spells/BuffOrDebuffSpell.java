@@ -3,13 +3,15 @@ package pl.sdk.spells;
 import pl.sdk.SpellsStatistic;
 import pl.sdk.creatures.Creature;
 
-public class BuffSpell extends AbstractSpell {
+public class BuffOrDebuffSpell extends AbstractSpell {
 
     private final int duration;
+    private BuffOrDebuffStatistic buffStats;
 
 
-    public BuffSpell(String aName, int aManaCost, int aDuration, SpellsStatistic.SpellElement aElement) {
-        super(aName, aManaCost, SpellsStatistic.TargetType.ALLY, aElement);
+    public BuffOrDebuffSpell(String aName, int aManaCost, int aDuration,
+                             SpellsStatistic.TargetType aTarget, SpellsStatistic.SpellElement aElement) {
+        super(aName, aManaCost, aTarget, aElement);
         duration = aDuration;
 
     }
@@ -26,8 +28,7 @@ public class BuffSpell extends AbstractSpell {
 
     @Override
     public void cast(Creature aCreature) {
-        BuffStatistic hasteStats = new BuffStatistic(3);
-        aCreature.buff(hasteStats);
+        aCreature.buff(buffStats);
     }
 
 
