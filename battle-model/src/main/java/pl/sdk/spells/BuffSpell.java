@@ -26,7 +26,8 @@ public class BuffSpell extends AbstractSpell {
 
     @Override
     public void cast(Creature aCreature) {
-
+        BuffStatistic hasteStats = new BuffStatistic(3);
+        aCreature.buff(hasteStats);
     }
 
 
