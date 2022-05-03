@@ -11,19 +11,19 @@ class DamageSpellFactory extends SpellFactory {
     private String DONT_RECOGNIZE_SPELL = "Cannot recognize spell";
     private String DONT_RECOGNIZE_MASTERY = "Cannot recognize mastery";
 
-    public AbstractSpell createInner(String aName, EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
+    public AbstractSpell createInner(EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
         switch (aEs.getSpellStatistic()) {
             case FIRE_BALL:
                 switch (aMasteries.getFire()) {
                     case BASIC:
-                        return new SingleTargetDamageSpell(aName,15, SpellsStatistic.TargetType.MAP, aEs.getElement(),
+                        return new SingleTargetDamageSpell(aEs.getName(),15, SpellsStatistic.TargetType.MAP, aEs.getElement(),
                                 aHeroPower * 10 + 15, 3);
                     case ADVANCED:
-                        return new SingleTargetDamageSpell(aName,15, SpellsStatistic.TargetType.MAP, aEs.getElement(),
+                        return new SingleTargetDamageSpell(aEs.getName(),15, SpellsStatistic.TargetType.MAP, aEs.getElement(),
                                 aHeroPower * 10 + 30, 3);
 
                     case MASTER:
-                        return new SingleTargetDamageSpell(aName,15, SpellsStatistic.TargetType.MAP, aEs.getElement(),
+                        return new SingleTargetDamageSpell(aEs.getName(),15, SpellsStatistic.TargetType.MAP, aEs.getElement(),
                                 aHeroPower * 10 + 60, 3);
                     default:
 
@@ -33,16 +33,16 @@ class DamageSpellFactory extends SpellFactory {
             case IMPLOSION:
                 switch (aMasteries.getFire()) {
                     case BASIC:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
                                 aEs.getElement(),
                                 aHeroPower * 75 + 100, 0);
                     case ADVANCED:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
                                 aEs.getElement(),
                                 aHeroPower * 75 + 200, 0);
 
                     case MASTER:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
                                 aEs.getElement(),
                                 aHeroPower * 75 + 300, 0);
                     default:
@@ -52,16 +52,16 @@ class DamageSpellFactory extends SpellFactory {
             case MAGIC_ARROW:
                 switch (aMasteries.findMaxLevel()) {
                     case BASIC:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
                                 aEs.getElement(),
                                 aHeroPower * 10 + 10, 3);
                     case ADVANCED:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
                                 aEs.getElement(),
                                 aHeroPower * 10 + 10, 3);
 
                     case MASTER:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ENEMY,
                                 aEs.getElement(),
                                 aHeroPower * 10 + 10, 3);
                     default:
@@ -71,14 +71,14 @@ class DamageSpellFactory extends SpellFactory {
             case DEATH_RIPPLE:
                 switch (aMasteries.getFire()) {
                     case BASIC:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ALL,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ALL,
                                 aEs.getElement(), aHeroPower * 5 + 10, 0);
                     case ADVANCED:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ALL,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ALL,
                                 aEs.getElement(), aHeroPower * 5 + 10, 0);
 
                     case MASTER:
-                        return new SingleTargetDamageSpell(aName,aEs.getManaCost(), SpellsStatistic.TargetType.ALL,
+                        return new SingleTargetDamageSpell(aEs.getName(),aEs.getManaCost(), SpellsStatistic.TargetType.ALL,
                                 aEs.getElement(), aHeroPower * 5 + 10, 0);
                     default:
                         throw new UnsupportedOperationException(DONT_RECOGNIZE_MASTERY);

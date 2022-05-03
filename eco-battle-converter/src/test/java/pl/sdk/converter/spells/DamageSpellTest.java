@@ -33,7 +33,7 @@ class DamageSpellTest {
     void spellShouldDeal20Damage() {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.MAGIC_ARROW);
         DamageSpell spell = (DamageSpell) new DamageSpellFactory()
-                .createInner("Magic Arrow", toCovert, 1, new SpellMasteries());
+                .createInner( toCovert, 1, new SpellMasteries());
 
         creatureForTesting = AbstractFractionFactory.getInstance(Fraction.TEST_FRACTION)
                 .create(true, FOR_DAMAGE_MAGIC_SPELL, 5);
@@ -48,7 +48,7 @@ class DamageSpellTest {
     void spellShouldDeal10DamageBecauseHas50PercentResistance() {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.MAGIC_ARROW);
         DamageSpell spell = (DamageSpell) new DamageSpellFactory()
-                .createInner("Magic Arrow", toCovert, 1, new SpellMasteries());
+                .createInner( toCovert, 1, new SpellMasteries());
         creatureForTesting = AbstractFractionFactory.getInstance(Fraction.TEST_FRACTION)
                 .create(true, FOR_MAGIC_RESISTANCE, 5);
 
@@ -68,7 +68,7 @@ class DamageSpellTest {
 
         GameEngine engine = new GameEngine(new Hero(List.of(c1, c2, c3, c4)), new Hero(new ArrayList<>()));
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.FIRE_BALL);
-        DamageSpell spell = (DamageSpell) new DamageSpellFactory().createInner("Fire Ball", toCovert, 1,
+        DamageSpell spell = (DamageSpell) new DamageSpellFactory().createInner( toCovert, 1,
                 new SpellMasteries());
 
         engine.castSpell(spell, new Point(0, 3));
@@ -90,7 +90,7 @@ class DamageSpellTest {
 
         GameEngine engine = new GameEngine(new Hero(List.of(c1, c2, c3, c4)), new Hero(new ArrayList<>()));
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.FIRE_BALL);
-        DamageSpell spell = (DamageSpell) new DamageSpellFactory().createInner("Fire Ball", toCovert, 1,
+        DamageSpell spell = (DamageSpell) new DamageSpellFactory().createInner(toCovert, 1,
                 new SpellMasteries());
 
         engine.castSpell(spell, new Point(2, 2));

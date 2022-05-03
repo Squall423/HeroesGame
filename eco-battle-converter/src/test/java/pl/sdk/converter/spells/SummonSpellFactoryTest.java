@@ -14,7 +14,7 @@ class SummonSpellFactoryTest {
     void shouldConvertSlowSpellsCorrectly() {
         EconomySpell toCovert = new EconomySpell(SpellsStatistic.SUMMON_AIR_ELEMENTAL);
         SpellMasteries masteries = new SpellMasteries();
-        SummonSpell spell = (SummonSpell) new SummonSpellFactory().createInner(toCovert.getName(), toCovert, 1,
+        SummonSpell spell = (SummonSpell) new SummonSpellFactory().createInner( toCovert, 1,
                 masteries);
 
         assertEquals(0, spell.getDuration());

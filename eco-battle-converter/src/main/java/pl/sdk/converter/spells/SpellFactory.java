@@ -10,16 +10,18 @@ public abstract class SpellFactory {
     private static String DONT_RECOGNIZE_TYPE = "Cannot recognize type: ";
 
 //TODO aName for refactor
-    public static AbstractSpell create(String aName, EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
+    public static AbstractSpell create(EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
         switch (aEs.getSpellType()) {
             case DAMAGE:
-                return new DamageSpellFactory().createInner(aName,aEs, aHeroPower, aMasteries);
+                return new DamageSpellFactory().createInner(aEs, aHeroPower, aMasteries);
             case BUFF:
-                return new BuffOrDebuffSpellFactory().createInner(aName,aEs, aHeroPower, aMasteries);
+                return new BuffOrDebuffSpellFactory().createInner(aEs, aHeroPower, aMasteries);
+            case DEBUFF:
+                return new BuffOrDebuffSpellFactory().createInner(aEs, aHeroPower, aMasteries);
             case SUMMON:
-                return new SummonSpellFactory().createInner(aName, aEs, aHeroPower, aMasteries);
+                return new SummonSpellFactory().createInner( aEs, aHeroPower, aMasteries);
             case SPECIAL:
-                return new SpecialSpellFactory().createInner(aName, aEs, aHeroPower, aMasteries);
+                return new SpecialSpellFactory().createInner( aEs, aHeroPower, aMasteries);
             case MAP_CHANGE:
                 throw new UnsupportedOperationException(NOT_IMPLEMENTED + aEs.getSpellType());
             default:
@@ -27,7 +29,7 @@ public abstract class SpellFactory {
         }
     }
 
-    public abstract AbstractSpell createInner(String aName, EconomySpell aEs, int aHeroPower,
+    public abstract AbstractSpell createInner( EconomySpell aEs, int aHeroPower,
                                               SpellMasteries aMasteries);
 
 }

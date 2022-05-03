@@ -9,7 +9,6 @@ import pl.sdk.converter.spells.SpellFactory;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
 import pl.sdk.gui.BattleMapController;
-import pl.sdk.hero.EconomyHero;
 import pl.sdk.hero.Player;
 import pl.sdk.spells.AbstractSpell;
 
@@ -50,7 +49,7 @@ public class EcoBattleConverter {
         SpellMasteries masteries = new SpellMasteries(BASIC, BASIC, BASIC, BASIC);
 
         List<AbstractSpell> spells = aPlayer1.getSpells().stream()
-                .map(es -> SpellFactory.create(es.getName(),es, aPlayer1.getPower(), masteries))
+                .map(es -> SpellFactory.create(es, aPlayer1.getPower(), masteries))
                 .collect(Collectors.toList());
 
         //Economy spells shop not done yet. You have to add the second argument for battle gui.
