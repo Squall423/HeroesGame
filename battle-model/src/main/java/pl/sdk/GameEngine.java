@@ -165,7 +165,6 @@ public class GameEngine {
     }
 
 
-
     public void castSpell(AbstractSpell aSpell, Point aTargetPoint) {
         queue.getActiveHero().castSpell(aSpell);
         SpellSplashCalculator spellSplashCalculator = new SpellSplashCalculator();

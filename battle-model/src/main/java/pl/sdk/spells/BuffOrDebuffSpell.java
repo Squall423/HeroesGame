@@ -10,9 +10,11 @@ public class BuffOrDebuffSpell extends AbstractSpell {
 
 
     public BuffOrDebuffSpell(String aName, int aManaCost, int aDuration,
-                             SpellsStatistic.TargetType aTarget, SpellsStatistic.SpellElement aElement) {
+                             SpellsStatistic.TargetType aTarget, SpellsStatistic.SpellElement aElement,
+                             BuffOrDebuffStatistic aBuffStats) {
         super(aName, aManaCost, aTarget, aElement);
         duration = aDuration;
+        buffStats = aBuffStats;
 
     }
 

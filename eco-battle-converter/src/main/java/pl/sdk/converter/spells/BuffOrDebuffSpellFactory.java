@@ -4,38 +4,48 @@ import pl.sdk.SpellsStatistic;
 import pl.sdk.converter.SpellMasteries;
 import pl.sdk.spells.AbstractSpell;
 import pl.sdk.spells.BuffOrDebuffSpell;
+import pl.sdk.spells.BuffOrDebuffStatistic;
 import pl.sdk.spells.EconomySpell;
 
 class BuffOrDebuffSpellFactory extends SpellFactory {
 
+
     @Override
     public AbstractSpell createInner(String aName, EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
         switch (aEs.getSpellStatistic()) {
+
             case HASTE:
+                BuffOrDebuffStatistic stats;
                 switch (aMasteries.getAir()) {
                     case BASIC:
-                        return new BuffOrDebuffSpell(aName, aEs.getManaCost(), aHeroPower,
-                                SpellsStatistic.TargetType.ALLY, aEs.getElement());
+                        stats = BuffOrDebuffStatistic.builder().moveRange(3).build();
+                        return new BuffOrDebuffSpell(aEs.getName(), aEs.getManaCost(), aHeroPower,
+                                SpellsStatistic.TargetType.ALLY, aEs.getElement(), stats);
                     case ADVANCED:
-                        return new BuffOrDebuffSpell(aName, aEs.getManaCost(), aHeroPower,
-                                SpellsStatistic.TargetType.ALLY, aEs.getElement());
+                        stats = BuffOrDebuffStatistic.builder().moveRange(5).build();
+                        return new BuffOrDebuffSpell(aEs.getName(), aEs.getManaCost(), aHeroPower,
+                                SpellsStatistic.TargetType.ALLY, aEs.getElement(), stats);
                     case MASTER:
-                        return new BuffOrDebuffSpell(aName, aEs.getManaCost(), aHeroPower,
-                                SpellsStatistic.TargetType.ALLY, aEs.getElement());
+                        stats = BuffOrDebuffStatistic.builder().moveRange(5).build();
+                        return new BuffOrDebuffSpell(aEs.getName(), aEs.getManaCost(), aHeroPower,
+                                SpellsStatistic.TargetType.ALLY, aEs.getElement(), stats);
                     default:
                         throw new UnsupportedOperationException("Cannot recognize spell");
                 }
             case SLOW:
                 switch (aMasteries.getEarth()) {
                     case BASIC:
-                        return new BuffOrDebuffSpell(aName, aEs.getManaCost(), aHeroPower,
-                                SpellsStatistic.TargetType.ENEMY, aEs.getElement());
+                        stats = BuffOrDebuffStatistic.builder().moveRangePercentage(-0.25).build();
+                        return new BuffOrDebuffSpell(aEs.getName(), aEs.getManaCost(), aHeroPower,
+                                SpellsStatistic.TargetType.ENEMY, aEs.getElement(), stats);
                     case ADVANCED:
-                        return new BuffOrDebuffSpell(aName, aEs.getManaCost(), aHeroPower,
-                                SpellsStatistic.TargetType.ENEMY, aEs.getElement());
+                        stats = BuffOrDebuffStatistic.builder().moveRangePercentage(-0.5).build();
+                        return new BuffOrDebuffSpell(aEs.getName(), aEs.getManaCost(), aHeroPower,
+                                SpellsStatistic.TargetType.ENEMY, aEs.getElement(), stats);
                     case MASTER:
-                        return new BuffOrDebuffSpell(aName, aEs.getManaCost(), aHeroPower,
-                                SpellsStatistic.TargetType.ENEMY, aEs.getElement());
+                        stats = BuffOrDebuffStatistic.builder().moveRangePercentage(-0.5).build();
+                        return new BuffOrDebuffSpell(aEs.getName(), aEs.getManaCost(), aHeroPower,
+                                SpellsStatistic.TargetType.ENEMY, aEs.getElement(), stats);
                     default:
                         throw new UnsupportedOperationException("Cannot recognize spell");
                 }

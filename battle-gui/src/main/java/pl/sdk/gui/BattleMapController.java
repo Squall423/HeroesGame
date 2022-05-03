@@ -4,10 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import pl.sdk.GameEngine;
-import pl.sdk.Hero;
-import pl.sdk.Point;
-import pl.sdk.SpellBook;
+import pl.sdk.*;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
 import pl.sdk.spells.AbstractSpell;
@@ -32,6 +29,7 @@ public class BattleMapController implements PropertyChangeListener {
     private Button spellBookButton;
 
     private final GameEngine gameEngine;
+
     private SpellBook spellBook;
 
     public BattleMapController() {
@@ -73,8 +71,13 @@ public class BattleMapController implements PropertyChangeListener {
     }
 
     private void refreshGui(AbstractSpell aSpellToCast) {
-        spellBookButton.setDisable(!gameEngine.canCastSpell());
 
+        gridMap.getChildren().clear();
+        spellBookButton.setDisable(!gameEngine.canCastSpell());
+//TODO
+//        if (aSpellToCast != null && aSpellToCast.getTargetType().equals(SpellsStatistic.TargetType.ALL_ALLIES)) {
+//            gameEngine.castSpell(aspellToCast);
+//        }
         for (int x = 0; x < 20; x++) {
             for (int y = 0; y < 15; y++) {
                 MapTile rec = new MapTile();
@@ -84,7 +87,7 @@ public class BattleMapController implements PropertyChangeListener {
                     boolean shouldFlip = gameEngine.isHeroTwoGotCreature(c);
                     rec.addCreature(c.getName(), c.getAmount(), shouldFlip);
                 }
-                if (aSpellToCast == null) {
+                if (aSpellToCast == null || aSpellToCast.getTargetType().equals(SpellsStatistic.TargetType.ALL_ALLIES)) {
                     prepareTile(x, y, rec);
                 } else {
                     prepareTileWithSpells(x, y, rec, aSpellToCast);
