@@ -9,13 +9,12 @@ import pl.sdk.spells.EconomySpell;
 
 class BuffOrDebuffSpellFactory extends SpellFactory {
 
+    private BuffOrDebuffStatistic stats;
 
     @Override
     public AbstractSpell createInner(EconomySpell aEs, int aHeroPower, SpellMasteries aMasteries) {
         switch (aEs.getSpellStatistic()) {
-
             case HASTE:
-                BuffOrDebuffStatistic stats;
                 switch (aMasteries.getAir()) {
                     case BASIC:
                         stats = BuffOrDebuffStatistic.builder().moveRange(3).build();

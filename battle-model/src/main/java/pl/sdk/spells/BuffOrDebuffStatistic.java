@@ -3,9 +3,11 @@ package pl.sdk.spells;
 import com.google.common.collect.Range;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 
 @Builder
 @AllArgsConstructor
+@Getter
 public class BuffOrDebuffStatistic {
     private int moveRange;
     private int attack;

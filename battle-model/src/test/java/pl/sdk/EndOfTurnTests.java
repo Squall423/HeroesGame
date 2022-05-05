@@ -8,9 +8,8 @@ import java.beans.PropertyChangeEvent;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.verify;
+import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.Mockito.*;
 
 class EndOfTurnTests {
 
@@ -34,11 +33,11 @@ class EndOfTurnTests {
     void shouldCallPropertyChangeAfterEndOfTurn() {
         Creature attacker = spy(Creature.class);
         Creature defender = NecropolisFactory.createDefaultForTests();
-        GameEngine engine = new GameEngine(new Hero(List.of(attacker) ), new Hero(List.of(defender) ));
+        GameEngine engine = new GameEngine(new Hero(List.of(attacker)), new Hero(List.of(defender)));
 
         engine.pass();
         engine.pass();
-        verify(attacker).propertyChange(any(PropertyChangeEvent.class));
+        verify(attacker, atLeast(2)).propertyChange(any(PropertyChangeEvent.class));
 
     }
 }

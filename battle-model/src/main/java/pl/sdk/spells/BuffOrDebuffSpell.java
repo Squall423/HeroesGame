@@ -15,7 +15,6 @@ public class BuffOrDebuffSpell extends AbstractSpell {
         super(aName, aManaCost, aTarget, aElement);
         duration = aDuration;
         buffStats = aBuffStats;
-
     }
 
     public int getDuration() {
@@ -30,8 +29,12 @@ public class BuffOrDebuffSpell extends AbstractSpell {
 
     @Override
     public void cast(Creature aCreature) {
-        aCreature.buff(buffStats);
+        aCreature.buff(this);
+
     }
 
 
+    public BuffOrDebuffStatistic getBuffStats() {
+        return buffStats;
+    }
 }

@@ -1,6 +1,7 @@
 package pl.sdk.creatures;
 
 import com.google.common.collect.Range;
+import pl.sdk.spells.BuffOrDebuffSpell;
 import pl.sdk.spells.BuffOrDebuffStatistic;
 
 import java.beans.PropertyChangeEvent;
@@ -13,7 +14,7 @@ import java.util.Set;
 public class Creature implements PropertyChangeListener {
 
     private final CreatureStatisticIf stats;
-    private Set<BuffOrDebuffStatistic> buffsAndDebuffs;
+    private BuffContainer buffContainer;
 
     private int currentHp;
     private boolean counterAttackedInThisTurn;
@@ -25,14 +26,14 @@ public class Creature implements PropertyChangeListener {
     Creature() {
         stats = CreatureStatistic.TEST;
         magicDamageApplier = new DefaultMagicDamageApplier();
-        buffsAndDebuffs = new HashSet<>();
+        buffContainer = new BuffContainer();
     }
 
     Creature(CreatureStatisticIf aStats) {
         stats = aStats;
         currentHp = stats.getMaxHp();
         magicDamageApplier = new DefaultMagicDamageApplier();
-        buffsAndDebuffs = new HashSet<>();
+        buffContainer = new BuffContainer();
     }
 
     public void attack(Creature aDefender) {
@@ -107,8 +108,18 @@ public class Creature implements PropertyChangeListener {
     }
 
     public int getMoveRange() {
-        return stats.getMoveRange() + buffsAndDebuffs.stream().mapToInt(BuffOrDebuffStatistic::getMoveRange).sum();
+        int ret = stats.getMoveRange();
+        int percentageBuff = buffContainer.getAllBuffStats().stream()
+                .filter(b -> b.getMoveRangePercentage() != 0.0)
+                .mapToInt(b -> (int) Math.round(ret * (b.getMoveRangePercentage())))
+                .sum();
+        int scalarBuff = buffContainer.getAllBuffStats().stream()
+                        .filter(b -> b.getMoveRange() != 0)
+                        .mapToInt(BuffOrDebuffStatistic::getMoveRange)
+                        .sum();
+        return ret + percentageBuff + scalarBuff;
     }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
@@ -168,14 +179,13 @@ public class Creature implements PropertyChangeListener {
         return ret;
     }
 
-    public void buff(BuffOrDebuffStatistic aHasteStats) {
-        buffsAndDebuffs.add(aHasteStats);
+    public void buff(BuffOrDebuffSpell aBuffOrDebuff) {
+        buffContainer.add(aBuffOrDebuff);
     }
 
-    public void removeBuff(BuffOrDebuffStatistic aBuffSpell) {
-        buffsAndDebuffs.add(aBuffSpell);
+   public BuffContainer getBuffContainer() {
+        return buffContainer;
     }
-
 
     static class Builder {
         private CreatureStatisticIf stats;
