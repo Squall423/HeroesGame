@@ -4,6 +4,7 @@ package pl.sdk.spells;
 import pl.sdk.SpellsStatistic;
 
 public class EconomySpell {
+    private static final int SPELL_GROWTH = 1;
     private final SpellsStatistic spellStats;
     private final int goldCost;
 
@@ -47,5 +48,13 @@ public class EconomySpell {
 
     public SpellsStatistic getSpellStatistic() {
         return spellStats;
+    }
+
+    public int getGoldCost() {
+        return goldCost;
+    }
+
+    public Integer getGrowth() {
+        return SPELL_GROWTH;
     }
 }
