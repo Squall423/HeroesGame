@@ -11,7 +11,7 @@ import java.util.Random;
 
 import static pl.sdk.hero.EconomyEngine.NEXT_ROUND;
 
- class CreatureShop implements PropertyChangeListener {
+ class CreatureShop extends AbstractShop implements PropertyChangeListener {
 
     private CreatureShopCalculator calculator;
     private HashMap<Integer, Integer> creaturePopulation;
@@ -94,7 +94,13 @@ import static pl.sdk.hero.EconomyEngine.NEXT_ROUND;
         }
     }
 
-    private void addPopulation(HashMap<Integer, Integer> aPopulationMap) {
+     @Override
+     protected void handlePopulation() {
+        addPopulation(creaturePopulation);
+
+     }
+
+     private void addPopulation(HashMap<Integer, Integer> aPopulationMap) {
         aPopulationMap.put(1, aPopulationMap.get(1) + calculatePopulation(1));
         aPopulationMap.put(2, aPopulationMap.get(2) + calculatePopulation(2));
         aPopulationMap.put(3, aPopulationMap.get(3) + calculatePopulation(3));

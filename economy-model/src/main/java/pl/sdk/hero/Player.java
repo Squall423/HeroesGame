@@ -5,28 +5,48 @@ import pl.sdk.creatures.EconomyCreature;
 import pl.sdk.spells.EconomySpell;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Player {
 
+
     EconomyHero hero;
     CreatureShop creatureShop;
+    SpellShop spellShop;
+    private List<AbstractShop> shops;
     private int gold;
+    Fraction fraction;
+    private String ALREADY_BOUGHT = "already bought ";
 
     public Player(Fraction aFraction, int aGold) {
-        hero = new EconomyHero();
+        hero = new EconomyHero(new HeroStats(5, 5, 15, 3));
         creatureShop = new CreatureShop(aFraction);
+        spellShop = new SpellShop();
+        shops = List.of(creatureShop, spellShop);
         gold = aGold;
+        fraction = aFraction;
     }
 
     Player(Fraction aFraction, int aGold, EconomyHero aEconomyHero) {
         hero = aEconomyHero;
         creatureShop = new CreatureShop(aFraction);
+        spellShop = new SpellShop();
+        shops = List.of(creatureShop, spellShop);
         gold = aGold;
+        fraction = aFraction;
     }
 
     Player(EconomyHero aHero, CreatureShop aCreatureShop, int aGold) {
         hero = aHero;
         creatureShop = aCreatureShop;
+        shops = List.of(creatureShop);
+        gold = aGold;
+    }
+
+    Player(EconomyHero aHero, SpellShop aSpellShop, int aGold) {
+        hero = aHero;
+        spellShop = aSpellShop;
+        shops = List.of(spellShop);
         gold = aGold;
     }
 
@@ -62,9 +82,18 @@ public class Player {
         return gold;
     }
 
-    public void buy(Player aActivePlayer, EconomyCreature aEconomyCreature) {
+    public void buyCreature(Player aActivePlayer, EconomyCreature aEconomyCreature) {
         creatureShop.buy(aActivePlayer, aEconomyCreature);
     }
+
+    public void buySpell(Player aActivePlayer, EconomySpell aEconomySpell) {
+        if (!hasSpell(aEconomySpell.getName())) {
+            spellShop.buy(aActivePlayer, aEconomySpell);
+        } else {
+            throw new IllegalStateException(ALREADY_BOUGHT);
+        }
+    }
+
 
     public int calculateMaxAmount(EconomyCreature aCreature) {
         return creatureShop.calculateMaxAmount(this, aCreature);
@@ -72,6 +101,10 @@ public class Player {
 
     public int getCurrentPopulation(int aTier) {
         return creatureShop.getCurrentPopulation(aTier);
+    }
+
+    public List<EconomySpell> getCurrentSpellPopulation() {
+        return spellShop.getCurrentSpellPopulation();
     }
 
     void addSpell(EconomySpell aEconomySpell) {
@@ -88,6 +121,14 @@ public class Player {
 
     public int getWisdom() {
         return hero.getWisdom();
+    }
+
+    public boolean hasSpell(String aName) {
+        return getSpells().stream().map(EconomySpell::getName).collect(Collectors.toList()).contains(aName);
+    }
+
+    List<AbstractShop> getShops() {
+        return shops;
     }
 
 }

@@ -1,9 +1,11 @@
 package pl.sdk.hero;
 
 import pl.sdk.creatures.EconomyCreature;
+import pl.sdk.spells.EconomySpell;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.List;
 
 public class EconomyEngine {
     public static final String PLAYER_BOUGHT_CREATURE = "PLAYER_BOUGHT_CREATURE";
@@ -28,14 +30,17 @@ public class EconomyEngine {
 
 
         observerSupport = new PropertyChangeSupport(this);
-        addObserver(EconomyEngine.NEXT_ROUND, player1.getCreatureShop());
-        addObserver(EconomyEngine.NEXT_ROUND, player2.getCreatureShop());
+//        addObserver(EconomyEngine.NEXT_ROUND, player1.getCreatureShop());
+//        addObserver(EconomyEngine.NEXT_ROUND, player2.getCreatureShop());
+
+        player1.getShops().forEach(shop -> addObserver(EconomyEngine.NEXT_ROUND, shop));
+        player2.getShops().forEach(shop -> addObserver(EconomyEngine.NEXT_ROUND, shop));
 
     }
 
 
     public void buy(EconomyCreature aEconomyCreature) {
-        activePlayer.buy(activePlayer, aEconomyCreature);
+        activePlayer.buyCreature(activePlayer, aEconomyCreature);
         observerSupport.firePropertyChange(PLAYER_BOUGHT_CREATURE, null, null);
     }
 
@@ -109,5 +114,17 @@ public class EconomyEngine {
 
     public int getCurrentPopulation(int aTier) {
         return activePlayer.getCurrentPopulation(aTier);
+    }
+
+    public List<EconomySpell> getCurrentSpellPopulation() {
+        return activePlayer.getCurrentSpellPopulation();
+    }
+
+    void buySpell(EconomySpell aEconomySpell) {
+        getActivePlayer().buySpell(activePlayer, aEconomySpell);
+    }
+
+    boolean hasSpell(String aName) {
+        return getActivePlayer().hasSpell(aName);
     }
 }
