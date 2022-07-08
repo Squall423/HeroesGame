@@ -49,6 +49,6 @@ class SpellBookTest {
     void shouldSubtractManaCorrectly() {
         SpellBook spellBook = new SpellBook(10, List.of(SpellFactoryForTests.createMagicArrow()));
         spellBook.cast(SpellFactoryForTests.createMagicArrow());
-        assertEquals(5, spellBook.getMana());
+        assertEquals(5, spellBook.getCurrentMana());
     }
 }

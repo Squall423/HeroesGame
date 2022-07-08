@@ -11,12 +11,14 @@ public class SpellBook implements PropertyChangeListener {
 
     private boolean spellWasCastedInThisTurn;
     private static final String CANNOT_CAST_MORE_SPELLS = "You cannot cast more spells in this turn!";
-    private int mana;
+    private int currentMana;
+    private int maxMana;
     private List<AbstractSpell> spells;
 
 
     public SpellBook(int aMana, List<AbstractSpell> aSpells) {
-        mana = aMana;
+        currentMana = aMana;
+        maxMana = aMana;
         spells = aSpells;
 
     }
@@ -31,7 +33,7 @@ public class SpellBook implements PropertyChangeListener {
             throw new IllegalStateException(CANNOT_CAST_MORE_SPELLS);
         }
         spellWasCastedInThisTurn = true;
-        mana = mana - aSpell.getManaCost();
+        currentMana = currentMana - aSpell.getManaCost();
 
     }
 
@@ -40,7 +42,7 @@ public class SpellBook implements PropertyChangeListener {
     }
 
     public boolean canCastSpell(AbstractSpell aSpell) {
-        return mana >= aSpell.getManaCost();
+        return maxMana >= aSpell.getManaCost();
     }
 
     public void endOfTurn() {
@@ -52,7 +54,12 @@ public class SpellBook implements PropertyChangeListener {
         endOfTurn();
     }
 
-    public int getMana() {
-        return mana;
+
+    public int getCurrentMana() {
+        return currentMana;
+    }
+
+    public int getMaxMana() {
+        return maxMana;
     }
 }

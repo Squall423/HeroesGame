@@ -131,6 +131,13 @@ public class Player {
         return shops;
     }
 
+    public Fraction getFraction() {
+        return fraction;
+    }
+
+    int calculateSpellMaxAmount(EconomySpell aEconomySpell) {
+        return spellShop.calculateMaxAmount(this, aEconomySpell);
+    }
 }
 
 

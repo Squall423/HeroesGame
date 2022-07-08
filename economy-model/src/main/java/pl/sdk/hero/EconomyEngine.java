@@ -44,10 +44,6 @@ public class EconomyEngine {
         observerSupport.firePropertyChange(PLAYER_BOUGHT_CREATURE, null, null);
     }
 
-    public int calculateMaxAmount(EconomyCreature aCreature) {
-        return activePlayer.calculateMaxAmount(aCreature);
-    }
-
     public Player getActivePlayer() {
         return activePlayer;
     }
@@ -64,6 +60,7 @@ public class EconomyEngine {
     }
 
     //Round = 2 passes
+
     private void nextRound() {
         roundNumber += 1;
         if (roundNumber == 4) {
@@ -74,7 +71,6 @@ public class EconomyEngine {
             observerSupport.firePropertyChange(NEXT_ROUND, roundNumber - 1, roundNumber);
         }
     }
-
     private void endTurn() {
         turnNumber += 1;
         roundNumber = 1;
@@ -120,11 +116,19 @@ public class EconomyEngine {
         return activePlayer.getCurrentSpellPopulation();
     }
 
-    void buySpell(EconomySpell aEconomySpell) {
+    public void buySpell(EconomySpell aEconomySpell) {
         getActivePlayer().buySpell(activePlayer, aEconomySpell);
     }
 
-    boolean hasSpell(String aName) {
+    public boolean hasSpell(String aName) {
         return getActivePlayer().hasSpell(aName);
+    }
+
+    public int calculateMaxAmount(EconomyCreature aCreature) {
+        return activePlayer.calculateMaxAmount(aCreature);
+    }
+
+    public int calculateSpellMaxAmount(EconomySpell aEconomySpell) {
+        return activePlayer.calculateSpellMaxAmount(aEconomySpell);
     }
 }

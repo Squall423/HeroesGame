@@ -49,4 +49,11 @@ public class Hero {
         aQueue.addObserver(spellBook);
     }
 
+    public int getCurrentMana() {
+        return spellBook.getCurrentMana();
+    }
+
+    public int  getMaxMana() {
+        return spellBook.getMaxMana();
+    }
 }

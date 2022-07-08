@@ -57,4 +57,8 @@ public class EconomySpell {
     public Integer getGrowth() {
         return SPELL_GROWTH;
     }
+
+    public SpellsStatistic.TargetType getTargetType() {
+        return spellStats.getTargetType();
+    }
 }

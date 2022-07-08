@@ -3,6 +3,8 @@ package pl.sdk.spells;
 import pl.sdk.SpellsStatistic;
 import pl.sdk.creatures.Creature;
 
+import java.net.ProtocolFamily;
+
 public abstract class AbstractSpell {
     protected final SpellsStatistic.TargetType targetType;
     protected final SpellsStatistic.SpellElement element;
@@ -33,5 +35,9 @@ public abstract class AbstractSpell {
     public abstract int getSplashRange();
 
     public abstract void cast(Creature aCreature);
+
+    public SpellsStatistic.SpellElement getElement() {
+        return element;
+    }
 }
 

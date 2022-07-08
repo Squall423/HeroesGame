@@ -63,7 +63,7 @@ public class BattleMapController implements PropertyChangeListener {
 
         spellBookButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             SpellChooserDialog spellChooser = new SpellChooserDialog(gameEngine.getActiveHero().getSpells(),
-                    gameEngine.getActiveHero().getSpellBook().getMana());
+                    gameEngine.getActiveHero().getCurrentMana(), gameEngine.getActiveHero().getMaxMana());
             spellChooser.startDialog(this::prepareToCastSpell);
         });
 

@@ -9,6 +9,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import pl.sdk.creatures.AbstractEconomyFractionFactory;
 import pl.sdk.creatures.EconomyCreature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
 
@@ -16,7 +17,7 @@ import pl.sdk.creatures.EconomyNecropolisFactory;
 public class CreatureButton extends Button {
 
 
-    public CreatureButton(EcoController aEcoController, EconomyNecropolisFactory aFactory, boolean aUpgraded,
+    public CreatureButton(EcoController aEcoController, AbstractEconomyFractionFactory aFactory, boolean aUpgraded,
                           int aTier) {
         super();
 
@@ -25,11 +26,11 @@ public class CreatureButton extends Button {
         addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             if (e.getButton() == MouseButton.PRIMARY) {
                 BuyCreatureDialog buyCreatureDialog = new BuyCreatureDialog(creature.getName(),
-                        aEcoController.calculateMaxAmount(creature), creature.getGoldCost(), creature.getGrowth());
+                        aEcoController.calculateCreatureMaxAmount(creature), creature.getGoldCost(), creature.getGrowth());
                 buyCreatureDialog.startDialog();
                 int amount = buyCreatureDialog.getCreatureAmount();
                 if (amount != 0) {
-                    aEcoController.buy(aFactory.create(aUpgraded, aTier, amount));
+                    aEcoController.buyCreature(aFactory.create(aUpgraded, aTier, amount));
                 }
                 aEcoController.refreshGui();
 
