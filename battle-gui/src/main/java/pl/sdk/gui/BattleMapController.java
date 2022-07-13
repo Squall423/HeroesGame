@@ -1,9 +1,11 @@
 package pl.sdk.gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 import pl.sdk.*;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.NecropolisFactory;
@@ -73,7 +75,9 @@ public class BattleMapController implements PropertyChangeListener {
 
         escapeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             try {
-                Start.getInstance().exit();
+                Node source = (Node) e.getSource();
+                Stage stage = (Stage) source.getScene().getWindow();
+                stage.close();
             } catch (Exception aE) {
                 System.out.println(APPLICATION_STOP);
                 aE.printStackTrace();
