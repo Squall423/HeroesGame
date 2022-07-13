@@ -16,7 +16,7 @@ class BoardMovingTest {
     void init() {
         board = new Board();
         creature = NecropolisFactory.createDefaultForTests();
-        board.add(new Point(0, 0), creature);
+        board.add( new Point(0, 0), creature);
     }
 
 
@@ -32,7 +32,7 @@ class BoardMovingTest {
 
     @Test
     void shouldThrowExceptionWhenCreatureTryingToMoveToNotEmptyField(){
-        board.add(new Point(0,1), NecropolisFactory.createDefaultForTests());
+        board.add( new Point(0,1), NecropolisFactory.createDefaultForTests());
 
         assertThrows(IllegalArgumentException.class, () -> board.move(new Point(0,0), new Point(0,1)));
 
@@ -43,7 +43,7 @@ class BoardMovingTest {
     @Test
     void canMoveWhenCreatureHasEnoughtMovePoint(){
         creature = NecropolisFactory.createDefaultForTests();
-        board.add(new Point(5,5), creature);
+        board.add( new Point(5,5), creature);
 
         assertTrue(board.canMove(creature, 6,5 ));
         assertTrue(board.canMove(creature, 4,5 ));
@@ -54,7 +54,7 @@ class BoardMovingTest {
     @Test
     void cannotMoveWhenCreatureHasNotEnoughtMovePoint(){
         Creature creature = NecropolisFactory.createDefaultForTests();
-        board.add(new Point(5,5), creature);
+        board.add( new Point(5,5), creature);
 
         assertFalse(board.canMove(creature, 6,6 ));
     }
@@ -62,7 +62,7 @@ class BoardMovingTest {
     @Test
     void cannotMoveWhenTileIsTaken(){
         Creature creature = NecropolisFactory.createDefaultForTests();
-        board.add(new Point(5,5), creature);
+        board.add( new Point(5,5), creature);
 
         assertFalse(board.canMove(creature, 0,0 ));
     }

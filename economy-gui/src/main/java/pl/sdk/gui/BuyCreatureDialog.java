@@ -173,7 +173,7 @@ class BuyCreatureDialog {
     private Stage prepareWindow(Pane aCenter, Pane aBottom, Pane aTop) {
         dialog = new Stage();
         BorderPane pane = new BorderPane();
-        Scene scene = new Scene(pane, 900, 600);
+        Scene scene = new Scene(pane, 1000, 700);
         scene.getStylesheets().add("fxml/main.css");
         dialog.setScene(scene);
         dialog.initModality(Modality.APPLICATION_MODAL);

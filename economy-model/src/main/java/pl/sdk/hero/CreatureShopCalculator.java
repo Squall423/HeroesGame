@@ -2,31 +2,18 @@ package pl.sdk.hero;
 
 import java.util.Random;
 
-public class CreatureShopCalculator {
-
-    private final Random rand;
-    private double randomFactor;
+public class CreatureShopCalculator extends AbstractShopCalculator  {
 
     CreatureShopCalculator() {
-        rand = new Random();
-        generateRandomFactor();
+        super();
     }
 
     CreatureShopCalculator(Random aRand) {
-        rand = aRand;
-        generateRandomFactor();
-
+        super(aRand);
     }
 
-    int calculateMaxAmount(int aHeroGold, Integer aPopulation, int aGoldCost) {
-        return Math.min(aHeroGold/aGoldCost, aPopulation);
+    int calculateMaxAmount(int aHeroGold, Integer aAmount, int aGoldCost) {
+        return Math.min(aHeroGold / aGoldCost, aAmount);
     }
 
-    void generateRandomFactor() {
-        randomFactor = 0.5 + (1 - 0.5) * rand.nextDouble();
-    }
-
-    int randomize(int aPopulation) {
-        return (int) (aPopulation * randomFactor);
-    }
 }

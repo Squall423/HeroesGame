@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import pl.sdk.creatures.EconomyNecropolisFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static pl.sdk.hero.Fraction.NECROPOLIS;
+import static pl.sdk.Fraction.NECROPOLIS;
 
 class EconomyHeroTest {
     private Player player;

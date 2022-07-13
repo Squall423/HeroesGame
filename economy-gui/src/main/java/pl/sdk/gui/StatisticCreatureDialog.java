@@ -60,8 +60,8 @@ public class StatisticCreatureDialog {
     private void prepareLeft(VBox aLeftPane) {
         ImageView image =
                 new ImageView(new Image(getClass().getResourceAsStream("/graphics/creatures/" + economyCreature.getName() + ".png")));
-        image.setFitHeight(200);
-        image.setFitWidth(200);
+        image.setFitHeight(100);
+        image.setFitWidth(100);
         aLeftPane.getChildren().add(image);
     }
 

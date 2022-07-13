@@ -1,19 +1,32 @@
 package pl.sdk.hero;
 
+import pl.sdk.SpellFactoryForTests;
+import pl.sdk.SpellsStatistic;
 import pl.sdk.creatures.EconomyCreature;
+import pl.sdk.spells.AbstractSpell;
+import pl.sdk.spells.EconomySpell;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-class EconomyHero {
-
+public class EconomyHero {
 
     private final List<EconomyCreature> creatureList;
+    private final HeroStats stats;
+    private final List<EconomySpell> spellList;
 
 
-    EconomyHero() {
-        creatureList = new ArrayList<>();
+    public EconomyHero() {
+        this(new HeroStats(0, 0, 0, 0));
     }
+
+    EconomyHero(HeroStats aStats) {
+        creatureList = new ArrayList<>();
+        spellList = new ArrayList<>();
+        stats = aStats;
+    }
+
 
     void addCreature(EconomyCreature aCreature) {
         if (creatureList.size() >= 7) {
@@ -22,9 +35,23 @@ class EconomyHero {
         creatureList.add(aCreature);
     }
 
-    List<EconomyCreature> getCreatures() {
+    public List<EconomyCreature> getCreatures() {
         return creatureList;
     }
 
+    void addSpell(EconomySpell aEconomySpell) {
+        spellList.add(aEconomySpell);
+    }
 
+    public List<EconomySpell> getSpells() {
+        return List.copyOf(spellList);
+    }
+
+    public int getPower() {
+        return stats.getPower();
+    }
+
+    public int getWisdom() {
+        return stats.getWisdom();
+    }
 }

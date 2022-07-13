@@ -1,4 +1,4 @@
-package pl.sdk.hero;
+package pl.sdk;
 
 public enum Fraction {
 

@@ -7,9 +7,7 @@ public class MapTileMovePossibleState extends MapTileState {
 
     private static final String AFTER_MOVE = "Move Possible";
 
-    MapTileMovePossibleState(MapTile aMapTile) {
-        super(aMapTile);
-    }
+
 
     @Override
     void updateBackground(Rectangle aRec) {

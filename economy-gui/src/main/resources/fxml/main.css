@@ -91,3 +91,11 @@
     -fx-font-family: "Garamond";
     -fx-font-size: 30px;
     }
+
+ .tab{
+    -fx-border-color: black;
+    -fx-pref-height: 40;
+    }
+
+
+

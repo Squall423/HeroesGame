@@ -1,9 +1,10 @@
 package pl.sdk.creatures;
 
 import com.google.common.collect.Range;
+import pl.sdk.spells.BuffOrDebuffSpell;
+import pl.sdk.spells.BuffOrDebuffStatistic;
 
 import java.beans.PropertyChangeEvent;
-
 import java.beans.PropertyChangeListener;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -13,19 +14,26 @@ import java.util.Set;
 public class Creature implements PropertyChangeListener {
 
     private final CreatureStatisticIf stats;
+    private BuffContainer buffContainer;
+
     private int currentHp;
     private boolean counterAttackedInThisTurn;
     private CalculateDamageStrategy calculateDamageStrategy;
     private int amount;
+    private DefaultMagicDamageApplier magicDamageApplier;
 
     //Mockito constructor
     Creature() {
         stats = CreatureStatistic.TEST;
+        magicDamageApplier = new DefaultMagicDamageApplier();
+        buffContainer = new BuffContainer();
     }
 
     Creature(CreatureStatisticIf aStats) {
         stats = aStats;
         currentHp = stats.getMaxHp();
+        magicDamageApplier = new DefaultMagicDamageApplier();
+        buffContainer = new BuffContainer();
     }
 
     public void attack(Creature aDefender) {
@@ -75,6 +83,10 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
+    public void applyMagicDamage(int aDamage) {
+        applyDamage(magicDamageApplier.reduceDamage(aDamage));
+    }
+
     public boolean isAlive() {
         return amount > 0;
     }
@@ -91,9 +103,23 @@ public class Creature implements PropertyChangeListener {
         return !counterAttackedInThisTurn;
     }
 
-    public int getMoveRange() {
+    public int getDefaultMoveRange() {
         return stats.getMoveRange();
     }
+
+    public int getMoveRange() {
+        int ret = stats.getMoveRange();
+        int percentageBuff = buffContainer.getAllBuffStats().stream()
+                .filter(b -> b.getMoveRangePercentage() != 0.0)
+                .mapToInt(b -> (int) Math.round(ret * (b.getMoveRangePercentage())))
+                .sum();
+        int scalarBuff = buffContainer.getAllBuffStats().stream()
+                        .filter(b -> b.getMoveRange() != 0)
+                        .mapToInt(BuffOrDebuffStatistic::getMoveRange)
+                        .sum();
+        return ret + percentageBuff + scalarBuff;
+    }
+
 
     @Override
     public void propertyChange(PropertyChangeEvent aPropertyChangeEvent) {
@@ -114,6 +140,10 @@ public class Creature implements PropertyChangeListener {
 
     public int getAmount() {
         return amount;
+    }
+
+    DefaultMagicDamageApplier getMagicDamageApplier() {
+        return magicDamageApplier;
     }
 
     public String currentHealth() {
@@ -149,10 +179,19 @@ public class Creature implements PropertyChangeListener {
         return ret;
     }
 
+    public void buff(BuffOrDebuffSpell aBuffOrDebuff) {
+        buffContainer.add(aBuffOrDebuff);
+    }
+
+   public BuffContainer getBuffContainer() {
+        return buffContainer;
+    }
+
     static class Builder {
         private CreatureStatisticIf stats;
         private CalculateDamageStrategy damageCalculator;
         private Integer amount;
+        private DefaultMagicDamageApplier magicDamageApplier;
 
         Builder statistic(CreatureStatisticIf aStats) {
             this.stats = aStats;
@@ -191,6 +230,11 @@ public class Creature implements PropertyChangeListener {
             } else {
                 ret.calculateDamageStrategy = new DefaultCalculateStrategy();
             }
+            if (magicDamageApplier != null) {
+                ret.magicDamageApplier = magicDamageApplier;
+            } else {
+                ret.magicDamageApplier = new DefaultMagicDamageApplier();
+            }
             return ret;
         }
 
@@ -199,6 +243,7 @@ public class Creature implements PropertyChangeListener {
         }
     }
 
+    //TODO refactor
     static class BuilderForTesting {
         private String name;
         private Integer attack;
@@ -208,6 +253,7 @@ public class Creature implements PropertyChangeListener {
         private Range<Integer> damage;
         private CalculateDamageStrategy damageCalculator;
         private Integer amount;
+        private DefaultMagicDamageApplier magicDamageApplier;
 
         public BuilderForTesting name(String aName) {
             this.name = aName;
@@ -249,6 +295,11 @@ public class Creature implements PropertyChangeListener {
             return this;
         }
 
+        public BuilderForTesting magicDamageApplier(DefaultMagicDamageApplier magicDamageApplier) {
+            this.magicDamageApplier = magicDamageApplier;
+            return this;
+        }
+
         public Creature build() {
             Set<String> emptyFields = new HashSet<>();
             if (name == null) {
@@ -286,6 +337,11 @@ public class Creature implements PropertyChangeListener {
                 ret.calculateDamageStrategy = damageCalculator;
             } else {
                 ret.calculateDamageStrategy = new DefaultCalculateStrategy();
+            }
+            if (magicDamageApplier != null) {
+                ret.magicDamageApplier = magicDamageApplier;
+            } else {
+                ret.magicDamageApplier = new DefaultMagicDamageApplier();
             }
             return ret;
         }

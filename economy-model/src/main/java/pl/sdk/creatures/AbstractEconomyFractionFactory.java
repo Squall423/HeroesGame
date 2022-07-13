@@ -1,6 +1,6 @@
 package pl.sdk.creatures;
 
-import pl.sdk.hero.Fraction;
+import pl.sdk.Fraction;
 
 public abstract class AbstractEconomyFractionFactory {
 

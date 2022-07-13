@@ -1,9 +1,11 @@
 package pl.sdk.hero;
 
 import pl.sdk.creatures.EconomyCreature;
+import pl.sdk.spells.EconomySpell;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.util.List;
 
 public class EconomyEngine {
     public static final String PLAYER_BOUGHT_CREATURE = "PLAYER_BOUGHT_CREATURE";
@@ -28,19 +30,18 @@ public class EconomyEngine {
 
 
         observerSupport = new PropertyChangeSupport(this);
-        addObserver(EconomyEngine.NEXT_ROUND, player1.getCreatureShop());
-        addObserver(EconomyEngine.NEXT_ROUND, player2.getCreatureShop());
+//        addObserver(EconomyEngine.NEXT_ROUND, player1.getCreatureShop());
+//        addObserver(EconomyEngine.NEXT_ROUND, player2.getCreatureShop());
+
+        player1.getShops().forEach(shop -> addObserver(EconomyEngine.NEXT_ROUND, shop));
+        player2.getShops().forEach(shop -> addObserver(EconomyEngine.NEXT_ROUND, shop));
 
     }
 
 
     public void buy(EconomyCreature aEconomyCreature) {
-        activePlayer.buy(activePlayer, aEconomyCreature);
+        activePlayer.buyCreature(activePlayer, aEconomyCreature);
         observerSupport.firePropertyChange(PLAYER_BOUGHT_CREATURE, null, null);
-    }
-
-    public int calculateMaxAmount(EconomyCreature aCreature) {
-        return activePlayer.calculateMaxAmount(aCreature);
     }
 
     public Player getActivePlayer() {
@@ -59,6 +60,7 @@ public class EconomyEngine {
     }
 
     //Round = 2 passes
+
     private void nextRound() {
         roundNumber += 1;
         if (roundNumber == 4) {
@@ -69,7 +71,6 @@ public class EconomyEngine {
             observerSupport.firePropertyChange(NEXT_ROUND, roundNumber - 1, roundNumber);
         }
     }
-
     private void endTurn() {
         turnNumber += 1;
         roundNumber = 1;
@@ -109,5 +110,25 @@ public class EconomyEngine {
 
     public int getCurrentPopulation(int aTier) {
         return activePlayer.getCurrentPopulation(aTier);
+    }
+
+    public List<EconomySpell> getCurrentSpellPopulation() {
+        return activePlayer.getCurrentSpellPopulation();
+    }
+
+    public void buySpell(EconomySpell aEconomySpell) {
+        getActivePlayer().buySpell(activePlayer, aEconomySpell);
+    }
+
+    public boolean hasSpell(String aName) {
+        return getActivePlayer().hasSpell(aName);
+    }
+
+    public int calculateMaxAmount(EconomyCreature aCreature) {
+        return activePlayer.calculateMaxAmount(aCreature);
+    }
+
+    public int calculateSpellMaxAmount(EconomySpell aEconomySpell) {
+        return activePlayer.calculateSpellMaxAmount(aEconomySpell);
     }
 }

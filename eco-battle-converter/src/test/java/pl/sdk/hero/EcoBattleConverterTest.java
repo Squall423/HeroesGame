@@ -1,14 +1,18 @@
 package pl.sdk.hero;
 
 import org.junit.jupiter.api.Test;
+import pl.sdk.Fraction;
+import pl.sdk.SpellsStatistic;
+import pl.sdk.converter.EcoBattleConverter;
 import pl.sdk.creatures.Creature;
 import pl.sdk.creatures.EconomyNecropolisFactory;
-import pl.sdk.converter.EcoBattleConverter;
+import pl.sdk.spells.DamageSpell;
+import pl.sdk.spells.EconomySpell;
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static pl.sdk.hero.Fraction.NECROPOLIS;
+import static pl.sdk.Fraction.NECROPOLIS;
 
 class EcoBattleConverterTest {
 
@@ -24,7 +28,7 @@ class EcoBattleConverterTest {
         ecoHero.addCreature(factory.create(false, 6, 6));
         ecoHero.addCreature(factory.create(false, 7, 7));
 
-        List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero);
+        List<Creature> convertedCreatures = EcoBattleConverter.convert(ecoHero).getCreatures();
 
         assertEquals(7, convertedCreatures.size());
 
@@ -49,4 +53,17 @@ class EcoBattleConverterTest {
         assertEquals("Bone Dragon", convertedCreatures.get(6).getName());
         assertEquals(7, convertedCreatures.get(6).getAmount());
     }
+
+
+    @Test
+    void shouldConvertImplosionSpellsCorrectly() {
+        Player ecoHero = new Player(Fraction.NECROPOLIS, 1000, new EconomyHero(new HeroStats(1, 1, 1, 1)));
+        ecoHero.addSpell(new EconomySpell(SpellsStatistic.IMPLOSION));
+        DamageSpell spell = (DamageSpell) EcoBattleConverter.convert(ecoHero).getSpells().get(0);
+
+        assertEquals(175, spell.getDamage());
+        assertEquals(0, spell.getSplashRange());
+    }
+
+
 }

@@ -11,10 +11,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ShootingAndBlockCounterAttackCreatureTest {
 
     int NOT_IMPORTANT = 5;
-    int MORE_THAN_SECOND_CREATURE = NOT_IMPORTANT+1;
+    int MORE_THAN_SECOND_CREATURE = NOT_IMPORTANT + 1;
 
     @Test
-    void creatureCanAttackEvenDistanceToOpponentIsMoreThanOne(){
+    void creatureCanAttackEvenDistanceToOpponentIsMoreThanOne() {
         Creature shootingCreature = new Creature.BuilderForTesting()
                 .name("Shooter")
                 .maxHp(NOT_IMPORTANT)
@@ -34,16 +34,16 @@ public class ShootingAndBlockCounterAttackCreatureTest {
                 .moveRange(NOT_IMPORTANT)
                 .amount(NOT_IMPORTANT)
                 .build();
-        GameEngine engine = new GameEngine(List.of(shootingCreature), List.of(normalCreature));
+        GameEngine engine = new GameEngine(new Hero(List.of(shootingCreature)), new Hero(List.of(normalCreature)));
 
-        assertTrue(engine.canAttack(GameEngine.BOARD_WIDTH-1,1));
+        assertTrue(engine.canAttack(GameEngine.BOARD_WIDTH - 1, 1));
 
         engine.pass();
-        assertFalse(engine.canAttack(0,1));
+        assertFalse(engine.canAttack(0, 1));
     }
 
     @Test
-    void defenderShouldNotCounterAttackForBlockCounterAttackCreature(){
+    void defenderShouldNotCounterAttackForBlockCounterAttackCreature() {
         Creature blockCounterAttackCreature = new Creature.BuilderForTesting()
                 .name("Shooter")
                 .maxHp(100)
@@ -63,12 +63,13 @@ public class ShootingAndBlockCounterAttackCreatureTest {
                 .amount(1)
                 .build();
 
-        blockCounterAttackCreature = new BlockCounterAttackCreatureDecorator(new ShootingCreatureDecorator(blockCounterAttackCreature));
+        blockCounterAttackCreature =
+                new BlockCounterAttackCreatureDecorator(new ShootingCreatureDecorator(blockCounterAttackCreature));
         blockCounterAttackCreature.attack(normalCreature);
         blockCounterAttackCreature.getAttackRange();
 
-        assertEquals(100,blockCounterAttackCreature.getCurrentHp());
-        assertEquals(1,blockCounterAttackCreature.getAmount());
+        assertEquals(100, blockCounterAttackCreature.getCurrentHp());
+        assertEquals(1, blockCounterAttackCreature.getAmount());
 
     }
 }

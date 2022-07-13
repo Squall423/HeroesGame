@@ -10,7 +10,7 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static pl.sdk.hero.Fraction.NECROPOLIS;
+import static pl.sdk.Fraction.NECROPOLIS;
 
 class CreatureShopCalculatorTest {
     private Player player;

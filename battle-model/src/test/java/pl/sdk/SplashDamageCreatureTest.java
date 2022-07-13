@@ -24,16 +24,17 @@ public class SplashDamageCreatureTest {
         Creature notSplashMock3 = spy(Creature.class);
 
         Board board = new Board();
-        board.add(new Point(10, 10), defender);
-        board.add(new Point(10, 9), splashMock1);
-        board.add(new Point(10, 11), splashMock2);
-        board.add(new Point(9, 10), splashMock3);
-        board.add(new Point(11, 10), splashMock4);
-        board.add(new Point(11, 11), splashMock4);
-        board.add(new Point(11, 13), splashMock4);
-        board.add(new Point(0, 2), splashMock4);
+        board.add( new Point(10, 10), defender);
+        board.add( new Point(10, 9), splashMock1);
+        board.add( new Point(10, 11), splashMock2);
+        board.add( new Point(9, 10), splashMock3);
+        board.add( new Point(11, 10), splashMock4);
+        board.add( new Point(11, 11), splashMock4);
+        board.add( new Point(11, 13), splashMock4);
+        board.add( new Point(0, 2), splashMock4);
 
-        GameEngine gameEngine = new GameEngine(List.of(splashCreature), Collections.emptyList(), board);
+        GameEngine gameEngine = new GameEngine(new Hero (List.of(splashCreature)),new Hero (Collections.emptyList()),
+                board);
         gameEngine.attack(10, 10);
 
         verify(defender).applyDamage(anyInt());
@@ -60,16 +61,17 @@ public class SplashDamageCreatureTest {
         Creature notSplashMock3 = spy(Creature.class);
 
         Board board = new Board();
-        board.add(new Point(1, 1), defender);
-        board.add(new Point(0, 0), splashMock1);
-        board.add(new Point(0, 2), splashMock2);
-        board.add(new Point(1, 2), splashMock3);
-        board.add(new Point(1, 0), splashMock4);
-        board.add(new Point(11, 11), splashMock4);
-        board.add(new Point(11, 13), splashMock4);
-        board.add(new Point(3, 2), splashMock4);
+        board.add( new Point(1, 1), defender);
+        board.add( new Point(0, 0), splashMock1);
+        board.add( new Point(0, 2), splashMock2);
+        board.add( new Point(1, 2), splashMock3);
+        board.add( new Point(1, 0), splashMock4);
+        board.add( new Point(11, 11), splashMock4);
+        board.add( new Point(11, 13), splashMock4);
+        board.add( new Point(3, 2), splashMock4);
 
-        GameEngine gameEngine = new GameEngine(List.of(notSplashCreature), Collections.emptyList(), board);
+        GameEngine gameEngine = new GameEngine(new Hero(List.of(notSplashCreature)), new Hero (Collections.emptyList()),
+                board);
         gameEngine.attack(1, 1);
 
         verify(defender).applyDamage(anyInt());
