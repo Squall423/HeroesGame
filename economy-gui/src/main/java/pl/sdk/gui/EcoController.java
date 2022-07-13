@@ -93,15 +93,19 @@ public class EcoController implements PropertyChangeListener {
         TabPane tabPane = new TabPane();
         Tab creatureTab = new Tab();
         creatureTab.setContent(creatureShop);
-        ImageView creatureTabImage = new ImageView(new Image(getClass().getResourceAsStream("")));
-        creatureTabImage.setFitHeight(48);
-        creatureTabImage.setFitWidth(48);
+        ImageView creatureTabImage = new ImageView(new Image(getClass().getResourceAsStream("/graphics.spells/giant" +
+                ".png")));
+        creatureTabImage.setFitHeight(50);
+        creatureTabImage.setFitWidth(50);
+        creatureTabImage.getStyleClass().add("tab");
         creatureTab.setGraphic(creatureTabImage);
         Tab spellTab = new Tab();
         spellTab.setContent(spellShop);
-        ImageView spellTabImage = new ImageView(new Image(getClass().getResourceAsStream("")));
-        spellTabImage.setFitHeight(48);
-        spellTabImage.setFitWidth(48);
+        ImageView spellTabImage = new ImageView(new Image(getClass().getResourceAsStream("/graphics.spells/spellbook" +
+                ".png")));
+        spellTabImage.setFitHeight(50);
+        spellTabImage.setFitWidth(50);
+        spellTabImage.fitHeightProperty();
         spellTab.setGraphic(spellTabImage);
         spellTab.getStyleClass().add("tab");
 
@@ -157,7 +161,9 @@ public class EcoController implements PropertyChangeListener {
             HBox tempHbox = new HBox();
 
             ImageView image =
-                    new ImageView(new Image(getClass().getResourceAsStream("   " + c.getName() + ".png")));
+                    new ImageView(new Image(getClass().getResourceAsStream("/graphics/creatures/" + c.getName() +
+                            ".png")));
+            ;
             image.setFitHeight(80);
             image.setFitWidth(80);
             tempHbox.getChildren().add(image);
@@ -183,7 +189,7 @@ public class EcoController implements PropertyChangeListener {
             HBox tempHbox = new HBox();
 
             ImageView image =
-                    new ImageView(new Image(getClass().getResourceAsStream("   " + c.getElement().name() + ".png")));
+                    new ImageView(new Image(getClass().getResourceAsStream("/graphics.spells/spell"  + ".png")));
             image.setFitHeight(55);
             image.setFitWidth(55);
             tempHbox.getChildren().add(image);
@@ -227,7 +233,7 @@ public class EcoController implements PropertyChangeListener {
     }
 
     int calculateSpellMaxAmount(EconomySpell aSpell) {
-       return economyEngine.calculateSpellMaxAmount(aSpell);
+        return economyEngine.calculateSpellMaxAmount(aSpell);
     }
 
     boolean hasSpell(String aName) {

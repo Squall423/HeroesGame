@@ -26,7 +26,7 @@ public class SpellButton extends Button {
 
         HBox topPane = new HBox();
         ImageView image =
-                new ImageView(new Image(getClass().getResourceAsStream("   " + spell.getElement().name() + ".png")));
+                new ImageView(new Image(getClass().getResourceAsStream("/graphics.spells/spell"  + ".png")));
         image.setFitHeight(20);
         image.setFitWidth(20);
         topPane.getChildren().add(image);

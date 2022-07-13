@@ -3,7 +3,12 @@ package pl.sdk.gui;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -22,8 +27,6 @@ public class SpellChooserDialog {
 
     SpellChooserDialog(List<AbstractSpell> aSpells, int aCurrentMana, int aMaxMana) {
         spells = aSpells;
-
-
         currentMana = aCurrentMana;
         maxMana = aMaxMana;
     }
@@ -42,45 +45,53 @@ public class SpellChooserDialog {
     }
 
     private void prepareCenter(VBox aCenterPane) {
-String buySpellButtonClass = "use-spell-button";
-String buySpellClass = "buy=spell-text";
-spellChooser = new ToggleGroup();
-spells.forEach(s ->{
+        String buySpellButtonClass = "use-spell-button";
+        String buySpellClass = "buy-spell-text";
+        spellChooser = new ToggleGroup();
+        spells.forEach(s -> {
 
-    Label spellName = new Label(s.getName());
-    spellName.getStyleClass().add(buySpellClass);
+            Label spellName = new Label(s.getName());
+            spellName.getStyleClass().add(buySpellClass);
 
-    HBox statisticBox = new HBox();
-    Label elementLabel = new Label("Element: " + s.getElement().name());
-    elementLabel.getStyleClass().add(buySpellButtonClass);
-    statisticBox.getChildren().add(elementLabel);
-    Label targetLabel = new Label("Target: " + s.getTargetType().name());
-    targetLabel.getStyleClass().add(buySpellButtonClass);
-    statisticBox.getChildren().add(targetLabel);
-    Label manaLabel = new Label ("Mana Cost: " + s.getManaCost());
-    manaLabel.getStyleClass().add(buySpellButtonClass);
-    statisticBox.getChildren().add(manaLabel);
-    statisticBox.setAlignment(Pos.CENTER);
+            HBox statisticBox = new HBox();
+            Label elementLabel = new Label("Element: " + s.getElement().name());
+            elementLabel.getStyleClass().add(buySpellButtonClass);
+            statisticBox.getChildren().add(elementLabel);
+            Label targetLabel = new Label("Target: " + s.getTargetType().name());
+            targetLabel.getStyleClass().add(buySpellButtonClass);
+            statisticBox.getChildren().add(targetLabel);
+            Label manaLabel = new Label("Mana Cost: " + s.getManaCost());
+            manaLabel.getStyleClass().add(buySpellButtonClass);
+            statisticBox.getChildren().add(manaLabel);
+            statisticBox.setAlignment(Pos.CENTER);
 
-    VBox buttonContent = new VBox();
-    buttonContent.getChildren().add(spellName);
-    buttonContent.getChildren().add(statisticBox);
-    buttonContent.setAlignment(Pos.CENTER);
-    buttonContent.setPrefWidth(Double.MAX_VALUE);
-    ToggleButton radio = new ToggleButton();
-    radio.setUserData(s);
-    radio.getStyleClass().add(buySpellButtonClass);
-    radio.setGraphic(buttonContent);
+            VBox buttonContent = new VBox();
+            buttonContent.getChildren().add(spellName);
+            buttonContent.getChildren().add(statisticBox);
+            buttonContent.setAlignment(Pos.CENTER);
+            buttonContent.setPrefWidth(Double.MAX_VALUE);
+            ToggleButton radio = new ToggleButton();
+            radio.setToggleGroup(spellChooser);
+            radio.setUserData(s);
+            radio.getStyleClass().add(buySpellButtonClass);
+            radio.setGraphic(buttonContent);
 
-    aCenterPane.getChildren().add(radio);
 
+            aCenterPane.getChildren().add(radio);
+        });
 
-});
     }
 
 
     private void prepareTop(VBox aTopPane) {
-        aTopPane.getChildren().add(new Label("Mana: " + maxMana));
+        ImageView image = new ImageView(new Image(getClass().getResourceAsStream("/graphics.spells/mana" +
+                ".png")));
+        image.setFitHeight(100);
+        image.setFitWidth(100);
+        image.fitHeightProperty();
+        aTopPane.getChildren().add(image);
+        aTopPane.getChildren().add(new Label(currentMana + "/" + maxMana));
+        aTopPane.setAlignment(Pos.CENTER);
     }
 
     private void prepareWindow(Pane aCenter, Pane aBottom, Pane aTop) {
@@ -102,14 +113,15 @@ spells.forEach(s ->{
         Button okButton = new Button("OK");
         aBottomPane.setAlignment(Pos.CENTER);
         okButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
-                    dialog.close();
-                    AbstractSpell chosenSpell = (AbstractSpell) spellChooser.getSelectedToggle().getUserData();
-                    aPrepareControllerFunction.accept(chosenSpell);
-                });
+            dialog.close();
+            AbstractSpell chosenSpell = (AbstractSpell) spellChooser.getSelectedToggle().getUserData();
+            aPrepareControllerFunction.accept(chosenSpell);
+        });
 
         okButton.setPrefWidth(200);
         Button cancelButton = new Button("CLOSE");
-        cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> { dialog.close();
+        cancelButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            dialog.close();
         });
         cancelButton.setPrefWidth(200);
         HBox.setHgrow(okButton, Priority.ALWAYS);

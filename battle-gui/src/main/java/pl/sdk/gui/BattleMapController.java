@@ -28,9 +28,13 @@ public class BattleMapController implements PropertyChangeListener {
     @FXML
     private Button spellBookButton;
 
+    @FXML
+    private Button escapeButton;
+
     private final GameEngine gameEngine;
 
     private SpellBook spellBook;
+    private String APPLICATION_STOP = "stopping the application impossible";
 
     public BattleMapController() {
         List<Creature> notUpgradedCreatures = new ArrayList<>();
@@ -65,6 +69,15 @@ public class BattleMapController implements PropertyChangeListener {
             SpellChooserDialog spellChooser = new SpellChooserDialog(gameEngine.getActiveHero().getSpells(),
                     gameEngine.getActiveHero().getCurrentMana(), gameEngine.getActiveHero().getMaxMana());
             spellChooser.startDialog(this::prepareToCastSpell);
+        });
+
+        escapeButton.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
+            try {
+                Start.getInstance().exit();
+            } catch (Exception aE) {
+                System.out.println(APPLICATION_STOP);
+                aE.printStackTrace();
+            }
         });
 
         refreshGui(null);
